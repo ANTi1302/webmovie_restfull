@@ -41,7 +41,11 @@ public class DemoController {
 		model.addAttribute("listSer", seriesService.listSeries());
 		model.addAttribute("listCoun", countryService.listCountry());
 		model.addAttribute("listSlide", slideService.listSlide());
-		model.addAttribute("listTrend", movieService.movies());
+		model.addAttribute("listTrend", movieService.moviesTrend());
+		model.addAttribute("listPopular", movieService.moviesPopular());
+		model.addAttribute("listRecently", movieService.moviesRecently());
+		model.addAttribute("listLive", movieService.moviesLive());
+		model.addAttribute("listView", movieService.moviesOrderByView());
 		return "customer/index";
 	}
 }

@@ -24,18 +24,15 @@ public class Series implements Serializable{
 	private String title;
 	@Column(name = "start_year")
 	private int startYear;
-	@Column(name = "number_season")
-	private int numberSeason;
 	
 	public Series() {
 		super();
 	}
-	public Series(String seriesId, String title, int startYear, int numberSeason) {
+	public Series(String seriesId, String title, int startYear) {
 		super();
 		this.seriesId = seriesId;
 		this.title = title;
 		this.startYear = startYear;
-		this.numberSeason = numberSeason;
 	}
 	public String getSeriesId() {
 		return seriesId;
@@ -55,16 +52,9 @@ public class Series implements Serializable{
 	public void setStartYear(int startYear) {
 		this.startYear = startYear;
 	}
-	public int getNumberSeason() {
-		return numberSeason;
-	}
-	public void setNumberSeason(int numberSeason) {
-		this.numberSeason = numberSeason;
-	}
 	@Override
 	public String toString() {
-		return "Series [seriesId=" + seriesId + ", title=" + title + ", startYear=" + startYear + ", numberSeason="
-				+ numberSeason + "]";
+		return "Series [seriesId=" + seriesId + ", title=" + title + ", startYear=" + startYear + "]";
 	}
 	
 }
