@@ -1,0 +1,14 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "blogs")
+public class Blogs {
+
+	private String blogId;
+	private String title;
+	private String imgPath;
+	
+}

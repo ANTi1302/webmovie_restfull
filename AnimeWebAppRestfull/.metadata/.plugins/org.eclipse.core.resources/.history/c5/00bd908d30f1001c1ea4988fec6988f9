@@ -1,0 +1,60 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+@Entity
+@Table(name = "movie")
+public class Movie {
+	@Id
+	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+	@GeneratedValue(generator = "generator")
+	@Column(name = "movie_id")
+	private String movieId;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String title;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String name;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String overview;
+	@Column(columnDefinition = "nvarchar(500)")
+	private int runtime;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String tagline;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String status;
+	@Column(name = "votes_avg")
+	private float votesAvg;
+	@Column(name = "votes_count")
+	private int votesCount;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String type;
+//	private  studios
+	@Column(name = "date_aired")
+	private int dateAired;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String quality;
+	@Column(columnDefinition = "nvarchar(500)")
+	private double views;
+	@Column(name = "scores_avg")
+	private float scoresAvg;
+	@Column(name = "scores_count")
+	private int scoresCount;
+	@Column(name = "poster_path")
+	private String posterPath;
+	@Column(columnDefinition = "nvarchar(500)")
+	private int recently;
+	@Column(columnDefinition = "nvarchar(500)")
+	private int live;
+	@Column(columnDefinition = "nvarchar(500)")
+	private int popular;
+	@Column(columnDefinition = "nvarchar(500)")
+	private int trending;
+	@Column(name = "movie_path")
+	private String moviePath;
+	
+}

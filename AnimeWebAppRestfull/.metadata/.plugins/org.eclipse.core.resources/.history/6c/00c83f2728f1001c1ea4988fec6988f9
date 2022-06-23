@@ -1,0 +1,30 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "series")
+public class Series {
+	@Id
+	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+	@GeneratedValue(generator = "generator")
+	@Column(name = "series_id")
+	private String seriesId;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String title;
+	@Column(name = "start_year")
+	private int startYear;
+	@Column(name = "number_season")
+	private int numberSeason;
+	@ManyToOne
+	@JoinColumn(name = "loai_sp")
+	private MovieGenres blogs;
+}

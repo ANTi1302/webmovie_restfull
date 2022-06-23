@@ -1,0 +1,19 @@
+package com.webfilm.anime.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.webfilm.anime.entity.Menu;
+import com.webfilm.anime.service.MenuService;
+
+public class MenuRestController {
+
+	@Autowired
+	private MenuService menuService;
+	@GetMapping("/sanpham")
+	public List<Menu> findAll() {
+		return menuService.listMenus();
+	}
+}

@@ -1,0 +1,15 @@
+package com.webfilm.anime.entity;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "watch")
+public class Watch {
+
+	private String watchId;
+	private Date createdAt;
+	
+}

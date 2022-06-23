@@ -1,0 +1,9 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class MovieSeasonPK {
+
+	private String 
+}

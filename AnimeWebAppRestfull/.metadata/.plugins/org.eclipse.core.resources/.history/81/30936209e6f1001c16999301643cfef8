@@ -1,0 +1,5 @@
+package com.webfilm.anime.dao;
+
+public interface SeasonDao {
+
+}

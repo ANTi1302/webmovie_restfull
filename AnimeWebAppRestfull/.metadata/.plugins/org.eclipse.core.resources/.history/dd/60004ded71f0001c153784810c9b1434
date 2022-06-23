@@ -1,0 +1,5 @@
+package com.webfilm.anime.entity;
+
+public class User {
+
+}

@@ -1,0 +1,21 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "movie_favorite")
+public class MovieFavorite {
+
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "favorite_id")
+	private Favorite favorite;
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
+}

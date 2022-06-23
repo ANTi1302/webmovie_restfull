@@ -1,0 +1,16 @@
+package com.webfilm.anime.entity;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "season")
+public class Season {
+
+	private String seasonId;
+	private int startYear;
+	private int endYear;
+	
+}

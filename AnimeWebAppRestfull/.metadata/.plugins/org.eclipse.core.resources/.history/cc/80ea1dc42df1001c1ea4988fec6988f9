@@ -1,0 +1,24 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "movie_country")
+public class MovieCountry {
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
+}

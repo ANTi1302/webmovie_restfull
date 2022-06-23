@@ -1,0 +1,5 @@
+package com.webfilm.anime.service;
+
+public class MenuServiceImpl {
+
+}

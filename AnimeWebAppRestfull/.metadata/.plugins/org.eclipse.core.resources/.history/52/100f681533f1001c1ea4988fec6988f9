@@ -1,0 +1,5 @@
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=webmovie_anime
+spring.datasource.username=sa
+spring.datasource.password=sapassword
+spring.datasource.encrypt=true
+spring.datasource.trustServerCertificate=true;

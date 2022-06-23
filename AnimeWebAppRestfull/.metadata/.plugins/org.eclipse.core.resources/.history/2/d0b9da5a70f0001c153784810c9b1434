@@ -1,0 +1,48 @@
+package com.webfilm.anime.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+@Entity
+@Table(name = "movie")
+public class Movie {
+	@Id
+	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+	@GeneratedValue(generator = "generator")
+	@Column(name = "movie_id")
+	private String movieId;
+	@Column(columnDefinition = "nvarchar(500)")
+	private String title;
+	private String name;
+	private String overview;
+	private int runtime;
+	private String tagline;
+	private String status;
+	@Column(name = "votes_avg")
+	private float votesAvg;
+	@Column(name = "votes_count")
+	private int votesCount;
+	private String type;
+//	private  studios
+	@Column(name = "date_aired")
+	private int dateAired;
+	private String quality;
+	private double views;
+	@Column(name = "scores_avg")
+	private float scoresAvg;
+	@Column(name = "scores_count")
+	private int scoresCount;
+	@Column(name = "poster_path")
+	private String posterPath;
+	private int recently;
+	private int live;
+	private int popular;
+	private int trending;
+	@Column(name = "movie_path")
+	private String moviePath;
+	
+}
