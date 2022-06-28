@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webfilm.anime.dao.MovieDao;
+import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
 @Service
 public class MovieServiceImpl implements MovieService{
@@ -13,7 +14,7 @@ public class MovieServiceImpl implements MovieService{
 	@Autowired
 	private MovieDao movieDao;
 	@Override
-	public List<Object[]> moviesTrend() {
+	public List<Movie> moviesTrend() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieTrend();
 	}
@@ -36,6 +37,11 @@ public class MovieServiceImpl implements MovieService{
 	public List<Object[]> moviesOrderByView() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieOrderByView();
+	}
+	@Override
+	public List<Movie> listMovie() {
+		// TODO Auto-generated method stub
+		return movieDao.findAll();
 	}
 
 }

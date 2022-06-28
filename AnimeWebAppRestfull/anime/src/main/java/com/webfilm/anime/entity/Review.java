@@ -30,8 +30,8 @@ public class Review implements Serializable{
 	private int status;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	public Review(String reviewId, String comment, Date createdAt, int status, User user) {
+	private Users user;
+	public Review(String reviewId, String comment, Date createdAt, int status, Users user) {
 		super();
 		this.reviewId = reviewId;
 		this.comment = comment;
@@ -66,10 +66,10 @@ public class Review implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	@Override

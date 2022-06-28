@@ -1,19 +1,26 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "movie")
-public class Movie implements Serializable{
+public class Movie implements Serializable {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
 	@GeneratedValue(generator = "generator")
@@ -47,7 +54,7 @@ public class Movie implements Serializable{
 	private float scoresAvg;
 	@Column(name = "scores_count")
 	private int scoresCount;
-	@Column(name = "poster_path",columnDefinition = "nvarchar(1000)")
+	@Column(name = "poster_path", columnDefinition = "nvarchar(1000)")
 	private String posterPath;
 	@Column(columnDefinition = "nvarchar(500)")
 	private int recently;
@@ -57,19 +64,40 @@ public class Movie implements Serializable{
 	private int popular;
 	@Column(columnDefinition = "nvarchar(500)")
 	private int trending;
-	@Column(name = "movie_path",columnDefinition = "nvarchar(1000)")
-	private String moviePath;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
+	private Users users;
+	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name = "movie_id")
+	private List<MovieEpisode> movieEpisodes;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "movie_id")
+	private List<MovieGenres> movieGenres;
+
+	public List<MovieEpisode> getMovieEpisodes() {
+		return movieEpisodes;
+	}
+
+	public void setMovieEpisodes(List<MovieEpisode> movieEpisodes) {
+		this.movieEpisodes = movieEpisodes;
+	}
+
 	public Movie() {
 		super();
 	}
+
+	public List<MovieGenres> getMovieGenres() {
+		return movieGenres;
+	}
+
+	public void setMovieGenres(List<MovieGenres> movieGenres) {
+		this.movieGenres = movieGenres;
+	}
+
 	public Movie(String movieId, String title, String name, String overview, int runtime, String tagline, String status,
 			float votesAvg, int votesCount, String type, int dateAired, String quality, double views, float scoresAvg,
-			int scoresCount, String posterPath, int recently, int live, int popular, int trending, String moviePath,
-			User user) {
+			int scoresCount, String posterPath, int recently, int live, int popular, int trending) {
 		super();
 		this.movieId = movieId;
 		this.title = title;
@@ -91,141 +119,183 @@ public class Movie implements Serializable{
 		this.live = live;
 		this.popular = popular;
 		this.trending = trending;
-		this.moviePath = moviePath;
-		this.user = user;
 	}
+//	public List<MovieSeries> getMovieSeries() {
+//		return movieSeries;
+//	}
+//
+//	public void setMovieSeries(List<MovieSeries> movieSeries) {
+//		this.movieSeries = movieSeries;
+//	}
+
 	public String getMovieId() {
 		return movieId;
 	}
+
 	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getOverview() {
 		return overview;
 	}
+
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
+
 	public int getRuntime() {
 		return runtime;
 	}
+
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
 	}
+
 	public String getTagline() {
 		return tagline;
 	}
+
 	public void setTagline(String tagline) {
 		this.tagline = tagline;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public float getVotesAvg() {
 		return votesAvg;
 	}
+
 	public void setVotesAvg(float votesAvg) {
 		this.votesAvg = votesAvg;
 	}
+
 	public int getVotesCount() {
 		return votesCount;
 	}
+
 	public void setVotesCount(int votesCount) {
 		this.votesCount = votesCount;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public int getDateAired() {
 		return dateAired;
 	}
+
 	public void setDateAired(int dateAired) {
 		this.dateAired = dateAired;
 	}
+
 	public String getQuality() {
 		return quality;
 	}
+
 	public void setQuality(String quality) {
 		this.quality = quality;
 	}
+
 	public double getViews() {
 		return views;
 	}
+
 	public void setViews(double views) {
 		this.views = views;
 	}
+
 	public float getScoresAvg() {
 		return scoresAvg;
 	}
+
 	public void setScoresAvg(float scoresAvg) {
 		this.scoresAvg = scoresAvg;
 	}
+
 	public int getScoresCount() {
 		return scoresCount;
 	}
+
 	public void setScoresCount(int scoresCount) {
 		this.scoresCount = scoresCount;
 	}
+
 	public String getPosterPath() {
 		return posterPath;
 	}
+
 	public void setPosterPath(String posterPath) {
 		this.posterPath = posterPath;
 	}
+
 	public int getRecently() {
 		return recently;
 	}
+
 	public void setRecently(int recently) {
 		this.recently = recently;
 	}
+
 	public int getLive() {
 		return live;
 	}
+
 	public void setLive(int live) {
 		this.live = live;
 	}
+
 	public int getPopular() {
 		return popular;
 	}
+
 	public void setPopular(int popular) {
 		this.popular = popular;
 	}
+
 	public int getTrending() {
 		return trending;
 	}
+
 	public void setTrending(int trending) {
 		this.trending = trending;
 	}
-	public String getMoviePath() {
-		return moviePath;
+
+	public Users getUsers() {
+		return users;
 	}
-	public void setMoviePath(String moviePath) {
-		this.moviePath = moviePath;
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+
 	@Override
 	public String toString() {
 		return "Movie [movieId=" + movieId + ", title=" + title + ", name=" + name + ", overview=" + overview
@@ -233,8 +303,8 @@ public class Movie implements Serializable{
 				+ ", votesCount=" + votesCount + ", type=" + type + ", dateAired=" + dateAired + ", quality=" + quality
 				+ ", views=" + views + ", scoresAvg=" + scoresAvg + ", scoresCount=" + scoresCount + ", posterPath="
 				+ posterPath + ", recently=" + recently + ", live=" + live + ", popular=" + popular + ", trending="
-				+ trending + ", moviePath=" + moviePath + "]";
+				+ trending + ", users=" + users + ", movieEpisodes=" + movieEpisodes + ", movieGenres=" + movieGenres
+				+ "]";
 	}
-	
-	
+
 }

@@ -18,18 +18,10 @@ public class Episode implements Serializable{
 	@GeneratedValue(generator = "generator")
 	@Column(name = "episode_id")
 	private String episodeId;
-	@Column(name = "episode_number")
+	@Column(name = "number_season")
 	private int episodeNumber;
 	@Column(name = "path_video",columnDefinition = "nvarchar(1000)")
 	private String pathVideo;
-	@Column(name = "number_season")
-	private int numberSeason;
-	public int getNumberSeason() {
-		return numberSeason;
-	}
-	public void setNumberSeason(int numberSeason) {
-		this.numberSeason = numberSeason;
-	}
 	public String getEpisodeId() {
 		return episodeId;
 	}

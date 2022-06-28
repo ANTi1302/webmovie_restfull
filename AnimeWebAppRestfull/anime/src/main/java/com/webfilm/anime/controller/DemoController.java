@@ -1,15 +1,20 @@
 package com.webfilm.anime.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
+import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
 import com.webfilm.anime.service.SeasonService;
 import com.webfilm.anime.service.SeriesService;
@@ -32,6 +37,8 @@ public class DemoController {
 	private SlideService slideService;
 	@Autowired
 	private MovieService movieService;
+	@Autowired
+	private MovieGenresService movieGenresService;
 	
 	@GetMapping({"/home","/trang-chu"})
 	public String home(Model model) {
@@ -46,6 +53,23 @@ public class DemoController {
 		model.addAttribute("listRecently", movieService.moviesRecently());
 		model.addAttribute("listLive", movieService.moviesLive());
 		model.addAttribute("listView", movieService.moviesOrderByView());
+//		List<Movie> movies = new ArrayList<Movie>();
+//		movies.addAll(movieService.moviesTrend());
+//		int soLuong = 0;
+//		for (int i = 0; i < movies.size(); i++) {
+//			int count = 1;
+//			for (int j = i + 1; j < movies.size(); j++) {
+//				if (movies.get(i).getMovieEpisodes().equals(movies.get(j).getMovieEpisodes())) {
+//					count++;
+//				}
+//			}
+//			soLuong++;
+//			movies.get(i).setMovieEpisodes(movies.get(i).getMovieEpisodes());
+//		}
 		return "customer/index";
+	}
+	@GetMapping({"/detail"})
+	public String detail(Model model) {
+		return "customer/anime-details";
 	}
 }

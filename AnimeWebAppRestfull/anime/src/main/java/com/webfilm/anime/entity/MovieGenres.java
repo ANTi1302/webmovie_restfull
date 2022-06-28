@@ -2,17 +2,20 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 @Entity
+@IdClass(MovieGenresPK.class)
 @Table(name = "movie_genres")
 public class MovieGenres implements Serializable{
 
-	@Id
+	@EmbeddedId
 	@ManyToOne
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
@@ -26,14 +29,8 @@ public class MovieGenres implements Serializable{
 	}
 	public MovieGenres(Movie movie, Genres genres) {
 		super();
-		this.movie = movie;
+//		this.movie = movie;
 		this.genres = genres;
-	}
-	public Movie getMovie() {
-		return movie;
-	}
-	public void setMovie(Movie movie) {
-		this.movie = movie;
 	}
 	public Genres getGenres() {
 		return genres;
@@ -43,7 +40,7 @@ public class MovieGenres implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "MovieGenres [movie=" + movie + ", genres=" + genres + "]";
+		return "MovieGenres [genres=" + genres + "]";
 	}
 	
 }

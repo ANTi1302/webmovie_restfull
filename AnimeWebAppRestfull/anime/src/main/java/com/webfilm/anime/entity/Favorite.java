@@ -27,12 +27,12 @@ public class Favorite implements Serializable{
 	private Date createdAt;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private Users user;
 	
 	public Favorite() {
 		super();
 	}
-	public Favorite(String favoriteId, Date createdAt, User user) {
+	public Favorite(String favoriteId, Date createdAt, Users user) {
 		super();
 		this.favoriteId = favoriteId;
 		this.createdAt = createdAt;
@@ -50,10 +50,10 @@ public class Favorite implements Serializable{
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	@Override

@@ -1,9 +1,0 @@
-package com.webfilm.anime.entity;
-
-public class Rating {
-
-	private String ratingId;
-	private int countStart;
-	private int numRating;
-	
-}

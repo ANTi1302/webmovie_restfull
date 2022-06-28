@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="E:\ANTi_study\webmovie_restfull\AnimeWebAppRestfull\anime"/>
 			<item value="C:\Users\ANTi\OneDrive\Máy tính\AnimeWebAppRestfull\anime"/>
 		</list>
 	</section>

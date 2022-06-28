@@ -19,20 +19,20 @@ public class RoleUser implements Serializable{
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private Users user;
 	public Roles getRoles() {
 		return roles;
 	}
 	public void setRoles(Roles roles) {
 		this.roles = roles;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
-	public RoleUser(Roles roles, User user) {
+	public RoleUser(Roles roles, Users user) {
 		super();
 		this.roles = roles;
 		this.user = user;
