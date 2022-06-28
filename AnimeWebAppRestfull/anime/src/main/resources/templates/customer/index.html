@@ -162,9 +162,8 @@
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul th:each="gen,state : ${item.movieGenres}">
-										
-											<li th:text="${gen.genres.name}"></li>
+										<ul >
+											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -203,9 +202,8 @@
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul th:each="gen,state : ${item.movieGenres}">
-										
-											<li th:text="${gen.genres.name}"></li>
+										<ul >
+											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -243,9 +241,8 @@
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul th:each="gen,state : ${item.movieGenres}">
-										
-											<li th:text="${gen.genres.name}"></li>
+										<ul >
+											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -283,8 +280,8 @@
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul th:each="gen,state : ${item.movieGenres}">
-											<li th:text="${gen.genres.name}"></li>
+										<ul>
+											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
