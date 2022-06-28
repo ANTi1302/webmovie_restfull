@@ -19,17 +19,17 @@ public class MovieServiceImpl implements MovieService{
 		return movieDao.listMovieTrend();
 	}
 	@Override
-	public List<Object[]> moviesPopular() {
+	public List<Movie> moviesPopular() {
 		// TODO Auto-generated method stub
 		return movieDao.listMoviePopular();
 	}
 	@Override
-	public List<Object[]> moviesRecently() {
+	public List<Movie> moviesRecently() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieRecently();
 	}
 	@Override
-	public List<Object[]> moviesLive() {
+	public List<Movie> moviesLive() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieLive();
 	}

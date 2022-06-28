@@ -80,15 +80,15 @@ public class HomeRestController {
 		return movieService.moviesTrend();
 	}
 	@GetMapping("/listMvPopular")
-	public List<Object[]> findMoviePopular() {
+	public List<Movie> findMoviePopular() {
 		return movieService.moviesPopular();
 	}
 	@GetMapping("/listMvRecently")
-	public List<Object[]> findMovieRecently() {
+	public List<Movie> findMovieRecently() {
 		return movieService.moviesRecently();
 	}
 	@GetMapping("/listMvLive")
-	public List<Object[]> findMovieLive() {
+	public List<Movie> findMovieLive() {
 		return movieService.moviesLive();
 	}
 	@GetMapping("/listMvOrderByView")
