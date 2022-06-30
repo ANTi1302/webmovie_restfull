@@ -64,9 +64,9 @@ public class Movie implements Serializable {
 	private int popular;
 	@Column(columnDefinition = "nvarchar(500)")
 	private int trending;
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private Users users;
+//	@ManyToOne
+//	@JoinColumn(name = "user_id")
+//	private Users users;
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "movie_id")
@@ -74,6 +74,18 @@ public class Movie implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "movie_id")
 	private List<MovieGenres> movieGenres;
+	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name = "movie_id")
+	private List<Review> reviews;
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
 	public List<MovieEpisode> getMovieEpisodes() {
 		return movieEpisodes;
@@ -288,13 +300,13 @@ public class Movie implements Serializable {
 		this.trending = trending;
 	}
 
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}
+//	public Users getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Users users) {
+//		this.users = users;
+//	}
 
 	@Override
 	public String toString() {
@@ -303,7 +315,7 @@ public class Movie implements Serializable {
 				+ ", votesCount=" + votesCount + ", type=" + type + ", dateAired=" + dateAired + ", quality=" + quality
 				+ ", views=" + views + ", scoresAvg=" + scoresAvg + ", scoresCount=" + scoresCount + ", posterPath="
 				+ posterPath + ", recently=" + recently + ", live=" + live + ", popular=" + popular + ", trending="
-				+ trending + ", users=" + users + ", movieEpisodes=" + movieEpisodes + ", movieGenres=" + movieGenres
+				+ trending + ", movieEpisodes=" + movieEpisodes + ", movieGenres=" + movieGenres
 				+ "]";
 	}
 

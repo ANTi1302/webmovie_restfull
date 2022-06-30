@@ -25,5 +25,12 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, Integer>{
 			+ "group by movie.movie_id,movie.name,movie.poster_path,movie.views\r\n"
 			+ " order by views desc",nativeQuery = true)
 	public List<Object[]> listMovieOrderByView();
-	
+	@Query(value = "SELECT top 5 movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
+			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,COUNT(review_id) as sum\r\n"
+			+ "FROM     review INNER JOIN\r\n"
+			+ "                  movie ON review.movie_id = movie.movie_id\r\n"
+			+ "GROUP BY movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
+			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending\r\n"
+			+ "				  order by MAX(review.created_at) ",nativeQuery = true)
+	public List<Movie> listMovieOrderByReview();
 }

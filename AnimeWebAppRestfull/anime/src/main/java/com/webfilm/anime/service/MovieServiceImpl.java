@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.webfilm.anime.dao.MovieDao;
 import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.Review;
 @Service
 public class MovieServiceImpl implements MovieService{
 
@@ -42,6 +43,11 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> listMovie() {
 		// TODO Auto-generated method stub
 		return movieDao.findAll();
+	}
+	@Override
+	public List<Movie> listMovieOrderByReview() {
+		// TODO Auto-generated method stub
+		return movieDao.listMovieOrderByReview();
 	}
 
 }

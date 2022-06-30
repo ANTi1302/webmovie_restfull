@@ -16,6 +16,7 @@ import com.webfilm.anime.entity.Genres;
 import com.webfilm.anime.entity.Menu;
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieGenres;
+import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.entity.Season;
 import com.webfilm.anime.entity.Series;
 import com.webfilm.anime.entity.Slides;
@@ -24,6 +25,7 @@ import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
+import com.webfilm.anime.service.ReviewService;
 import com.webfilm.anime.service.SeasonService;
 import com.webfilm.anime.service.SeriesService;
 import com.webfilm.anime.service.SlideService;
@@ -48,6 +50,8 @@ public class HomeRestController {
 	private MovieService movieService;
 	@Autowired
 	private MovieGenresService movieGenresService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@GetMapping("/list")
 	public List<Menu> findAllMenu() {
@@ -106,5 +110,9 @@ public class HomeRestController {
 	@GetMapping("/listMovie")
 	public List<Movie> list() {
 		return movieService.listMovie();
+	}
+	@GetMapping("/listMovieByReview")
+	public List<Movie> listMovieByReview() {
+		return movieService.listMovieOrderByReview();
 	}
 }

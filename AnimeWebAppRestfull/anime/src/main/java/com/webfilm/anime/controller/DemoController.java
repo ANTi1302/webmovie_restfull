@@ -16,6 +16,7 @@ import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
+import com.webfilm.anime.service.ReviewService;
 import com.webfilm.anime.service.SeasonService;
 import com.webfilm.anime.service.SeriesService;
 import com.webfilm.anime.service.SlideService;
@@ -39,6 +40,8 @@ public class DemoController {
 	private MovieService movieService;
 	@Autowired
 	private MovieGenresService movieGenresService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@GetMapping({"/home","/trang-chu"})
 	public String home(Model model) {
@@ -53,19 +56,7 @@ public class DemoController {
 		model.addAttribute("listRecently", movieService.moviesRecently());
 		model.addAttribute("listLive", movieService.moviesLive());
 		model.addAttribute("listView", movieService.moviesOrderByView());
-//		List<Movie> movies = new ArrayList<Movie>();
-//		movies.addAll(movieService.moviesTrend());
-//		int soLuong = 0;
-//		for (int i = 0; i < movies.size(); i++) {
-//			int count = 1;
-//			for (int j = i + 1; j < movies.size(); j++) {
-//				if (movies.get(i).getMovieEpisodes().equals(movies.get(j).getMovieEpisodes())) {
-//					count++;
-//				}
-//			}
-//			soLuong++;
-//			movies.get(i).setMovieEpisodes(movies.get(i).getMovieEpisodes());
-//		}
+		model.addAttribute("listReview", movieService.listMovieOrderByReview());
 		return "customer/index";
 	}
 	@GetMapping({"/detail"})

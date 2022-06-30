@@ -109,21 +109,21 @@
 		<div class="container">
 			<div class="hero__slider owl-carousel">
 				<ul:block th:each="item,state : ${listSlide}">
-					<div class="hero__items set-bg"  th:data-setbg="${item.img}">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="hero__text">
-							<div class="label">Adventure</div>
-							<h2 th:text="${item.caption}"></h2>
-							<p th:text="${item.contents}"></p>
-							<a th:href="${item.link}"><span>Watch Now</span> <i
-								class="fa fa-angle-right"></i></a>
+					<div class="hero__items set-bg" th:data-setbg="${item.img}">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="hero__text">
+									<div class="label">Adventure</div>
+									<h2 th:text="${item.caption}"></h2>
+									<p th:text="${item.contents}"></p>
+									<a th:href="${item.link}"><span>Watch Now</span> <i
+										class="fa fa-angle-right"></i></a>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</ul:block>
 			</div>
-			</ul:block>
-		</div>
 		</div>
 	</section>
 	<!-- Hero Section End -->
@@ -147,23 +147,26 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class="row" >
-							<div class="col-lg-4 col-md-6 col-sm-6" th:each="item,state : ${listTrend}" >
+
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-6"
+								th:each="item,state : ${listTrend}">
 								<div class="product__item">
-									<div class="product__item__pic set-bg " 
-										th:data-setbg="${item.posterPath}" >
+									<div class="product__item__pic set-bg "
+										th:data-setbg="${item.posterPath}">
 										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 										<div class="comment">
-											<i class="fa fa-comments"></i> 11
+											<i class="fa fa-comments" th:text="${item.reviews.size}"></i>
 										</div>
-										<div class="view" >
-											<i class="fa fa-eye" th:text="${#numbers.formatInteger(item.views,3)}"></i> 
+										<div class="view">
+											<i class="fa fa-eye"
+												th:text="${#numbers.formatInteger(item.views,3)}"></i>
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul >
-											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
+										<ul>
+											<li th:each="gen,state : ${item.movieGenres}"
+												th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -171,7 +174,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 					<div class="popular__product">
@@ -189,21 +192,24 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-4 col-md-6 col-sm-6" th:each="item,state : ${listPopular}">
+							<div class="col-lg-4 col-md-6 col-sm-6"
+								th:each="item,state : ${listPopular}">
 								<div class="product__item">
-									<div class="product__item__pic set-bg " 
-										th:data-setbg="${item.posterPath}" >
+									<div class="product__item__pic set-bg "
+										th:data-setbg="${item.posterPath}">
 										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 										<div class="comment">
-											<i class="fa fa-comments"></i> 11
+											<i class="fa fa-comments" th:text="${item.reviews.size}"></i>
 										</div>
-										<div class="view" >
-											<i class="fa fa-eye" th:text="${#numbers.formatInteger(item.views,3)}"></i> 
+										<div class="view">
+											<i class="fa fa-eye"
+												th:text="${#numbers.formatInteger(item.views,3)}"></i>
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul >
-											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
+										<ul>
+											<li th:each="gen,state : ${item.movieGenres}"
+												th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -228,21 +234,24 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-4 col-md-6 col-sm-6" th:each="item,state : ${listRecently}">
+							<div class="col-lg-4 col-md-6 col-sm-6"
+								th:each="item,state : ${listRecently}">
 								<div class="product__item">
-									<div class="product__item__pic set-bg " 
-										th:data-setbg="${item.posterPath}" >
+									<div class="product__item__pic set-bg "
+										th:data-setbg="${item.posterPath}">
 										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 										<div class="comment">
-											<i class="fa fa-comments"></i> 11
+											<i class="fa fa-comments" th:text="${item.reviews.size}"></i>
 										</div>
-										<div class="view" >
-											<i class="fa fa-eye" th:text="${#numbers.formatInteger(item.views,3)}"></i> 
+										<div class="view">
+											<i class="fa fa-eye"
+												th:text="${#numbers.formatInteger(item.views,3)}"></i>
 										</div>
 									</div>
 									<div class="product__item__text">
-										<ul >
-											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
+										<ul>
+											<li th:each="gen,state : ${item.movieGenres}"
+												th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -267,21 +276,24 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-4 col-md-6 col-sm-6" th:each="item,state : ${listLive}">
+							<div class="col-lg-4 col-md-6 col-sm-6"
+								th:each="item,state : ${listLive}">
 								<div class="product__item">
-									<div class="product__item__pic set-bg " 
-										th:data-setbg="${item.posterPath}" >
+									<div class="product__item__pic set-bg "
+										th:data-setbg="${item.posterPath}">
 										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 										<div class="comment">
-											<i class="fa fa-comments"></i> 11
+											<i class="fa fa-comments" th:text="${item.reviews.size}"></i> 
 										</div>
-										<div class="view" >
-											<i class="fa fa-eye" th:text="${#numbers.formatInteger(item.views,3)}"></i> 
+										<div class="view">
+											<i class="fa fa-eye"
+												th:text="${#numbers.formatInteger(item.views,3)}"></i>
 										</div>
 									</div>
 									<div class="product__item__text">
 										<ul>
-											<li th:each="gen,state : ${item.movieGenres}" th:text="${gen.genres.name}"></li>
+											<li th:each="gen,state : ${item.movieGenres}"
+												th:text="${gen.genres.name}"></li>
 										</ul>
 										<h5>
 											<a href="#" th:text="${item.name}"></a>
@@ -309,7 +321,8 @@
 									th:data-setbg="${item[2]}">
 									<div class="ep" th:text="${item[4]}+'/18'"></div>
 									<div class="view">
-										<i class="fa fa-eye"  th:text="${#numbers.formatInteger(item[3],3)}"></i>
+										<i class="fa fa-eye"
+											th:text="${#numbers.formatInteger(item[3],3)}"></i>
 									</div>
 									<h5>
 										<a href="#" th:text="${item[1]}"></a>
@@ -321,64 +334,21 @@
 							<div class="section-title">
 								<h5>New Comment</h5>
 							</div>
-							<div class="product__sidebar__comment__item">
+							<div class="product__sidebar__comment__item"
+								th:each="item,state : ${listReview}">
 								<div class="product__sidebar__comment__item__pic">
-									<img src="img/sidebar/comment-1.jpg" alt="">
+									<img th:src="${item.posterPath}" alt="">
 								</div>
 								<div class="product__sidebar__comment__item__text">
 									<ul>
-										<li>Active</li>
-										<li>Movie</li>
+										<li th:each="gen,state : ${item.movieGenres}"
+											th:text="${gen.genres.name}"></li>
 									</ul>
 									<h5>
-										<a href="#">The Seven Deadly Sins: Wrath of the Gods</a>
+										<a href="#" th:text="${item.name}"></a>
 									</h5>
-									<span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-								</div>
-							</div>
-							<div class="product__sidebar__comment__item">
-								<div class="product__sidebar__comment__item__pic">
-									<img src="img/sidebar/comment-2.jpg" alt="">
-								</div>
-								<div class="product__sidebar__comment__item__text">
-									<ul>
-										<li>Active</li>
-										<li>Movie</li>
-									</ul>
-									<h5>
-										<a href="#">Shirogane Tamashii hen Kouhan sen</a>
-									</h5>
-									<span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-								</div>
-							</div>
-							<div class="product__sidebar__comment__item">
-								<div class="product__sidebar__comment__item__pic">
-									<img src="img/sidebar/comment-3.jpg" alt="">
-								</div>
-								<div class="product__sidebar__comment__item__text">
-									<ul>
-										<li>Active</li>
-										<li>Movie</li>
-									</ul>
-									<h5>
-										<a href="#">Kizumonogatari III: Reiket su-hen</a>
-									</h5>
-									<span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-								</div>
-							</div>
-							<div class="product__sidebar__comment__item">
-								<div class="product__sidebar__comment__item__pic">
-									<img src="img/sidebar/comment-4.jpg" alt="">
-								</div>
-								<div class="product__sidebar__comment__item__text">
-									<ul>
-										<li>Active</li>
-										<li>Movie</li>
-									</ul>
-									<h5>
-										<a href="#">Monogatari Series: Second Season</a>
-									</h5>
-									<span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+									<span><i class="fa fa-eye"
+										th:text="${#numbers.formatInteger(item.views,3)}+'Viewes'"></i></span>
 								</div>
 							</div>
 						</div>

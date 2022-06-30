@@ -28,17 +28,37 @@ public class Review implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date createdAt;
 	private int status;
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private Users user;
+//	@ManyToOne
+//	@JoinColumn(name = "user_id")
+//	private Users user;
+//	@ManyToOne
+//	@JoinColumn(name = "movie_id")
+//	private Movie movie;
 	public Review(String reviewId, String comment, Date createdAt, int status, Users user) {
 		super();
 		this.reviewId = reviewId;
 		this.comment = comment;
 		this.createdAt = createdAt;
 		this.status = status;
-		this.user = user;
+//		this.user = user;
 	}
+	
+//	public Users getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(Users user) {
+//		this.user = user;
+//	}
+
+//	public Movie getMovie() {
+//		return movie;
+//	}
+//
+//	public void setMovie(Movie movie) {
+//		this.movie = movie;
+//	}
+
 	public Review() {
 		super();
 	}
@@ -66,16 +86,16 @@ public class Review implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public Users getUser() {
-		return user;
-	}
-	public void setUser(Users user) {
-		this.user = user;
-	}
+//	public Users getUser() {
+//		return user;
+//	}
+//	public void setUser(Users user) {
+//		this.user = user;
+//	}
 	@Override
 	public String toString() {
 		return "Review [reviewId=" + reviewId + ", comment=" + comment + ", createdAt=" + createdAt + ", status="
-				+ status + ", user=" + user + "]";
+				+ status + "]";
 	}
 	
 }
