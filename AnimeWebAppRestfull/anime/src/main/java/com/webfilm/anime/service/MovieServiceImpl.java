@@ -1,6 +1,7 @@
 package com.webfilm.anime.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,18 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> listMovieOrderByReview() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieOrderByReview();
+	}
+	@Override
+	public Movie movieById(String id) {
+		// TODO Auto-generated method stub
+		Optional<Movie> result=movieDao.findById(id);
+		Movie movie=null;
+		if (result.isPresent()) {
+			movie=result.get();
+		}else {
+			throw new RuntimeException("Did not find product id - "+id);
+		}
+		return movie;
 	}
 
 }

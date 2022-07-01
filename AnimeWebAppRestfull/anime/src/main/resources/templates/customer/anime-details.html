@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Anime Template">
@@ -15,14 +15,14 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/plyr.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 
 <body>
@@ -45,22 +45,49 @@
                 <div class="col-lg-8">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="./index.html">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-details.html">Anime Details</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./signup.html">Sign Up</a></li>
-                                        <li><a href="./login.html">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
+							<ul>
+								<li class="active"><a href="./index.html">Homepage</a></li>
+								<ul:block th:each="item,state : ${list}">
+									<ul:block th:switch="${item.name}">
+										<li th:case="'Genres'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listGen}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Country'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listCoun}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Seasion'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSea}">
+													<li><a href="./categories.html"
+														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Series'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSer}">
+													<li><a href="./categories.html" th:text="${item}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="*"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+									</ul:block>
+							</ul>
+						</nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -94,7 +121,7 @@
     <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
-            <div class="anime__details__content">
+            <div class="anime__details__content" >
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="img/anime/details-pic.jpg">
@@ -105,7 +132,7 @@
                     <div class="col-lg-9">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
-                                <h3>Fate Stay Night: Unlimited Blade</h3>
+                                <h3 th:text="${movie.name}"></h3>
                                 <span>フェイト／ステイナイト, Feito／sutei naito</span>
                             </div>
                             <div class="anime__details__rating">
@@ -303,14 +330,14 @@
         <!-- Search model end -->
 
         <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+        <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/player.js}"></script>
+        <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/mixitup.min.js}"></script>
+        <script th:src="@{/js/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
 
     </body>
 

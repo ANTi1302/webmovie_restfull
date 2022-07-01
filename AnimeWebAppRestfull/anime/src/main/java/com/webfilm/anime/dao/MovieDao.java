@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
-
-public interface MovieDao extends JpaRepositoryImplementation<Movie, Integer>{
+public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 
 	@Query(value = "select top 6* from [dbo].[movie] where trending=1",nativeQuery = true)
 	public List<Movie> listMovieTrend();

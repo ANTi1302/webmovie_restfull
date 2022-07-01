@@ -15,4 +15,5 @@ public interface MovieService {
 	public List<Object[]> moviesOrderByView();
 	public List<Movie> listMovie();
 	public List<Movie> listMovieOrderByReview();
+	public Movie movieById(String id);
 }
