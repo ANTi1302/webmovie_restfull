@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.Review;
 
 public interface MovieService {
@@ -16,4 +17,5 @@ public interface MovieService {
 	public List<Movie> listMovie();
 	public List<Movie> listMovieOrderByReview();
 	public Movie movieById(String id);
+	
 }

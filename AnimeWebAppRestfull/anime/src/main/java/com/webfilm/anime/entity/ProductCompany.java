@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "product_company")
+@Table(name = "production_company")
 public class ProductCompany implements Serializable{
 
 	@Id

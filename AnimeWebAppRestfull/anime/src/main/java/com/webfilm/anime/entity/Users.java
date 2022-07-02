@@ -35,11 +35,19 @@ public class Users implements Serializable{
 	private String password;
 	@Column(name = "access_tokenID",columnDefinition = "nvarchar(1000)")
 	private String accessTokenID;
+	@Column(name = "path_img",columnDefinition = "nvarchar(1000)")
+	private String pathImg;
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "user_id")
 	private List<Review> reviews;
 	
+	public String getPathImg() {
+		return pathImg;
+	}
+	public void setPathImg(String pathImg) {
+		this.pathImg = pathImg;
+	}
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -104,8 +112,9 @@ public class Users implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phone=" + phone + ", password=" + password + ", accessTokenID=" + accessTokenID + "]";
+		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", phone=" + phone + ", password=" + password + ", accessTokenID=" + accessTokenID + ", pathImg="
+				+ pathImg + "]";
 	}
 	
 }

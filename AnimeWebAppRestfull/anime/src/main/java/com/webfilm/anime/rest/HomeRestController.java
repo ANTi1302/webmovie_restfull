@@ -19,6 +19,8 @@ import com.webfilm.anime.entity.Country;
 import com.webfilm.anime.entity.Genres;
 import com.webfilm.anime.entity.Menu;
 import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.MovieCompany;
+import com.webfilm.anime.entity.MovieCompanyPK;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.entity.Season;
@@ -27,6 +29,7 @@ import com.webfilm.anime.entity.Slides;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
+import com.webfilm.anime.service.MovieCompanyService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
 import com.webfilm.anime.service.MovieTrendService;
@@ -60,6 +63,8 @@ public class HomeRestController {
 	private ReviewService reviewService;
 	@Autowired
 	private MovieTrendService movieTrendService;
+	@Autowired
+	private MovieCompanyService movieCompanyService;
 
 	@GetMapping("/list")
 	public List<Menu> findAllMenu() {
@@ -171,9 +176,15 @@ public class HomeRestController {
 	@GetMapping("/movie/{movieId}")
 	public Movie findMovie(@PathVariable String movieId) {
 		Movie movie=movieService.movieById(movieId);
+		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
+		movie.setMovieCompanies(movieCompanies);
 		if (movie==null) {
 			throw new RuntimeException("Product id not found - "+movieId);
 		}
 		return movie;
+	}
+	@GetMapping("/company/{movieId}")
+	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
+		return movieCompanyService.companyById(movieId);
 	}
 }

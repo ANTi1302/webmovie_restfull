@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
+import com.webfilm.anime.service.MovieCompanyService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
 import com.webfilm.anime.service.MovieTrendService;
@@ -56,6 +58,8 @@ public class DemoController extends BaseController {
 	private ReviewService reviewService;
 	@Autowired
 	private MovieTrendService movieTrendService;
+	@Autowired
+	private MovieCompanyService movieCompanyService;
 
 	@GetMapping({ "/home", "/trang-chu" })
 	public ModelAndView home(Model model) {
@@ -131,6 +135,8 @@ public class DemoController extends BaseController {
 	@GetMapping("/moviebyid/{movieId}")
 	public ModelAndView showSPbyID(Model theModel,@PathVariable("movieId") String movieId) {
 		Movie movie=movieService.movieById(movieId);
+		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
+		movie.setMovieCompanies(movieCompanies);
 		theModel.addAttribute("movie", movie);
 //		id=movieId;
 		modelAndView.setViewName("customer/anime-details");

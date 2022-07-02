@@ -78,9 +78,19 @@ public class Movie implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "movie_id")
 	private List<Review> reviews;
-	
+	@OneToMany
+	@JoinColumn(name = "movie_id")
+	private List<MovieCompany> movieCompanies;
 	public List<Review> getReviews() {
 		return reviews;
+	}
+
+	public List<MovieCompany> getMovieCompanies() {
+		return movieCompanies;
+	}
+
+	public void setMovieCompanies(List<MovieCompany> movieCompanies) {
+		this.movieCompanies = movieCompanies;
 	}
 
 	public void setReviews(List<Review> reviews) {
@@ -315,8 +325,8 @@ public class Movie implements Serializable {
 				+ ", votesCount=" + votesCount + ", type=" + type + ", dateAired=" + dateAired + ", quality=" + quality
 				+ ", views=" + views + ", scoresAvg=" + scoresAvg + ", scoresCount=" + scoresCount + ", posterPath="
 				+ posterPath + ", recently=" + recently + ", live=" + live + ", popular=" + popular + ", trending="
-				+ trending + ", movieEpisodes=" + movieEpisodes + ", movieGenres=" + movieGenres
-				+ "]";
+				+ trending + ", movieEpisodes=" + movieEpisodes + ", movieGenres=" + movieGenres + ", reviews="
+				+ reviews + ", movieCompanies=" + movieCompanies + "]";
 	}
 
 }
