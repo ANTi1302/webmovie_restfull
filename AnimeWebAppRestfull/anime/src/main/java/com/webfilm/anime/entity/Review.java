@@ -28,9 +28,9 @@ public class Review implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date createdAt;
 	private int status;
-//	@ManyToOne
-//	@JoinColumn(name = "user_id")
-//	private Users user;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Users user;
 //	@ManyToOne
 //	@JoinColumn(name = "movie_id")
 //	private Movie movie;
@@ -43,13 +43,13 @@ public class Review implements Serializable{
 //		this.user = user;
 	}
 	
-//	public Users getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(Users user) {
-//		this.user = user;
-//	}
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
 //	public Movie getMovie() {
 //		return movie;

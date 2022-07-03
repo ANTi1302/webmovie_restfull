@@ -14,15 +14,12 @@
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieSeries"/>
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenres"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollection"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollectionOption"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenresPK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisodePK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisode"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.ReviewDao"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Review"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.service.ReviewService"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.RepositoryDefinition"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.support.JpaRepositoryImplementation"/>
     <fullyQualifiedTypeName name="org.springframework.data.rest.core.annotation.RepositoryRestResource"/>
@@ -55,9 +52,12 @@
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieCompanyPK"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieCompany"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieCompanyService"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.persistence.Column"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenres"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.service.ReviewService"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Review"/>
 </qualifiedTypeNameHistroy>

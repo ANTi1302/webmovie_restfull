@@ -37,10 +37,10 @@ public class Users implements Serializable{
 	private String accessTokenID;
 	@Column(name = "path_img",columnDefinition = "nvarchar(1000)")
 	private String pathImg;
-	@OneToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "user_id")
-	private List<Review> reviews;
+//	@OneToMany
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@JoinColumn(name = "user_id")
+//	private List<Review> reviews;
 	
 	public String getPathImg() {
 		return pathImg;
@@ -48,12 +48,12 @@ public class Users implements Serializable{
 	public void setPathImg(String pathImg) {
 		this.pathImg = pathImg;
 	}
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
+//	public List<Review> getReviews() {
+//		return reviews;
+//	}
+//	public void setReviews(List<Review> reviews) {
+//		this.reviews = reviews;
+//	}
 	public String getUserId() {
 		return userId;
 	}

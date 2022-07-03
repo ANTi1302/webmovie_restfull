@@ -12,5 +12,11 @@ import com.webfilm.anime.entity.Review;
 public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewDao reviewDao;
+
+	@Override
+	public List<Review> listByMovieId(String movieId) {
+		// TODO Auto-generated method stub
+		return reviewDao.listReviewByMovie(movieId);
+	}
 	
 }

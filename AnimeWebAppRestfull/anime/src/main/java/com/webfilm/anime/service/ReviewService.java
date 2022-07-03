@@ -7,4 +7,5 @@ import com.webfilm.anime.entity.Review;
 
 public interface ReviewService {
 
+	public List<Review> listByMovieId(String movieId);
 }

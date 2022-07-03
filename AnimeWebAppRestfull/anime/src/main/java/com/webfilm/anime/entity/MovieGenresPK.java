@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class MovieGenresPK implements Serializable{
 	private String genres;
-//	private String movie;
+	private String movie;
 	
 	
 	public MovieGenresPK() {
@@ -17,7 +17,7 @@ public class MovieGenresPK implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(genres);
+		return Objects.hash(genres, movie);
 	}
 
 
@@ -30,7 +30,9 @@ public class MovieGenresPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		MovieGenresPK other = (MovieGenresPK) obj;
-		return Objects.equals(genres, other.genres);
+		return Objects.equals(genres, other.genres) && Objects.equals(movie, other.movie);
 	}
 
+
+	
 }

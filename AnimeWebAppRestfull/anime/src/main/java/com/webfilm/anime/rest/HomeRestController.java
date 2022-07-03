@@ -177,7 +177,9 @@ public class HomeRestController {
 	public Movie findMovie(@PathVariable String movieId) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
+		List<Review> reviews= reviewService.listByMovieId(movieId);
 		movie.setMovieCompanies(movieCompanies);
+		movie.setReviews(reviews);
 		if (movie==null) {
 			throw new RuntimeException("Product id not found - "+movieId);
 		}

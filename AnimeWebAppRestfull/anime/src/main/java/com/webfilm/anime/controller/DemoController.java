@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieGenres;
+import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
@@ -136,7 +137,11 @@ public class DemoController extends BaseController {
 	public ModelAndView showSPbyID(Model theModel,@PathVariable("movieId") String movieId) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
+		List<MovieGenres> movieGenres=movieGenresService.listGenresByMovieId(movieId);
+		List<Review> reviews=reviewService.listByMovieId(movieId);
 		movie.setMovieCompanies(movieCompanies);
+		movie.setMovieGenres(movieGenres);
+		movie.setReviews(reviews);
 		theModel.addAttribute("movie", movie);
 //		id=movieId;
 		modelAndView.setViewName("customer/anime-details");

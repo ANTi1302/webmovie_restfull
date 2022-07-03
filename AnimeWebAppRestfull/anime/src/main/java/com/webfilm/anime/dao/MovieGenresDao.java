@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import org.springframework.data.repository.query.Param;
 
 import com.webfilm.anime.entity.Movie;
+import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.MovieGenresPK;
 
