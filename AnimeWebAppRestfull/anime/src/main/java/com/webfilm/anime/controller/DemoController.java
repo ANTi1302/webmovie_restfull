@@ -147,4 +147,9 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
 	}
+	@GetMapping({ "/watch"})
+	public ModelAndView watch(Model model) {
+		modelAndView.setViewName("customer/anime-watching");
+		return modelAndView;
+	}
 }

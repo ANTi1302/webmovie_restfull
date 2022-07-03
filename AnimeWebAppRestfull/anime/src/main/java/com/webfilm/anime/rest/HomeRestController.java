@@ -189,4 +189,9 @@ public class HomeRestController {
 	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
 		return movieCompanyService.companyById(movieId);
 	}
+	@GetMapping("/moviebygen/{name}")
+	public List<Movie> findMovieByNameGen(@PathVariable String name) {
+		List<Movie> movieGenres= movieGenresService.listMovieByNameGen(name);
+		return movieGenres;
+	}
 }

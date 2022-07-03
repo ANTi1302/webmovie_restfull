@@ -22,6 +22,15 @@ public class Episode implements Serializable{
 	private int episodeNumber;
 	@Column(name = "path_video",columnDefinition = "nvarchar(1000)")
 	private String pathVideo;
+	@Column(name = "poster",columnDefinition = "nvarchar(1000)")
+	private String poster;
+	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	public String getEpisodeId() {
 		return episodeId;
 	}
@@ -52,7 +61,7 @@ public class Episode implements Serializable{
 	@Override
 	public String toString() {
 		return "Episode [episodeId=" + episodeId + ", episodeNumber=" + episodeNumber + ", pathVideo=" + pathVideo
-				+ "]";
+				+ ", poster=" + poster + "]";
 	}
 	
 	

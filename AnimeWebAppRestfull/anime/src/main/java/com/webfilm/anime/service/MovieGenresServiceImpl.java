@@ -19,6 +19,11 @@ public class MovieGenresServiceImpl implements MovieGenresService{
 		// TODO Auto-generated method stub
 		return movieGenresDao.listGenresByMovie(movieId);
 	}
+	@Override
+	public List<Movie> listMovieByNameGen(String name) {
+		// TODO Auto-generated method stub
+		return movieGenresDao.listMovieByNameGen(name);
+	}
 	
 
 }
