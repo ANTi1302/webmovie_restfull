@@ -147,6 +147,9 @@ public class DemoController extends BaseController {
 		movie.setMovieGenres(movieGenres);
 		movie.setReviews(reviews);
 		theModel.addAttribute("movie", movie);
+		for (MovieGenres review : movieGenres) {
+			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(review.getGenres().getName()));
+		}
 //		id=movieId;
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;

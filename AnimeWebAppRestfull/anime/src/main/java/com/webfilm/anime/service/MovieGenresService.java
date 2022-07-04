@@ -8,5 +8,5 @@ import com.webfilm.anime.entity.MovieGenres;
 public interface MovieGenresService {
 
 	public List<MovieGenres> listGenresByMovieId(String movieId);
-	public List<Movie> listMovieByNameGen(String name);
+	public List<Object[]> listMovieByNameGen(String name);
 }

@@ -178,26 +178,37 @@ public class HomeRestController {
 		return movieTrendService.listMVLive(pageable);
 	}
 	@GetMapping("/movie/{movieId}")
-	public Movie findMovie(@PathVariable String movieId) {
+	public List<Object[]> findMovie(@PathVariable String movieId) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
 		List<Review> reviews= reviewService.listByMovieId(movieId);
 		movie.setMovieCompanies(movieCompanies);
 		movie.setReviews(reviews);
+		List<MovieGenres> movieGenres=movieGenresService.listGenresByMovieId(movieId);
+		movie.setMovieCompanies(movieCompanies);
+		movie.setMovieGenres(movieGenres);
+		movie.setReviews(reviews);
+//		for (int i = 0; i < movieGenres.size(); i++) {
+//			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(movieGenres.get(i).toString()));
+//		}
+		List<Object[]> gen=null;
+		for (MovieGenres review : movieGenres) {
+			gen= movieGenresService.listMovieByNameGen(review.getGenres().getName());
+		}
 		if (movie==null) {
 			throw new RuntimeException("Product id not found - "+movieId);
 		}
-		return movie;
+		return gen;
 	}
 	@GetMapping("/company/{movieId}")
 	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
 		return movieCompanyService.companyById(movieId);
 	}
-//	@GetMapping("/moviebygen/{name}")
-//	public List<Movie> findMovieByNameGen(@PathVariable String name) {
-//		List<Movie> movieGenres= movieGenresService.listMovieByNameGen(name);
-//		return movieGenres;
-//	}
+	@GetMapping("/moviebygen/{name}")
+	public List<Object[]> findMovieByNameGen(@PathVariable String name) {
+		List<Object[]> movieGenres= movieGenresService.listMovieByNameGen(name);
+		return movieGenres;
+	}
 	@GetMapping("/moviebyeps/{movieId}&{eps}")
 	public Movie findMovieByEps(@PathVariable(value = "movieId") String movieId,@PathVariable(value = "eps") int eps) {
 		Movie movie=movieService.movieById(movieId);
@@ -208,5 +219,9 @@ public class HomeRestController {
 	@GetMapping("/eps/{movieId}")
 	public List<MovieEpisode> findEps(@PathVariable(value = "movieId") String movieId) {
 		return movieEpisodeService.movieEps(movieId);
+	}
+	@GetMapping("/genbymovie/{movieId}")
+	public List<MovieGenres> genbymovie(@PathVariable(value = "movieId") String movieId) {
+		return movieGenresService.listGenresByMovieId(movieId);
 	}
 }
