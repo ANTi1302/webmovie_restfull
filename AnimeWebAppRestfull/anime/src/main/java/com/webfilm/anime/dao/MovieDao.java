@@ -34,4 +34,13 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending\r\n"
 			+ "				  order by MAX(review.created_at) ",nativeQuery = true)
 	public List<Movie> listMovieOrderByReview();
+//	@Query(value = "SELECT movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
+//			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,episode.number_season,episode.path_video,episode.poster\r\n"
+//			+ "FROM     movie INNER JOIN\r\n"
+//			+ "                  movie_episode ON movie.movie_id = movie_episode.movie_id INNER JOIN\r\n"
+//			+ "                  episode ON movie_episode.episode = episode.episode_id\r\n"
+//			+ "				  where movie.movie_id=:movieId and episode.number_season=:eps\r\n"
+//			+ "GROUP BY movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
+//			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,episode.number_season,episode.path_video,episode.poster",nativeQuery = true)
+//	public Movie listMovieByEps(@Param(value ="movieId") String movieId, @Param(value = "eps")int eps);
 }

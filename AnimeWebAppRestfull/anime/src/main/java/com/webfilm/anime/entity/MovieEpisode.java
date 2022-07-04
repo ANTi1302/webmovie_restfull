@@ -14,10 +14,10 @@ import javax.persistence.Table;
 @Table(name = "movie_episode")
 @IdClass(MovieEpisodePK.class)
 public class MovieEpisode implements Serializable{
-//	@EmbeddedId
-//	@ManyToOne
-//	@JoinColumn(name = "movie_id")
-//	private Movie movie;
+	@EmbeddedId
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "episode")

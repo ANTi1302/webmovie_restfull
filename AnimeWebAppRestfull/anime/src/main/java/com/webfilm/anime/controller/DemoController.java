@@ -22,12 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieCompany;
+import com.webfilm.anime.entity.MovieEpisode;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
 import com.webfilm.anime.service.MovieCompanyService;
+import com.webfilm.anime.service.MovieEpisodeService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
 import com.webfilm.anime.service.MovieTrendService;
@@ -61,7 +63,9 @@ public class DemoController extends BaseController {
 	private MovieTrendService movieTrendService;
 	@Autowired
 	private MovieCompanyService movieCompanyService;
-
+	@Autowired
+	private MovieEpisodeService movieEpisodeService;
+	
 	@GetMapping({ "/home", "/trang-chu" })
 	public ModelAndView home(Model model) {
 		model.addAttribute("listSlide", slideService.listSlide());
@@ -147,9 +151,14 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
 	}
-	@GetMapping({ "/watch"})
-	public ModelAndView watch(Model model) {
+	@GetMapping({ "/watch/{movieId}&{eps}"})
+	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps) {
+		Movie movie=movieService.movieById(movieId);
+		model.addAttribute("movie", movie);
+		List<MovieEpisode> episode=movieEpisodeService.movieByEps(movieId, eps);
+		movie.setMovieEpisodes(episode);
 		modelAndView.setViewName("customer/anime-watching");
+		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		return modelAndView;
 	}
 }

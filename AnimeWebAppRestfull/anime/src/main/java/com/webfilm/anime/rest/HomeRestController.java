@@ -21,6 +21,7 @@ import com.webfilm.anime.entity.Menu;
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieCompanyPK;
+import com.webfilm.anime.entity.MovieEpisode;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.entity.Season;
@@ -30,6 +31,7 @@ import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
 import com.webfilm.anime.service.MovieCompanyService;
+import com.webfilm.anime.service.MovieEpisodeService;
 import com.webfilm.anime.service.MovieGenresService;
 import com.webfilm.anime.service.MovieService;
 import com.webfilm.anime.service.MovieTrendService;
@@ -65,6 +67,8 @@ public class HomeRestController {
 	private MovieTrendService movieTrendService;
 	@Autowired
 	private MovieCompanyService movieCompanyService;
+	@Autowired
+	private MovieEpisodeService movieEpisodeService;
 
 	@GetMapping("/list")
 	public List<Menu> findAllMenu() {
@@ -189,9 +193,20 @@ public class HomeRestController {
 	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
 		return movieCompanyService.companyById(movieId);
 	}
-	@GetMapping("/moviebygen/{name}")
-	public List<Movie> findMovieByNameGen(@PathVariable String name) {
-		List<Movie> movieGenres= movieGenresService.listMovieByNameGen(name);
-		return movieGenres;
+//	@GetMapping("/moviebygen/{name}")
+//	public List<Movie> findMovieByNameGen(@PathVariable String name) {
+//		List<Movie> movieGenres= movieGenresService.listMovieByNameGen(name);
+//		return movieGenres;
+//	}
+	@GetMapping("/moviebyeps/{movieId}&{eps}")
+	public Movie findMovieByEps(@PathVariable(value = "movieId") String movieId,@PathVariable(value = "eps") int eps) {
+		Movie movie=movieService.movieById(movieId);
+		List<MovieEpisode> episode=movieEpisodeService.movieByEps(movieId, eps);
+		movie.setMovieEpisodes(episode);
+		return movie;
+	}
+	@GetMapping("/eps/{movieId}")
+	public List<MovieEpisode> findEps(@PathVariable(value = "movieId") String movieId) {
+		return movieEpisodeService.movieEps(movieId);
 	}
 }

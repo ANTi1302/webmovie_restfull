@@ -2,6 +2,8 @@ package com.webfilm.anime.service;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieCompany;
@@ -17,5 +19,5 @@ public interface MovieService {
 	public List<Movie> listMovie();
 	public List<Movie> listMovieOrderByReview();
 	public Movie movieById(String id);
-	
+//	public Movie listMovieByEps(String movieId,int eps);
 }

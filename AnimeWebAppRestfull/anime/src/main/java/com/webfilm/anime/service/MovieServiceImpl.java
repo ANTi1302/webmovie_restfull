@@ -63,5 +63,10 @@ public class MovieServiceImpl implements MovieService{
 		}
 		return movie;
 	}
+//	@Override
+//	public Movie listMovieByEps(String movieId, int eps) {
+//		// TODO Auto-generated method stub
+//		return movieDao.listMovieByEps(movieId, eps);
+//	}
 
 }
