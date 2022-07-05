@@ -210,7 +210,7 @@
                                 <h5>you might like...</h5>
                             </div>
                             <div th:each="might,state : ${moviemighr}" class="product__sidebar__view__item set-bg" th:data-setbg="@{'/'+${might[16]}}">
-                                <div class="ep">18 / ?</div>
+                                <div class="ep" th:text="${might[21]+'/?'}">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye" th:text="${#numbers.formatInteger(might[13],3)}"></i></div>
                                 <h5><a href="#" th:text="${might[2]}"></a></h5>
                             </div>

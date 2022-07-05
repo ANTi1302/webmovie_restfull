@@ -162,6 +162,7 @@ public class DemoController extends BaseController {
 		movie.setMovieEpisodes(episode);
 		modelAndView.setViewName("customer/anime-watching");
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
+		model.addAttribute("numeps", eps);
 		return modelAndView;
 	}
 }

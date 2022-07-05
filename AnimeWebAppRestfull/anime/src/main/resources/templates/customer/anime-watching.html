@@ -54,18 +54,45 @@
 						<nav class="header__menu mobile-menu">
 							<ul>
 								<li class="active"><a href="./index.html">Homepage</a></li>
-								<li><a href="./categories.html">Categories <span
-										class="arrow_carrot-down"></span></a>
-									<ul class="dropdown">
-										<li><a href="./categories.html">Categories</a></li>
-										<li><a href="./anime-details.html">Anime Details</a></li>
-										<li><a href="./anime-watching.html">Anime Watching</a></li>
-										<li><a href="./blog-details.html">Blog Details</a></li>
-										<li><a href="./signup.html">Sign Up</a></li>
-										<li><a href="./login.html">Login</a></li>
-									</ul></li>
-								<li><a href="./blog.html">Our Blog</a></li>
-								<li><a href="#">Contacts</a></li>
+								<ul:block th:each="item,state : ${list}">
+									<ul:block th:switch="${item.name}">
+										<li th:case="'Genres'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listGen}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Country'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listCoun}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Seasion'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSea}">
+													<li><a href="./categories.html"
+														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Series'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSer}">
+													<li><a href="./categories.html" th:text="${item}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="*"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+									</ul:block>
 							</ul>
 						</nav>
 					</div>
@@ -116,7 +143,7 @@
 						<div class="section-title">
 							<h5>List Name</h5>
 						</div>
-						<a th:href="@{/watch/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}" th:each="eps,state : ${eps}" th:text="${eps.episode.episodeNumber}"></a>
+						<a th:href="@{/watch/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}" th:each="eps,state : ${eps}" th:text="${eps.episode.episodeNumber}"  th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
 					</div>
 				</div>
 			</div>
