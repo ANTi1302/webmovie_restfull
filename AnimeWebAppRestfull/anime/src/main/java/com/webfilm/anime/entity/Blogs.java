@@ -1,11 +1,14 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,7 +25,42 @@ public class Blogs implements Serializable{
 	private String title;
 	@Column(columnDefinition = "nvarchar(500)")
 	private String imgPath;
+	@Column(name = "top_blog")
+	private int topBlog;
+	@OneToMany
+	@JoinColumn(name = "blog_id")
+	private List<KeyWordBlog> keyWordBlogs;
+	@OneToMany
+	@JoinColumn(name = "blog_id")
+	private List<GenresBlog> genresBlogs;
+	@OneToMany
+	@JoinColumn(name = "blog_id")
+	private List<BlogDetail> blogDetails;
 	
+	public int getTopBlog() {
+		return topBlog;
+	}
+	public void setTopBlog(int topBlog) {
+		this.topBlog = topBlog;
+	}
+	public List<BlogDetail> getBlogDetails() {
+		return blogDetails;
+	}
+	public void setBlogDetails(List<BlogDetail> blogDetails) {
+		this.blogDetails = blogDetails;
+	}
+	public List<KeyWordBlog> getKeyWordBlogs() {
+		return keyWordBlogs;
+	}
+	public void setKeyWordBlogs(List<KeyWordBlog> keyWordBlogs) {
+		this.keyWordBlogs = keyWordBlogs;
+	}
+	public List<GenresBlog> getGenresBlogs() {
+		return genresBlogs;
+	}
+	public void setGenresBlogs(List<GenresBlog> genresBlogs) {
+		this.genresBlogs = genresBlogs;
+	}
 	public Blogs() {
 		super();
 	}
@@ -52,7 +90,8 @@ public class Blogs implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Blogs [blogId=" + blogId + ", title=" + title + ", imgPath=" + imgPath + "]";
+		return "Blogs [blogId=" + blogId + ", title=" + title + ", imgPath=" + imgPath + ", keyWordBlogs="
+				+ keyWordBlogs + ", genresBlogs=" + genresBlogs + "]";
 	}
 	
 }

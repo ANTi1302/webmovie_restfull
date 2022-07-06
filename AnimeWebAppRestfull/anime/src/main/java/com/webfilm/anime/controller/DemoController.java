@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.webfilm.anime.entity.Blogs;
 import com.webfilm.anime.entity.Movie;
 import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieEpisode;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.Review;
+import com.webfilm.anime.service.BlogService;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
@@ -40,7 +42,6 @@ import com.webfilm.anime.service.SlideService;
 
 @Controller
 public class DemoController extends BaseController {
-	private String id;
 	@Autowired
 	private MenuService menuService;
 	@Autowired
@@ -65,6 +66,8 @@ public class DemoController extends BaseController {
 	private MovieCompanyService movieCompanyService;
 	@Autowired
 	private MovieEpisodeService movieEpisodeService;
+	@Autowired
+	private BlogService blogService;
 	
 	@GetMapping({ "/home", "/trang-chu" })
 	public ModelAndView home(Model model) {
@@ -163,6 +166,24 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/anime-watching");
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		model.addAttribute("numeps", eps);
+		return modelAndView;
+	}
+	@GetMapping({ "/blog"})
+	public ModelAndView blog(Model model,@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "6") Integer size) {
+		Pageable pageable = PageRequest.of(0, size);
+		Page<Blogs> bookPage = blogService.listBlog(pageable);
+		Pageable pageable2 = PageRequest.of(1, size);
+		Page<Blogs> bookPage2 = blogService.listBlog(pageable2);
+		
+		model.addAttribute("blog", bookPage);
+		model.addAttribute("blog2", bookPage2);
+		modelAndView.setViewName("customer/blog");
+		return modelAndView;
+	}
+	@GetMapping({ "/blogdetails"})
+	public ModelAndView blogdetail(Model model) {
+		modelAndView.setViewName("customer/blog-details");
 		return modelAndView;
 	}
 }

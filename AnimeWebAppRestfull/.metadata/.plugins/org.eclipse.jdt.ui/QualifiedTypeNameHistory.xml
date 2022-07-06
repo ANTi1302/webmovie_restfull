@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="javax.persistence.FetchType"/>
-    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieSeriesPK"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Genres"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
-    <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.dto.MovieDto"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieSeries"/>
-    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollection"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollectionOption"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenresPK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.ReviewDao"/>
@@ -35,17 +23,11 @@
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="javax.persistence.IdClass"/>
-    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.MovieCompanyDao"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieCompanyPK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieCompany"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieCompanyService"/>
-    <fullyQualifiedTypeName name="javax.persistence.Column"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.ReviewService"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.Review"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.Movie"/>
@@ -54,10 +36,28 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisodePK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.MovieEpisodeDao"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieEpisodeService"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisode"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenres"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.KeyWordBlogPK"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Keyword"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="javax.persistence.IdClass"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.GenresBlogPK"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.KeyWordBlog"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.GenresBlog"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.dao.BlogsDao"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Blogs"/>
+    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
+    <fullyQualifiedTypeName name="javax.persistence.Column"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.service.BlogService"/>
 </qualifiedTypeNameHistroy>

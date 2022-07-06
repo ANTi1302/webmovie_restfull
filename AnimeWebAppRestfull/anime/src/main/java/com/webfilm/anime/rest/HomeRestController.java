@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webfilm.anime.dto.MovieDto;
+import com.webfilm.anime.entity.Blogs;
 import com.webfilm.anime.entity.Country;
 import com.webfilm.anime.entity.Genres;
 import com.webfilm.anime.entity.Menu;
@@ -27,6 +28,7 @@ import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.entity.Season;
 import com.webfilm.anime.entity.Series;
 import com.webfilm.anime.entity.Slides;
+import com.webfilm.anime.service.BlogService;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
 import com.webfilm.anime.service.MenuService;
@@ -69,6 +71,8 @@ public class HomeRestController {
 	private MovieCompanyService movieCompanyService;
 	@Autowired
 	private MovieEpisodeService movieEpisodeService;
+	@Autowired
+	private BlogService blogService;
 
 	@GetMapping("/list")
 	public List<Menu> findAllMenu() {
@@ -223,5 +227,9 @@ public class HomeRestController {
 	@GetMapping("/genbymovie/{movieId}")
 	public List<MovieGenres> genbymovie(@PathVariable(value = "movieId") String movieId) {
 		return movieGenresService.listGenresByMovieId(movieId);
+	}
+	@GetMapping("/bloglist")
+	public Page<Blogs> blog(Pageable pageable) {
+		return blogService.listBlog(pageable);
 	}
 }

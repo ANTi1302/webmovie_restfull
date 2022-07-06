@@ -154,7 +154,7 @@
                                             <li><span>Type:</span><li:block th:text="${movie.type}"> </li:block></li>
                                             <li><span>Studios:</span><li:block th:each="gen,state : ${movie.movieCompanies}" th:text="${gen.company.name}"> </li:block></li>
                                             <li><span>Date aired:</span><li:block th:text="${movie.dateAired}"> </li:block></li>
-                                            <li><span>Status:</span><li:block th:text="${movie.status}"> </li:block>  </li>
+                                            <li><span>Status:</span><li:block th:text="${movie.status}==1?'Airing':'Stop Broadcasting'"> </li:block>  </li>
                                             <li><span>Genre:</span><li:block th:each="gen,state : ${movie.movieGenres}" th:text="${gen.genres.name+' '}"> </li:block> </li>
                                         </ul>
                                     </div>
