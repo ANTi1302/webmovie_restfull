@@ -170,9 +170,7 @@
                             a team environment.</p>
                         </div>
                     <div class="blog__details__tags">
-                            <a href="#">Healthfood</a>
-                            <a href="#">Sport</a>
-                            <a href="#">Game</a>
+                            <a th:each="key,state : ${blog.keyWordBlogs}" href="#" th:text="${key.keyword.name}"></a>
                         </div>
                         <div class="blog__details__btns">
                             <div class="row">
