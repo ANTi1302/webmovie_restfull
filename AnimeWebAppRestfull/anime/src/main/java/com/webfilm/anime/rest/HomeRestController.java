@@ -232,4 +232,8 @@ public class HomeRestController {
 	public Page<Blogs> blog(Pageable pageable) {
 		return blogService.listBlog(pageable);
 	}
+	@GetMapping("/bloglist/{blogId}")
+	public Blogs blog(@PathVariable String blogId) {
+		return blogService.blogById(blogId);
+	}
 }

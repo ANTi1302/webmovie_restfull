@@ -175,14 +175,15 @@ public class DemoController extends BaseController {
 		Page<Blogs> bookPage = blogService.listBlog(pageable);
 		Pageable pageable2 = PageRequest.of(1, size);
 		Page<Blogs> bookPage2 = blogService.listBlog(pageable2);
-		
 		model.addAttribute("blog", bookPage);
 		model.addAttribute("blog2", bookPage2);
 		modelAndView.setViewName("customer/blog");
 		return modelAndView;
 	}
-	@GetMapping({ "/blogdetails"})
-	public ModelAndView blogdetail(Model model) {
+	@GetMapping({ "/blogdetails/{blogId}"})
+	public ModelAndView blogdetail(Model model,@PathVariable("blogId") String blogId) {
+		Blogs blogs=blogService.blogById(blogId);
+		model.addAttribute("blog", blogs);
 		modelAndView.setViewName("customer/blog-details");
 		return modelAndView;
 	}

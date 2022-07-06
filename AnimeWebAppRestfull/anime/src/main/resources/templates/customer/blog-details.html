@@ -15,14 +15,19 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/plyr.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 
 <body>
@@ -38,29 +43,56 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="./index.html">
-                            <img src="img/logo.png" alt="">
+                            <img th:src="@{/img/logo.png}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-details.html">Anime Details</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./signup.html">Sign Up</a></li>
-                                        <li><a href="./login.html">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active"><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
+							<ul>
+								<li class="active"><a href="./index.html">Homepage</a></li>
+								<ul:block th:each="item,state : ${list}">
+									<ul:block th:switch="${item.name}">
+										<li th:case="'Genres'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listGen}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Country'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listCoun}">
+													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Seasion'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSea}">
+													<li><a href="./categories.html"
+														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Series'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSer}">
+													<li><a href="./categories.html" th:text="${item}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="*"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+									</ul:block>
+							</ul>
+						</nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -80,9 +112,9 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
-                    <div class="blog__details__title">
-                        <h6>Action, Magic <span>- March 08, 2020</span></h6>
-                        <h2>Anime for Beginners: 20 Pieces of Essential Viewing</h2>
+                    <div class="blog__details__title" >
+                        <h6><span th:each="gen,state : ${blog.genresBlogs}"><u:block th:text="${gen.genres.name}"> </u:block> </span><span th:each="cen,state : ${blog.blogDetails}" >-<ul:block th:text="${cen.createdAt}"> </ul:block></span></h6>
+                        <h2 th:text="${blog.title}"></h2>
                         <div class="blog__details__social">
                             <a href="#" class="facebook"><i class="fa fa-facebook-square"></i> Facebook</a>
                             <a href="#" class="pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
@@ -93,12 +125,12 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="blog__details__pic">
-                        <img src="img/blog/details/blog-details-pic.jpg" alt="">
+                        <img th:src="@{'/'+${blog.imgPath}}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div class="blog__details__content">
-                        <div class="blog__details__text">
+                    <div class="blog__details__content" >
+                    <div class="blog__details__text">
                             <p>As a result the last couple of eps haven’t been super exciting for me, because they’ve
                                 been more like settling into a familiar and comfortable routine.  We’re seeing character
                                 growth here but it’s subtle (apart from Shouyou, arguably).  I mean, Tobio being an
@@ -137,7 +169,7 @@
                                 deal, but this is really on Tobio – he has to figure out how to co-exist with others in
                             a team environment.</p>
                         </div>
-                        <div class="blog__details__tags">
+                    <div class="blog__details__tags">
                             <a href="#">Healthfood</a>
                             <a href="#">Sport</a>
                             <a href="#">Game</a>
@@ -269,14 +301,14 @@
         <!-- Search model end -->
 
         <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+        <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/player.js}"></script>
+        <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/mixitup.min.js}"></script>
+        <script th:src="@{/js/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
 
     </body>
 

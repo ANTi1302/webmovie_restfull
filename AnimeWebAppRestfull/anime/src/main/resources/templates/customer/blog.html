@@ -128,14 +128,14 @@
                             <div th:case="'1'" class="blog__item set-bg" th:data-setbg="@{'/'+${item.imgPath}}">
                                 <div class="blog__item__text"  th:each="cen,state : ${item.blogDetails}" >
                                      <p th:text="${cen.createdAt}"><span class="icon_calendar" ></span></p>
-                                    <h4><a href="#" th:text="${item.title}"></a></h4>
+                                    <h4><a th:href="@{/blogdetails/{blogId}(blogId=${item.blogId})}" th:text="${item.title}"></a></h4>
                                 </div>
                             </div>
                             
                             <div th:case="'0'" class="blog__item small__item set-bg" th:data-setbg="@{'/'+${item.imgPath}}">
                                 <div class="blog__item__text"  th:each="cen,state : ${item.blogDetails}" >
                                      <p th:text="${cen.createdAt}"><span class="icon_calendar" ></span></p>
-                                    <h4><a href="#" th:text="${item.title}"></a></h4>
+                                    <h4><a th:href="@{/blogdetails/{blogId}(blogId=${item.blogId})}" th:text="${item.title}"></a></h4>
                                 </div>
                             </div>
                             </ul:block>
@@ -149,14 +149,14 @@
                             <div th:case="'1'" class="blog__item set-bg" th:data-setbg="@{'/'+${item.imgPath}}">
                                 <div class="blog__item__text"  th:each="cen,state : ${item.blogDetails}" >
                                      <p th:text="${cen.createdAt}"><span class="icon_calendar" ></span></p>
-                                    <h4><a href="#" th:text="${item.title}"></a></h4>
+                                    <h4><a th:href="@{/blogdetails/{blogId}(blogId=${item.blogId})}" th:text="${item.title}"></a></h4>
                                 </div>
                             </div>
                             
                             <div th:case="'0'" class="blog__item small__item set-bg" th:data-setbg="@{'/'+${item.imgPath}}">
                                 <div class="blog__item__text"  th:each="cen,state : ${item.blogDetails}" >
                                      <p th:text="${cen.createdAt}"><span class="icon_calendar" ></span></p>
-                                    <h4><a href="#" th:text="${item.title}"></a></h4>
+                                    <h4><a th:href="@{/blogdetails/{blogId}(movieId=${item.blogId})}" th:text="${item.title}"></a></h4>
                                 </div>
                             </div>
                             </ul:block>

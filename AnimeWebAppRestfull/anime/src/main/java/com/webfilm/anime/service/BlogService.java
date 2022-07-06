@@ -10,4 +10,6 @@ import com.webfilm.anime.entity.Blogs;
 public interface BlogService {
 
 	public Page<Blogs> listBlog(Pageable pageable);
+
+	public Blogs blogById(String blogId);
 }
