@@ -2,16 +2,28 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -34,6 +46,30 @@ public class Review implements Serializable{
 //	@ManyToOne
 //	@JoinColumn(name = "movie_id")
 //	private Movie movie;
+	@Column(name = "count_like")
+	private Integer countLike;
+	@OneToMany
+	
+	@JoinColumn(name="review_id")
+	@Column(name = "review_reply")
+	private List<Review> reviewReply;
+	
+//	public List<Review> getReviewReply() {
+//		return reviewReply;
+//	}
+//
+//	public void setReviewReply(List<Review> reviewReply) {
+//		this.reviewReply = reviewReply;
+//	}
+
+	public Integer getCountLike() {
+		return countLike;
+	}
+
+	public void setCountLike(Integer countLike) {
+		this.countLike = countLike;
+	}
+
 	public Review(String reviewId, String comment, Date createdAt, int status, Users user) {
 		super();
 		this.reviewId = reviewId;

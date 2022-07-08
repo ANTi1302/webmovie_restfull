@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "blogs")
@@ -36,7 +38,16 @@ public class Blogs implements Serializable{
 	@OneToMany
 	@JoinColumn(name = "blog_id")
 	private List<BlogDetail> blogDetails;
+	@OneToMany
+	@JoinColumn(name = "blog_id")
+	private List<Review> reviews;
 	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 	public int getTopBlog() {
 		return topBlog;
 	}

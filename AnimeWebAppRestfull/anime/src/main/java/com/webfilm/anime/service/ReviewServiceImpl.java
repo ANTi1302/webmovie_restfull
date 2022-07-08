@@ -18,5 +18,17 @@ public class ReviewServiceImpl implements ReviewService{
 		// TODO Auto-generated method stub
 		return reviewDao.listReviewByMovie(movieId);
 	}
+
+	@Override
+	public List<Review> listReviewAndReplies(String replyId) {
+		// TODO Auto-generated method stub
+		return reviewDao.listReviewAndReplies(replyId);
+	}
+
+	@Override
+	public List<Review> listComment() {
+		// TODO Auto-generated method stub
+		return reviewDao.listComment();
+	}
 	
 }

@@ -2,6 +2,7 @@ package com.webfilm.anime.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -184,6 +185,13 @@ public class DemoController extends BaseController {
 	public ModelAndView blogdetail(Model model,@PathVariable("blogId") String blogId) {
 		Blogs blogs=blogService.blogById(blogId);
 		model.addAttribute("blog", blogs);
+		List<Review> comment=reviewService.listComment();
+		List<Review> reply=null;
+		for (Review review : comment) {
+			reply=(reviewService.listReviewAndReplies(review.getReviewId()));
+		}
+		model.addAttribute("rep", reply);
+		blogs.setReviews(comment);
 		modelAndView.setViewName("customer/blog-details");
 		return modelAndView;
 	}

@@ -15,4 +15,19 @@ public interface ReviewDao extends JpaRepositoryImplementation<Review, String>{
 	@Query(value = "select * from  review where [movie_id]=:movieId\r\n"
 			+ "",nativeQuery = true)
 	public List<Review> listReviewByMovie(@Param("movieId") String movieId);
+	@Query(value = ";WITH x AS\r\n"
+			+ "(\r\n"
+			+ "    -- anchor:\r\n"
+			+ "    SELECT  [review_id],[user_id] , [comment],[created_at],[status],[movie_id], [blog_id],[count_like],[review_reply]\r\n"
+			+ "    FROM review WHERE review_reply =:replyId\r\n"
+			+ "    UNION ALL\r\n"
+			+ "    -- recursive:\r\n"
+			+ "    SELECT t.[review_id], t.[user_id], t.[comment], t.[created_at],t.[status],t.[movie_id], t.[blog_id],t.[count_like],t.[review_reply]\r\n"
+			+ "    FROM x INNER JOIN review AS t\r\n"
+			+ "    ON t.[review_reply] = x.[review_id]\r\n"
+			+ ")\r\n"
+			+ "SELECT x.[review_id],x.[user_id] , x.[comment],x.[created_at],x.[status],x.[movie_id],x.[blog_id],x.[count_like],x.[review_reply] FROM x",nativeQuery = true)
+	public List<Review> listReviewAndReplies(@Param("replyId")String replyId);
+	@Query(value = "select *from review where review_reply is null",nativeQuery = true)
+	public List<Review> listComment();
 }

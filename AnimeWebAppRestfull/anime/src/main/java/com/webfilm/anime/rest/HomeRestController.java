@@ -236,4 +236,12 @@ public class HomeRestController {
 	public Blogs blog(@PathVariable String blogId) {
 		return blogService.blogById(blogId);
 	}
+	@GetMapping("/rev/{replyId}")
+	public List<Review> listReviewAndReplies(@PathVariable(value = "replyId") String replyId) {
+		return reviewService.listReviewAndReplies(replyId);
+	}
+	@GetMapping("/rev")
+	public List<Review> comment() {
+		return reviewService.listComment();
+	}
 }
