@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -31,6 +32,21 @@ public class BlogDetail implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MMMM-dd")
 	private Date updateAt;
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(blogs);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BlogDetail other = (BlogDetail) obj;
+		return Objects.equals(blogs, other.blogs);
+	}
 	public BlogDetail() {
 		super();
 	}

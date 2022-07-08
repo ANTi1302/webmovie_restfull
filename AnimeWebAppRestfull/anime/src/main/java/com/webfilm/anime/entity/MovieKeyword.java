@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,6 +21,22 @@ public class MovieKeyword implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "keyword_id")
 	private Keyword keyword;
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(movie);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovieKeyword other = (MovieKeyword) obj;
+		return Objects.equals(movie, other.movie);
+	}
 	public Movie getMovie() {
 		return movie;
 	}

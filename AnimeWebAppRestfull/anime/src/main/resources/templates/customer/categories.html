@@ -84,7 +84,7 @@
 													<li><a href="./categories.html" th:text="${item}"></a></li>
 												</ul:block>
 											</ul></li>
-										<li th:case="*"><a href="./categories.html"
+										<li th:case="*"><a th:href="@{'/'+${item.url}}"
 											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
 										</a></li>
 									</ul:block>
@@ -236,6 +236,7 @@
 											th:text="${#numbers.formatInteger(item[3],3)}"></i>
 									</div>
 									<h5>
+									<a th:href="@{/moviebyid/{movieId}(movieId=${item[0]})}" th:text="${item[1]}"></a>
 										<a href="#" th:text="${item[1]}"></a>
 									</h5>
 								</div>
@@ -256,7 +257,7 @@
 											th:text="${gen.genres.name}"></li>
 									</ul>
 									<h5>
-										<a href="#" th:text="${item.name}"></a>
+										<a th:href="@{/moviebyid/{movieId}(movieId=${item.movieId})}" th:text="${item.name}"></a>
 									</h5>
 									<span><i class="fa fa-eye"
 										th:text="${#numbers.formatInteger(item.views,3)}+'Viewes'"></i></span>

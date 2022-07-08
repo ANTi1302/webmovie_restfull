@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -14,10 +15,10 @@ import javax.persistence.Table;
 @IdClass(MovieSeriesPK.class)
 public class MovieSeries implements Serializable{
 
-//	@Id
-//	@ManyToOne
-//	@JoinColumn(name = "movie_id")
-//	private Movie movie;
+	@EmbeddedId
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "series_id")
@@ -28,6 +29,7 @@ public class MovieSeries implements Serializable{
 //	public void setMovie(Movie movie) {
 //		this.movie = movie;
 //	}
+	
 	public Series getSeries() {
 		return series;
 	}

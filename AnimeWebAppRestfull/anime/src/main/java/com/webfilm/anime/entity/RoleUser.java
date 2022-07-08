@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,6 +21,22 @@ public class RoleUser implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private Users user;
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(user);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RoleUser other = (RoleUser) obj;
+		return Objects.equals(user, other.user);
+	}
 	public Roles getRoles() {
 		return roles;
 	}

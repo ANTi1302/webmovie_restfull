@@ -46,7 +46,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
 							<ul>
-								<li class="active"><a href="./index.html">Homepage</a></li>
+								<li class="active"><a href="/home">Homepage</a></li>
 								<ul:block th:each="item,state : ${list}">
 									<ul:block th:switch="${item.name}">
 										<li th:case="'Genres'"><a href="./categories.html"
@@ -82,7 +82,7 @@
 													<li><a href="./categories.html" th:text="${item}"></a></li>
 												</ul:block>
 											</ul></li>
-										<li th:case="*"><a href="./categories.html"
+										<li th:case="*"><a th:href="@{'/'+${item.url}}"
 											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
 										</a></li>
 									</ul:block>
