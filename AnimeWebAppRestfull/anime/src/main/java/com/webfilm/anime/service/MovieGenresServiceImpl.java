@@ -25,5 +25,6 @@ public class MovieGenresServiceImpl implements MovieGenresService{
 		return movieGenresDao.listMovieByNameGen(name);
 	}
 	
+	
 
 }

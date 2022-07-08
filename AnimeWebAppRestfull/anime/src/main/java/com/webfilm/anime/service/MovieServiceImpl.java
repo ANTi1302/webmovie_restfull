@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.webfilm.anime.dao.MovieDao;
@@ -68,5 +70,10 @@ public class MovieServiceImpl implements MovieService{
 //		// TODO Auto-generated method stub
 //		return movieDao.listMovieByEps(movieId, eps);
 //	}
+	@Override
+	public Page<Movie> listMoveByGenId(String genId,Pageable pageable) {
+		// TODO Auto-generated method stub
+		return movieDao.listMoveByGenId(genId,pageable);
+	}
 
 }

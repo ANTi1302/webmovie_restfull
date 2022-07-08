@@ -93,6 +93,34 @@ public class Movie implements Serializable {
 		this.movieCompanies = movieCompanies;
 	}
 
+	public Movie(String movieId, String title, String name, String overview, int runtime, String tagline, String status,
+			float votesAvg, int votesCount, String type, int dateAired, String quality, double views, float scoresAvg,
+			int scoresCount, String posterPath, int recently, int live, int popular, int trending,
+			List<MovieCompany> movieCompanies) {
+		super();
+		this.movieId = movieId;
+		this.title = title;
+		this.name = name;
+		this.overview = overview;
+		this.runtime = runtime;
+		this.tagline = tagline;
+		this.status = status;
+		this.votesAvg = votesAvg;
+		this.votesCount = votesCount;
+		this.type = type;
+		this.dateAired = dateAired;
+		this.quality = quality;
+		this.views = views;
+		this.scoresAvg = scoresAvg;
+		this.scoresCount = scoresCount;
+		this.posterPath = posterPath;
+		this.recently = recently;
+		this.live = live;
+		this.popular = popular;
+		this.trending = trending;
+		this.movieCompanies = movieCompanies;
+	}
+
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}

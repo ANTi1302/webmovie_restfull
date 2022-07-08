@@ -25,4 +25,5 @@ public interface MovieGenresDao extends JpaRepositoryImplementation<MovieGenres,
 			+ "				  where genres.name like %:namegen% group by movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending",nativeQuery = true)
 	public List<Object[]> listMovieByNameGen(@Param("namegen")String name);
+
 }

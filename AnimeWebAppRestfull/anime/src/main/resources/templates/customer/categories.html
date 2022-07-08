@@ -18,14 +18,14 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="css/plyr.css" type="text/css">
-<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/plyr.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 
 <body>
@@ -56,7 +56,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listGen}">
-													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+													<li><a th:href="@{/moviegenres/{genId}(genId=${item.genresId})}" th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Country'"><a href="./categories.html"
@@ -149,7 +149,7 @@
 								th:each="item,state : ${listTrend.content}">
 								<div class="product__item">
 									<div class="product__item__pic set-bg"
-										th:data-setbg="${item.posterPath}">
+										th:data-setbg="@{'/'+${item.posterPath}}">
 										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 										<div class="comment">
 											<i class="fa fa-comments" th:text="${item.reviews.size}"></i>
@@ -214,6 +214,14 @@
 							th:text=${pageNumber}></a> <a th:href="@{/recently(page=${listTrend.number + 2})}"><i
 							class="fa fa-angle-double-right"></i></a>
 					</div>
+					<div th:switch="${request}" th:case="'/moviegenres/*'"
+						th:if="${listTrend.totalPages > 0}" class="product__pagination"
+						>
+						<a th:each="pageNumber : ${pageNumbers}" th:href="@{/moviegenres(page=${pageNumber})}"
+							th:class="${pageNumber==listTrend.number + 1} ?current-page"
+							th:text=${pageNumber}></a> <a th:href="@{/moviegenres(page=${listTrend.number + 2})}"><i
+							class="fa fa-angle-double-right"></i></a>
+					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-8">
 					<div class="product__sidebar">
@@ -229,7 +237,7 @@
 							</ul>
 							<div class="filter__gallery" th:each="item,state : ${listView}">
 								<div class="product__sidebar__view__item set-bg mix day years"
-									th:data-setbg="${item[2]}">
+									th:data-setbg="@{'/'+${item[2]}}">
 									<div class="ep" th:text="${item[4]}+'/18'"></div>
 									<div class="view">
 										<i class="fa fa-eye"
@@ -249,7 +257,7 @@
 							<div class="product__sidebar__comment__item"
 								th:each="item,state : ${listReview}">
 								<div class="product__sidebar__comment__item__pic">
-									<img th:src="${item.posterPath}" alt="">
+									<img th:src="@{'/'+${item.posterPath}}" alt="">
 								</div>
 								<div class="product__sidebar__comment__item__text">
 									<ul>
@@ -326,14 +334,14 @@
 	<!-- Search model end -->
 
 	<!-- Js Plugins -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/player.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/mixitup.min.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
+	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/player.js}"></script>
+        <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/mixitup.min.js}"></script>
+        <script th:src="@{/js/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
 
 </body>
 

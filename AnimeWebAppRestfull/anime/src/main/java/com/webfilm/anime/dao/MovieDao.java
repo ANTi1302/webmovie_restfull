@@ -2,6 +2,8 @@ package com.webfilm.anime.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.repository.RepositoryDefinition;
@@ -29,9 +31,14 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 	@Query(value = "SELECT top 5 movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,COUNT(review_id) as sum\r\n"
 			+ "FROM     review INNER JOIN\r\n"
-			+ "                  movie ON review.movie_id = movie.movie_id\r\n"
+			+ "                  movie ON review.movie_id = movie.movie_id\r\n "
 			+ "GROUP BY movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending\r\n"
 			+ "				  order by MAX(review.created_at) ",nativeQuery = true)
 	public List<Movie> listMovieOrderByReview();
+	@Query(value = "SELECT movie.*\r\n"
+			+ "FROM     movie INNER JOIN\r\n"
+			+ "                  movie_genres ON movie.movie_id = movie_genres.movie_id\r\n"
+			+ "						 where movie_genres.genres_id=:genId",nativeQuery = true)
+	public Page<Movie> listMoveByGenId(@Param(value = "genId")String genId,Pageable pageable);
 }

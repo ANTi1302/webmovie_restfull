@@ -61,7 +61,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listGen}">
-													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+													<li><a th:href="@{/moviegenres/{genId}(genId=${item.genresId})}" th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Country'"><a href="./categories.html"

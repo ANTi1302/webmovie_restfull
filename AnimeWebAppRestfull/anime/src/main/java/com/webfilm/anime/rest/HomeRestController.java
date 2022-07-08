@@ -244,4 +244,8 @@ public class HomeRestController {
 	public List<Review> comment() {
 		return reviewService.listComment();
 	}
+	@GetMapping("/moviegen/{genId}")
+	public Page<Movie> moviege(@PathVariable(value = "genId") String genId,Pageable pageable) {
+		return movieService.listMoveByGenId(genId,pageable);
+	}
 }
