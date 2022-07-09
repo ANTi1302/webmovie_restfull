@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<div class="header__logo">
-						<a href="/home"> <img src="img/logo.png" alt="">
+						<a href="/home"> <img th:src="@{/img/logo.png}" alt="">
 						</a>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listCoun}">
-													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+													<li><a th:href="@{/moviecon/{genId}(genId=${item.countryId})}" th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Seasion'"><a href="./categories.html"
@@ -72,7 +72,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSea}">
-													<li><a href="./categories.html"
+													<li><a th:href="@{/moviesea/{genId}(genId=${item.seasonId})}"
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>
@@ -223,6 +223,22 @@
 							class="fa fa-angle-double-right"></i></a>
 					</div>
 					<div th:switch="${request}" th:case="${'/movieser/'+id}"
+						th:if="${listTrend.totalPages > 0}" class="product__pagination"
+						>
+						<a th:each="pageNumber : ${pageNumbers}" th:href="@{${request}(page=${pageNumber})}"
+							th:class="${pageNumber==listTrend.number + 1} ?current-page"
+							th:text=${pageNumber}></a> <a th:href="@{${request}(page=${listTrend.number + 2})}"><i
+							class="fa fa-angle-double-right"></i></a>
+					</div>
+					<div th:switch="${request}" th:case="${'/moviecon/'+id}"
+						th:if="${listTrend.totalPages > 0}" class="product__pagination"
+						>
+						<a th:each="pageNumber : ${pageNumbers}" th:href="@{${request}(page=${pageNumber})}"
+							th:class="${pageNumber==listTrend.number + 1} ?current-page"
+							th:text=${pageNumber}></a> <a th:href="@{${request}(page=${listTrend.number + 2})}"><i
+							class="fa fa-angle-double-right"></i></a>
+					</div>
+					<div th:switch="${request}" th:case="${'/moviesea/'+id}"
 						th:if="${listTrend.totalPages > 0}" class="product__pagination"
 						>
 						<a th:each="pageNumber : ${pageNumbers}" th:href="@{${request}(page=${pageNumber})}"

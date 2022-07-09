@@ -195,6 +195,44 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+	@GetMapping("/moviecon/{conId}")
+	public ModelAndView moviecon(Model theModel,@PathVariable("conId") String genId,HttpServletRequest request,
+			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+		theModel.addAttribute("listTrend", movieService.listMoveByConId(genId, pageable));
+		theModel.addAttribute("listView", movieService.moviesOrderByView());
+		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
+		int totalPages =  movieService.listMoveByConId(genId, pageable).getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			theModel.addAttribute("pageNumbers", pageNumbers);
+		}
+		theModel.addAttribute("request", request.getRequestURI());
+		theModel.addAttribute("id", genId);
+		System.out.println(request.getRequestURI());
+		modelAndView.setViewName("customer/categories");
+		return modelAndView;
+	}
+	@GetMapping("/moviesea/{seaId}")
+	public ModelAndView moviesea(Model theModel,@PathVariable("seaId") String genId,HttpServletRequest request,
+			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+		theModel.addAttribute("listTrend", movieService.listMoveBySeaId(genId, pageable));
+		theModel.addAttribute("listView", movieService.moviesOrderByView());
+		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
+		int totalPages =  movieService.listMoveBySeaId(genId, pageable).getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			theModel.addAttribute("pageNumbers", pageNumbers);
+		}
+		theModel.addAttribute("request", request.getRequestURI());
+		theModel.addAttribute("id", genId);
+		System.out.println(request.getRequestURI());
+		modelAndView.setViewName("customer/categories");
+		return modelAndView;
+	}
 	@GetMapping({ "/watch/{movieId}&{eps}"})
 	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps) {
 		Movie movie=movieService.movieById(movieId);

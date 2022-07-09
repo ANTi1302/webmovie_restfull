@@ -67,7 +67,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listCoun}">
-													<li><a href="./categories.html" th:text="${item.name}"></a></li>
+													<li><a th:href="@{/moviecon/{genId}(genId=${item.countryId})}" th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Seasion'"><a href="./categories.html"
@@ -75,7 +75,7 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSea}">
-													<li><a href="./categories.html"
+													<li><a th:href="@{/moviesea/{genId}(genId=${item.seasonId})}"
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>

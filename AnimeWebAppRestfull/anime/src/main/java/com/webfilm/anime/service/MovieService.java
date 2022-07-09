@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.webfilm.anime.dto.MovieDto;
@@ -24,4 +25,6 @@ public interface MovieService {
 //	public Movie listMovieByEps(String movieId,int eps);
 	public Page<Movie> listMoveByGenId(String genId, Pageable pageable);
 	public Page<Movie> listMoveBySerId(String serId,Pageable pageable);
+	public Page<Movie> listMoveByConId(String conId,Pageable pageable);
+	public Page<Movie> listMoveBySeaId(String seaId,Pageable pageable);
 }

@@ -46,4 +46,14 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 			+ "                  movie_series ON movie.movie_id = movie_series.movie_id\r\n"
 			+ "				   where [dbo].[movie_series].series_id=:serId",nativeQuery = true)
 	public Page<Movie> listMoveBySerId(@Param(value = "serId")String serId,Pageable pageable);
+	@Query(value = "SELECT movie.*\r\n"
+			+ "FROM     movie INNER JOIN\r\n"
+			+ "                  movie_country ON movie.movie_id = movie_country.movie_id\r\n"
+			+ "				  where movie_country.country_id=:conId",nativeQuery = true)
+	public Page<Movie> listMoveByConId(@Param(value = "conId")String conId,Pageable pageable);
+	@Query(value = "SELECT movie.*\r\n"
+			+ "FROM     movie INNER JOIN\r\n"
+			+ "                  movie_season ON movie.movie_id = movie_season.movie_id\r\n"
+			+ "				  where movie_season.season_id=:seaId",nativeQuery = true)
+	public Page<Movie> listMoveBySeaId(@Param(value = "seaId")String seaId,Pageable pageable);
 }
