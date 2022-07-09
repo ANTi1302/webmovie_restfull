@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -210,7 +211,6 @@ public class DemoController extends BaseController {
 		}
 		theModel.addAttribute("request", request.getRequestURI());
 		theModel.addAttribute("id", genId);
-		System.out.println(request.getRequestURI());
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
@@ -229,7 +229,6 @@ public class DemoController extends BaseController {
 		}
 		theModel.addAttribute("request", request.getRequestURI());
 		theModel.addAttribute("id", genId);
-		System.out.println(request.getRequestURI());
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
@@ -268,6 +267,28 @@ public class DemoController extends BaseController {
 		model.addAttribute("rep", reply);
 		blogs.setReviews(comment);
 		modelAndView.setViewName("customer/blog-details");
+		return modelAndView;
+	}
+	@GetMapping("/search/")
+	public ModelAndView search(Model theModel,@Param("name") String name,HttpServletRequest request,
+			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+		String[] tenx = name.split("[,; \\t\\n\\r]+");
+		for (String string : tenx) {
+			
+			theModel.addAttribute("listTrend", movieService.listByName(string, pageable));
+		}
+		theModel.addAttribute("listView", movieService.moviesOrderByView());
+		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
+		int totalPages =  movieService.listByName(name, pageable).getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			theModel.addAttribute("pageNumbers", pageNumbers);
+		}
+		theModel.addAttribute("request", request.getRequestURI());
+		theModel.addAttribute("id", name);
+		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
 }

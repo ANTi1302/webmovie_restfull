@@ -232,8 +232,8 @@
 			<div class="search-close-switch">
 				<i class="icon_close"></i>
 			</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
+			<form class="search-model-form" method="get" th:action="@{/search/}">
+				<input type="text" id="search-input" placeholder="Search here....." name="name">
 			</form>
 		</div>
 	</div>

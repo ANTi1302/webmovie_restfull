@@ -246,6 +246,14 @@
 							th:text=${pageNumber}></a> <a th:href="@{${request}(page=${listTrend.number + 2})}"><i
 							class="fa fa-angle-double-right"></i></a>
 					</div>
+					<div th:switch="${request}" th:case="${'/search/'}"
+						th:if="${listTrend.totalPages > 0}" class="product__pagination"
+						>
+						<a th:each="pageNumber : ${pageNumbers}" th:href="@{/search/?name={name}&page={page}(page=${pageNumber},name=${id})}"
+							th:class="${pageNumber==listTrend.number + 1} ?current-page"
+							th:text=${pageNumber}></a> <a th:href="@{/search/?name={name}&page={page}(page=${listTrend.number + 2},name=${id})}"><i
+							class="fa fa-angle-double-right"></i></a>
+					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-8">
 					<div class="product__sidebar">
@@ -350,8 +358,8 @@
 			<div class="search-close-switch">
 				<i class="icon_close"></i>
 			</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
+			<form class="search-model-form" method="get" th:action="@{/search/}">
+				<input type="text" id="search-input" placeholder="Search here....." name="name">
 			</form>
 		</div>
 	</div>

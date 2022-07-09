@@ -56,4 +56,6 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 			+ "                  movie_season ON movie.movie_id = movie_season.movie_id\r\n"
 			+ "				  where movie_season.season_id=:seaId",nativeQuery = true)
 	public Page<Movie> listMoveBySeaId(@Param(value = "seaId")String seaId,Pageable pageable);
+	@Query(value = "select * from movie where movie.name like %:name%",nativeQuery = true)
+	public Page<Movie> listByName(@Param(value = "name")String name,Pageable pageable);
 }

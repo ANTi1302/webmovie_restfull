@@ -27,4 +27,5 @@ public interface MovieService {
 	public Page<Movie> listMoveBySerId(String serId,Pageable pageable);
 	public Page<Movie> listMoveByConId(String conId,Pageable pageable);
 	public Page<Movie> listMoveBySeaId(String seaId,Pageable pageable);
+	public Page<Movie> listByName(String name,Pageable pageable);
 }

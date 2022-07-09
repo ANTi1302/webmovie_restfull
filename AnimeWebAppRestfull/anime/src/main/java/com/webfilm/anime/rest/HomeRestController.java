@@ -248,4 +248,8 @@ public class HomeRestController {
 	public Page<Movie> moviege(@PathVariable(value = "genId") String genId,Pageable pageable) {
 		return movieService.listMoveByGenId(genId,pageable);
 	}
+	@GetMapping("/moviebyname/{name}")
+	public Page<Movie> moviebyname(@PathVariable String name,Pageable pageable) {
+		return movieService.listByName(name,pageable);
+	}
 }
