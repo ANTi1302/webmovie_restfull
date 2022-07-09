@@ -172,6 +172,7 @@ public class DemoController extends BaseController {
 			theModel.addAttribute("pageNumbers", pageNumbers);
 		}
 		theModel.addAttribute("request", request.getRequestURI());
+		theModel.addAttribute("id", genId);
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
@@ -189,6 +190,8 @@ public class DemoController extends BaseController {
 			theModel.addAttribute("pageNumbers", pageNumbers);
 		}
 		theModel.addAttribute("request", request.getRequestURI());
+		theModel.addAttribute("id", genId);
+		System.out.println(request.getRequestURI());
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
