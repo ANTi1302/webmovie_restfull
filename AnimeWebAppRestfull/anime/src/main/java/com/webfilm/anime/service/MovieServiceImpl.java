@@ -75,5 +75,10 @@ public class MovieServiceImpl implements MovieService{
 		// TODO Auto-generated method stub
 		return movieDao.listMoveByGenId(genId,pageable);
 	}
+	@Override
+	public Page<Movie> listMoveBySerId(String serId, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return movieDao.listMoveBySerId(serId, pageable);
+	}
 
 }

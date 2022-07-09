@@ -13,7 +13,7 @@ public class SeriesServiceImpl implements SeriesService{
 	@Autowired
 	private SeriesDao seriesDao;
 	@Override
-	public List<String> listSeries() {
+	public List<Series> listSeries() {
 		// TODO Auto-generated method stub
 		return seriesDao.listGroupTitleSeries();
 	}

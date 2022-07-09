@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
-    <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieTrendService"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
@@ -19,14 +18,11 @@
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieCompany"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieCompanyService"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.ReviewService"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Movie"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisodePK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.MovieEpisodeDao"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.MovieEpisodeService"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieEpisode"/>
-    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenres"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.KeyWordBlogPK"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.Keyword"/>
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
@@ -39,7 +35,6 @@
     <fullyQualifiedTypeName name="com.webfilm.anime.dao.BlogsDao"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.service.BlogService"/>
-    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.Blogs"/>
     <fullyQualifiedTypeName name="javax.persistence.Column"/>
@@ -53,11 +48,16 @@
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.IdClass"/>
-    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
-    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.webfilm.anime.entity.Review"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.MovieGenres"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="com.webfilm.anime.entity.Movie"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
 </qualifiedTypeNameHistroy>

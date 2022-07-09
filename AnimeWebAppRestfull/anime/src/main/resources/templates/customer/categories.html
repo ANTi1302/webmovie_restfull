@@ -76,12 +76,12 @@
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>
-										<li th:case="'Series'"><a href="./categories.html"
+										<li th:case="'Series'"><a href=""
 											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSer}">
-													<li><a href="./categories.html" th:text="${item}"></a></li>
+													<li><a th:href="@{/movieser/{serId}(serId=${item.seriesId})}" th:text="${item.title}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="*"><a th:href="@{'/'+${item.url}}"
@@ -220,6 +220,14 @@
 						<a th:each="pageNumber : ${pageNumbers}" th:href="@{/moviegenres(page=${pageNumber})}"
 							th:class="${pageNumber==listTrend.number + 1} ?current-page"
 							th:text=${pageNumber}></a> <a th:href="@{/moviegenres(page=${listTrend.number + 2})}"><i
+							class="fa fa-angle-double-right"></i></a>
+					</div>
+					<div th:switch="${request}" th:case="'/movieser/*'"
+						th:if="${listTrend.totalPages > 0}" class="product__pagination"
+						>
+						<a th:each="pageNumber : ${pageNumbers}" th:href="@{/movieser(page=${pageNumber})}"
+							th:class="${pageNumber==listTrend.number + 1} ?current-page"
+							th:text=${pageNumber}></a> <a th:href="@{/movieser(page=${listTrend.number + 2})}"><i
 							class="fa fa-angle-double-right"></i></a>
 					</div>
 				</div>

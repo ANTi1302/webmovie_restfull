@@ -23,4 +23,5 @@ public interface MovieService {
 	public Movie movieById(String id);
 //	public Movie listMovieByEps(String movieId,int eps);
 	public Page<Movie> listMoveByGenId(String genId, Pageable pageable);
+	public Page<Movie> listMoveBySerId(String serId,Pageable pageable);
 }

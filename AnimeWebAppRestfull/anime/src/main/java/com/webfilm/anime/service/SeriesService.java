@@ -6,5 +6,5 @@ import com.webfilm.anime.entity.Series;
 
 public interface SeriesService {
 
-	public List<String> listSeries();
+	public List<Series> listSeries();
 }

@@ -79,12 +79,12 @@
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>
-										<li th:case="'Series'"><a href="./categories.html"
+										<li th:case="'Series'"><a href=""
 											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSer}">
-													<li><a href="./categories.html" th:text="${item}"></a></li>
+													<li><a th:href="@{/movieser/{serId}(serId=${item.seriesId})}" th:text="${item.title}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="*"><a th:href="@{'/'+${item.url}}"

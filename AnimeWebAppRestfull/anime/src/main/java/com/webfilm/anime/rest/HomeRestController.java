@@ -90,7 +90,7 @@ public class HomeRestController {
 	}
 
 	@GetMapping("/listSer")
-	public List<String> findAllSeries() {
+	public List<Series> findAllSeries() {
 		return seriesService.listSeries();
 	}
 

@@ -175,6 +175,23 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+	@GetMapping("/movieser/{serId}")
+	public ModelAndView movieser(Model theModel,@PathVariable("serId") String genId,HttpServletRequest request,
+			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+		theModel.addAttribute("listTrend", movieService.listMoveBySerId(genId, pageable));
+		theModel.addAttribute("listView", movieService.moviesOrderByView());
+		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
+		int totalPages =  movieService.listMoveBySerId(genId, pageable).getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			theModel.addAttribute("pageNumbers", pageNumbers);
+		}
+		theModel.addAttribute("request", request.getRequestURI());
+		modelAndView.setViewName("customer/categories");
+		return modelAndView;
+	}
 	@GetMapping({ "/watch/{movieId}&{eps}"})
 	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps) {
 		Movie movie=movieService.movieById(movieId);
