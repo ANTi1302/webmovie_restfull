@@ -3,6 +3,7 @@ package com.webfilm.anime.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.webfilm.anime.dao.MovieGenresDao;
@@ -20,9 +21,9 @@ public class MovieGenresServiceImpl implements MovieGenresService{
 		return movieGenresDao.listGenresByMovie(movieId);
 	}
 	@Override
-	public List<Object[]> listMovieByNameGen(String name) {
+	public List<Object[]> listMovieByNameGen(String name,String nameMovie) {
 		// TODO Auto-generated method stub
-		return movieGenresDao.listMovieByNameGen(name);
+		return movieGenresDao.listMovieByNameGen(name,nameMovie);
 	}
 	
 	

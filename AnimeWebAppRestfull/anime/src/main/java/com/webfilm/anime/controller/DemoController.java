@@ -161,7 +161,7 @@ public class DemoController extends BaseController {
 		movie.setReviews(reviews);
 		theModel.addAttribute("movie", movie);
 		for (MovieGenres review : movieGenres) {
-			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(review.getGenres().getName()));
+			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(review.getGenres().getName(),movie.getName()));
 		}
 //		id=movieId;
 		//////Cookie

@@ -197,7 +197,7 @@ public class HomeRestController {
 //		}
 		List<Object[]> gen=null;
 		for (MovieGenres review : movieGenres) {
-			gen= movieGenresService.listMovieByNameGen(review.getGenres().getName());
+			gen= movieGenresService.listMovieByNameGen(review.getGenres().getName(),movie.getName());
 		}
 		if (movie==null) {
 			throw new RuntimeException("Product id not found - "+movieId);
@@ -208,9 +208,9 @@ public class HomeRestController {
 	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
 		return movieCompanyService.companyById(movieId);
 	}
-	@GetMapping("/moviebygen/{name}")
-	public List<Object[]> findMovieByNameGen(@PathVariable String name) {
-		List<Object[]> movieGenres= movieGenresService.listMovieByNameGen(name);
+	@GetMapping("/moviebygen/{name}&{movie}")
+	public List<Object[]> findMovieByNameGen(@PathVariable(value = "name") String name,@PathVariable(value = "movie") String movie) {
+		List<Object[]> movieGenres= movieGenresService.listMovieByNameGen(name,movie);
 		return movieGenres;
 	}
 	@GetMapping("/moviebyeps/{movieId}&{eps}")
