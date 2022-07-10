@@ -265,30 +265,6 @@ public class DemoController extends BaseController {
 
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		model.addAttribute("numeps", eps);
-		///////// cookie
-//		List<Movie> list = new ArrayList<>();
-//		Cookie arr[] = req.getCookies();
-//		for (Cookie o : arr) {
-//			if (o.getName().equals("page")) {
-//				String txt[] = o.getValue().split("/" + "&" + eps);
-//				for (String s : txt) {
-//					list.add(movieService.movieById(s));
-//				}
-//			}
-//		}
-//		int soLuong = 0;
-//		for (int i = 0; i < list.size(); i++) {
-//			int count = 1;
-//			for (int j = i + 1; j < list.size(); j++) {
-//				if (list.get(i).getMovieId() == list.get(j).getMovieId()) {
-//					count++;
-//					list.remove(j);
-//					j--;
-//				}
-//			}
-//			model.addAttribute("eps", movieEpisodeService.movieEps(list.get(i).getMovieId()));
-//		}
-//		System.out.println(movie);
 		modelAndView.setViewName("customer/anime-watching");
 		return modelAndView;
 	}
@@ -348,18 +324,9 @@ public class DemoController extends BaseController {
 	public ModelAndView addCookie(Model model,HttpServletResponse resp, HttpServletRequest req,
 			@PathVariable("movieId") String movieId, @PathVariable("eps") int eps) {
 		/// Cookie
-		Cookie arr[] = req.getCookies();
 		Cookie page[] = req.getCookies();
-		String txt = "";
 		String num_page = "";
 		String ep_co = String.valueOf(eps);
-		for (Cookie o : arr) {
-			if (o.getName().equals("_id")) {
-					txt = txt + o.getValue();
-					o.setMaxAge(0);
-					resp.addCookie(o);
-			}
-		}
 		for (Cookie o : page) {
 			if (o.getName().equals(movieId)) {
 				num_page = num_page + o.getValue();
@@ -367,24 +334,14 @@ public class DemoController extends BaseController {
 					resp.addCookie(o);
 			}
 		}
-		if (txt.isEmpty()) {
-			txt = movieId ;
-		} else {
-			txt = txt + "/"+movieId;
-		}
 		if (num_page.isEmpty()) {
 			num_page = ep_co;
 		} else {
 			num_page = ep_co;
 		}
-		Cookie c = new Cookie("_id", txt);
-		c.setMaxAge(60 * 60 * 24);
-		c.setPath("/");
-		resp.addCookie(c);
 		Cookie p = new Cookie(movieId,num_page);
 		p.setMaxAge(60 * 60 * 24);
 		p.setPath("/");
-		resp.addCookie(c);
 		resp.addCookie(p);
 		/////
 		
