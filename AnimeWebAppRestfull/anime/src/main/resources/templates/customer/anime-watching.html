@@ -143,7 +143,7 @@
 						<div class="section-title">
 							<h5>List Name</h5>
 						</div>
-						<a th:href="@{/watch/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}" th:each="eps,state : ${eps}" th:text="${eps.episode.episodeNumber}"  th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
+						<a th:href="@{/add/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}" th:each="eps,state : ${eps}" th:text="${eps.episode.episodeNumber}"  th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
 					</div>
 				</div>
 			</div>

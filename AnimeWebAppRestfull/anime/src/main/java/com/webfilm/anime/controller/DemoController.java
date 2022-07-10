@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,7 +75,7 @@ public class DemoController extends BaseController {
 	private BlogService blogService;
 	
 	@GetMapping({ "/home", "/trang-chu" })
-	public ModelAndView home(Model model) {
+	public ModelAndView home(Model model,HttpServletRequest request,HttpServletResponse resp) {
 		model.addAttribute("listSlide", slideService.listSlide());
 		model.addAttribute("listTrend", movieService.moviesTrend());
 		model.addAttribute("listPopular", movieService.moviesPopular());
@@ -233,7 +236,8 @@ public class DemoController extends BaseController {
 		return modelAndView;
 	}
 	@GetMapping({ "/watch/{movieId}&{eps}"})
-	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps) {
+	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps,HttpServletRequest req
+			,HttpServletResponse resp) {
 		Movie movie=movieService.movieById(movieId);
 		model.addAttribute("movie", movie);
 		List<MovieEpisode> episode=movieEpisodeService.movieByEps(movieId, eps);
@@ -241,6 +245,37 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/anime-watching");
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		model.addAttribute("numeps", eps);
+		/////////cookie
+		Cookie arr[] = req.getCookies();
+		String txt="";
+		for (Cookie o : arr) {
+			if (o.getName().equals("page")) {
+				String txt1[] = o.getValue().split("/");
+			}
+		}
+		String ids[] = txt.split("/");
+		String txtOutPut = "";
+		int check = 0;
+		for (int i = 0; i < ids.length; i++) {
+			if (ids[i].equals(movieId)) {
+				check++;
+			}
+			if (check != 1) {
+				if (txtOutPut.isEmpty()) {
+					txtOutPut = ids[i];
+				} else {
+					txtOutPut = txtOutPut + "/" + ids[i];
+				}
+			} else {
+				check++;
+			}
+		}
+		if (!txtOutPut.isEmpty()) {
+			Cookie c = new Cookie("page", txtOutPut);
+			c.setMaxAge(60 * 60 * 24);
+			c.setPath("/");
+			resp.addCookie(c);
+		}
 		return modelAndView;
 	}
 	@GetMapping({ "/blog"})
@@ -276,7 +311,6 @@ public class DemoController extends BaseController {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		String[] tenx = name.split("[,; \\t\\n\\r]+");
 		for (String string : tenx) {
-			
 			theModel.addAttribute("listTrend", movieService.listByName(string, pageable));
 		}
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
@@ -289,6 +323,35 @@ public class DemoController extends BaseController {
 		theModel.addAttribute("request", request.getRequestURI());
 		theModel.addAttribute("id", name);
 		modelAndView.setViewName("customer/categories");
+		return modelAndView;
+	}
+	@GetMapping("/add/{movieId}&{eps}")
+	public ModelAndView addCookie(HttpServletResponse resp, HttpServletRequest req,@PathVariable("movieId") String movieId,@PathVariable("eps")int eps) {
+		///Cookie
+				Cookie  arr[] = req.getCookies();
+				String txt = "";
+				String ep_co=String.valueOf(eps);
+				for (Cookie o : arr) {
+					String txt1[] = o.getValue().split("/");
+					if (o.getName().equals("page")) {
+						
+						txt = txt + o.getValue();
+						o.setMaxAge(0);
+						resp.addCookie(o);
+					}
+				}
+				if (txt.isEmpty()) {
+					txt = movieId+'&'+ep_co;
+				} else {
+					txt = txt + "/" + movieId+'&'+ep_co;
+				}
+				Cookie c = new Cookie("page", txt);
+				c.setMaxAge(60 * 60 * 24);
+				c.setPath("/");
+				resp.addCookie(c);
+
+			///////////
+		modelAndView.setViewName("redirect:/watch/{movieId}&{eps}");
 		return modelAndView;
 	}
 }
