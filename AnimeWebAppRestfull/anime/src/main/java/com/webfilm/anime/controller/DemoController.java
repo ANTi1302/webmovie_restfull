@@ -73,9 +73,9 @@ public class DemoController extends BaseController {
 	private MovieEpisodeService movieEpisodeService;
 	@Autowired
 	private BlogService blogService;
-	
+
 	@GetMapping({ "/home", "/trang-chu" })
-	public ModelAndView home(Model model,HttpServletRequest request,HttpServletResponse resp) {
+	public ModelAndView home(Model model, HttpServletRequest req, HttpServletResponse resp) {
 		model.addAttribute("listSlide", slideService.listSlide());
 		model.addAttribute("listTrend", movieService.moviesTrend());
 		model.addAttribute("listPopular", movieService.moviesPopular());
@@ -83,6 +83,10 @@ public class DemoController extends BaseController {
 		model.addAttribute("listLive", movieService.moviesLive());
 		model.addAttribute("listView", movieService.moviesOrderByView());
 		model.addAttribute("listReview", movieService.listMovieOrderByReview());
+		
+		
+		///////
+		
 		modelAndView.setViewName("customer/index");
 		return modelAndView;
 	}
@@ -145,12 +149,13 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+
 	@GetMapping("/moviebyid/{movieId}")
-	public ModelAndView showSPbyID(Model theModel,@PathVariable("movieId") String movieId) {
-		Movie movie=movieService.movieById(movieId);
-		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
-		List<MovieGenres> movieGenres=movieGenresService.listGenresByMovieId(movieId);
-		List<Review> reviews=reviewService.listByMovieId(movieId);
+	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") String movieId,HttpServletRequest req) {
+		Movie movie = movieService.movieById(movieId);
+		List<MovieCompany> movieCompanies = movieCompanyService.companyById(movieId);
+		List<MovieGenres> movieGenres = movieGenresService.listGenresByMovieId(movieId);
+		List<Review> reviews = reviewService.listByMovieId(movieId);
 		movie.setMovieCompanies(movieCompanies);
 		movie.setMovieGenres(movieGenres);
 		movie.setReviews(reviews);
@@ -159,18 +164,29 @@ public class DemoController extends BaseController {
 			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(review.getGenres().getName()));
 		}
 //		id=movieId;
+		//////Cookie
+		Cookie arr[] = req.getCookies();
+		for (Cookie o : arr) {
+            if (o.getName().equals(movieId)) {
+            	theModel.addAttribute("eps", o.getValue());
+            }else {
+            	int eps=1;
+            	theModel.addAttribute("eps",eps);
+			}
+        }
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
 	}
+
 	@GetMapping("/moviegenres/{genId}")
-	public ModelAndView moviegen(Model theModel,@PathVariable("genId") String genId,HttpServletRequest request,
+	public ModelAndView moviegen(Model theModel, @PathVariable("genId") String genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		theModel.addAttribute("listTrend", movieService.listMoveByGenId(genId, pageable));
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
 		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
-		int totalPages =  movieService.listMoveByGenId(genId, pageable).getTotalPages();
+		int totalPages = movieService.listMoveByGenId(genId, pageable).getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			theModel.addAttribute("pageNumbers", pageNumbers);
@@ -180,15 +196,16 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+
 	@GetMapping("/movieser/{serId}")
-	public ModelAndView movieser(Model theModel,@PathVariable("serId") String genId,HttpServletRequest request,
+	public ModelAndView movieser(Model theModel, @PathVariable("serId") String genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		theModel.addAttribute("listTrend", movieService.listMoveBySerId(genId, pageable));
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
 		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
-		int totalPages =  movieService.listMoveBySerId(genId, pageable).getTotalPages();
+		int totalPages = movieService.listMoveBySerId(genId, pageable).getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			theModel.addAttribute("pageNumbers", pageNumbers);
@@ -199,15 +216,16 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+
 	@GetMapping("/moviecon/{conId}")
-	public ModelAndView moviecon(Model theModel,@PathVariable("conId") String genId,HttpServletRequest request,
+	public ModelAndView moviecon(Model theModel, @PathVariable("conId") String genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		theModel.addAttribute("listTrend", movieService.listMoveByConId(genId, pageable));
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
 		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
-		int totalPages =  movieService.listMoveByConId(genId, pageable).getTotalPages();
+		int totalPages = movieService.listMoveByConId(genId, pageable).getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			theModel.addAttribute("pageNumbers", pageNumbers);
@@ -217,15 +235,16 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+
 	@GetMapping("/moviesea/{seaId}")
-	public ModelAndView moviesea(Model theModel,@PathVariable("seaId") String genId,HttpServletRequest request,
+	public ModelAndView moviesea(Model theModel, @PathVariable("seaId") String genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		theModel.addAttribute("listTrend", movieService.listMoveBySeaId(genId, pageable));
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
 		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
-		int totalPages =  movieService.listMoveBySeaId(genId, pageable).getTotalPages();
+		int totalPages = movieService.listMoveBySeaId(genId, pageable).getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			theModel.addAttribute("pageNumbers", pageNumbers);
@@ -235,51 +254,48 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
-	@GetMapping({ "/watch/{movieId}&{eps}"})
-	public ModelAndView watch(Model model,@PathVariable("movieId") String movieId,@PathVariable("eps") int eps,HttpServletRequest req
-			,HttpServletResponse resp) {
-		Movie movie=movieService.movieById(movieId);
+
+	@GetMapping({ "/watch/{movieId}&{eps}" })
+	public ModelAndView watch(Model model, @PathVariable("movieId") String movieId, @PathVariable("eps") int eps,
+			HttpServletRequest req, HttpServletResponse resp) {
+		Movie movie = movieService.movieById(movieId);
 		model.addAttribute("movie", movie);
-		List<MovieEpisode> episode=movieEpisodeService.movieByEps(movieId, eps);
+		List<MovieEpisode> episode = movieEpisodeService.movieByEps(movieId, eps);
 		movie.setMovieEpisodes(episode);
-		modelAndView.setViewName("customer/anime-watching");
+
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		model.addAttribute("numeps", eps);
-		/////////cookie
-		Cookie arr[] = req.getCookies();
-		String txt="";
-		for (Cookie o : arr) {
-			if (o.getName().equals("page")) {
-				String txt1[] = o.getValue().split("/");
-			}
-		}
-		String ids[] = txt.split("/");
-		String txtOutPut = "";
-		int check = 0;
-		for (int i = 0; i < ids.length; i++) {
-			if (ids[i].equals(movieId)) {
-				check++;
-			}
-			if (check != 1) {
-				if (txtOutPut.isEmpty()) {
-					txtOutPut = ids[i];
-				} else {
-					txtOutPut = txtOutPut + "/" + ids[i];
-				}
-			} else {
-				check++;
-			}
-		}
-		if (!txtOutPut.isEmpty()) {
-			Cookie c = new Cookie("page", txtOutPut);
-			c.setMaxAge(60 * 60 * 24);
-			c.setPath("/");
-			resp.addCookie(c);
-		}
+		///////// cookie
+//		List<Movie> list = new ArrayList<>();
+//		Cookie arr[] = req.getCookies();
+//		for (Cookie o : arr) {
+//			if (o.getName().equals("page")) {
+//				String txt[] = o.getValue().split("/" + "&" + eps);
+//				for (String s : txt) {
+//					list.add(movieService.movieById(s));
+//				}
+//			}
+//		}
+//		int soLuong = 0;
+//		for (int i = 0; i < list.size(); i++) {
+//			int count = 1;
+//			for (int j = i + 1; j < list.size(); j++) {
+//				if (list.get(i).getMovieId() == list.get(j).getMovieId()) {
+//					count++;
+//					list.remove(j);
+//					j--;
+//				}
+//			}
+//			model.addAttribute("eps", movieEpisodeService.movieEps(list.get(i).getMovieId()));
+//		}
+//		System.out.println(movie);
+		modelAndView.setViewName("customer/anime-watching");
 		return modelAndView;
 	}
-	@GetMapping({ "/blog"})
-	public ModelAndView blog(Model model,@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+
+	@GetMapping({ "/blog" })
+	public ModelAndView blog(Model model,
+			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "6") Integer size) {
 		Pageable pageable = PageRequest.of(0, size);
 		Page<Blogs> bookPage = blogService.listBlog(pageable);
@@ -290,22 +306,24 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/blog");
 		return modelAndView;
 	}
-	@GetMapping({ "/blogdetails/{blogId}"})
-	public ModelAndView blogdetail(Model model,@PathVariable("blogId") String blogId) {
-		Blogs blogs=blogService.blogById(blogId);
+
+	@GetMapping({ "/blogdetails/{blogId}" })
+	public ModelAndView blogdetail(Model model, @PathVariable("blogId") String blogId) {
+		Blogs blogs = blogService.blogById(blogId);
 		model.addAttribute("blog", blogs);
-		List<Review> comment=reviewService.listComment();
-		List<Review> reply=null;
+		List<Review> comment = reviewService.listComment();
+		List<Review> reply = null;
 		for (Review review : comment) {
-			reply=(reviewService.listReviewAndReplies(review.getReviewId()));
+			reply = (reviewService.listReviewAndReplies(review.getReviewId()));
 		}
 		model.addAttribute("rep", reply);
 		blogs.setReviews(comment);
 		modelAndView.setViewName("customer/blog-details");
 		return modelAndView;
 	}
+
 	@GetMapping("/search/")
-	public ModelAndView search(Model theModel,@Param("name") String name,HttpServletRequest request,
+	public ModelAndView search(Model theModel, @Param("name") String name, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
@@ -315,7 +333,7 @@ public class DemoController extends BaseController {
 		}
 		theModel.addAttribute("listView", movieService.moviesOrderByView());
 		theModel.addAttribute("listReview", movieService.listMovieOrderByReview());
-		int totalPages =  movieService.listByName(name, pageable).getTotalPages();
+		int totalPages = movieService.listByName(name, pageable).getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			theModel.addAttribute("pageNumbers", pageNumbers);
@@ -325,32 +343,52 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
-	@GetMapping("/add/{movieId}&{eps}")
-	public ModelAndView addCookie(HttpServletResponse resp, HttpServletRequest req,@PathVariable("movieId") String movieId,@PathVariable("eps")int eps) {
-		///Cookie
-				Cookie  arr[] = req.getCookies();
-				String txt = "";
-				String ep_co=String.valueOf(eps);
-				for (Cookie o : arr) {
-					String txt1[] = o.getValue().split("/");
-					if (o.getName().equals("page")) {
-						
-						txt = txt + o.getValue();
-						o.setMaxAge(0);
-						resp.addCookie(o);
-					}
-				}
-				if (txt.isEmpty()) {
-					txt = movieId+'&'+ep_co;
-				} else {
-					txt = txt + "/" + movieId+'&'+ep_co;
-				}
-				Cookie c = new Cookie("page", txt);
-				c.setMaxAge(60 * 60 * 24);
-				c.setPath("/");
-				resp.addCookie(c);
 
-			///////////
+	@GetMapping("/add/{movieId}&{eps}")
+	public ModelAndView addCookie(Model model,HttpServletResponse resp, HttpServletRequest req,
+			@PathVariable("movieId") String movieId, @PathVariable("eps") int eps) {
+		/// Cookie
+		Cookie arr[] = req.getCookies();
+		Cookie page[] = req.getCookies();
+		String txt = "";
+		String num_page = "";
+		String ep_co = String.valueOf(eps);
+		for (Cookie o : arr) {
+			if (o.getName().equals("_id")) {
+					txt = txt + o.getValue();
+					o.setMaxAge(0);
+					resp.addCookie(o);
+			}
+		}
+		for (Cookie o : page) {
+			if (o.getName().equals(movieId)) {
+				num_page = num_page + o.getValue();
+					o.setMaxAge(0);
+					resp.addCookie(o);
+			}
+		}
+		if (txt.isEmpty()) {
+			txt = movieId ;
+		} else {
+			txt = txt + "/"+movieId;
+		}
+		if (num_page.isEmpty()) {
+			num_page = ep_co;
+		} else {
+			num_page = ep_co;
+		}
+		Cookie c = new Cookie("_id", txt);
+		c.setMaxAge(60 * 60 * 24);
+		c.setPath("/");
+		resp.addCookie(c);
+		Cookie p = new Cookie(movieId,num_page);
+		p.setMaxAge(60 * 60 * 24);
+		p.setPath("/");
+		resp.addCookie(c);
+		resp.addCookie(p);
+		/////
+		
+		///////////
 		modelAndView.setViewName("redirect:/watch/{movieId}&{eps}");
 		return modelAndView;
 	}
