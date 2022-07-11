@@ -259,10 +259,9 @@ public class DemoController extends BaseController {
 	public ModelAndView watch(Model model, @PathVariable("movieId") String movieId, @PathVariable("eps") int eps,
 			HttpServletRequest req, HttpServletResponse resp) {
 		Movie movie = movieService.movieById(movieId);
-		model.addAttribute("movie", movie);
 		List<MovieEpisode> episode = movieEpisodeService.movieByEps(movieId, eps);
 		movie.setMovieEpisodes(episode);
-
+		model.addAttribute("movie", movie);
 		model.addAttribute("eps", movieEpisodeService.movieEps(movieId));
 		model.addAttribute("numeps", eps);
 		modelAndView.setViewName("customer/anime-watching");

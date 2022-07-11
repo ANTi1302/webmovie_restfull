@@ -64,6 +64,8 @@ public class Movie implements Serializable {
 	private int popular;
 	@Column(columnDefinition = "nvarchar(500)")
 	private int trending;
+	@Column(name = "role_age")
+	private Integer roleAge;
 //	@ManyToOne
 //	@JoinColumn(name = "user_id")
 //	private Users users;
@@ -81,6 +83,15 @@ public class Movie implements Serializable {
 	@OneToMany
 	@JoinColumn(name = "movie_id")
 	private List<MovieCompany> movieCompanies;
+	
+	public Integer getRoleAge() {
+		return roleAge;
+	}
+
+	public void setRoleAge(Integer roleAge) {
+		this.roleAge = roleAge;
+	}
+
 	public List<Review> getReviews() {
 		return reviews;
 	}

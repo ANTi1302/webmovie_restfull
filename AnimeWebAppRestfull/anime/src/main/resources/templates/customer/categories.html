@@ -150,7 +150,13 @@
 								<div class="product__item">
 									<div class="product__item__pic set-bg"
 										th:data-setbg="@{'/'+${item.posterPath}}">
-										<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
+										<ul:block th:if="${item.movieEpisodes.size>1}">
+									<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
+									</ul:block>
+									<ul:block th:if="${item.movieEpisodes.size==1}">
+									<div class="ep" th:text="${item.roleAge}+'+'"></div>
+									</ul:block>
+										
 										<div class="comment">
 											<i class="fa fa-comments" th:text="${item.reviews.size}"></i>
 										</div>
@@ -270,7 +276,12 @@
 							<div class="filter__gallery" th:each="item,state : ${listView}">
 								<div class="product__sidebar__view__item set-bg mix day years"
 									th:data-setbg="@{'/'+${item[2]}}">
-									<div class="ep" th:text="${item[4]}+'/18'"></div>
+										<ul:block th:if="${item[4]>1}">
+									<div  class="ep" th:text="${item[4]}+'/18'"></div>
+									</ul:block>
+									<ul:block th:if="${item[4]==1}">
+									<div class="ep" th:text="${item[5]}+'+'"></div>
+									</ul:block>
 									<div class="view">
 										<i class="fa fa-eye"
 											th:text="${#numbers.formatInteger(item[3],3)}"></i>

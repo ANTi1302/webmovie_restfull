@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
-<html xmlns:th="http://www.thymeleaf.org"><head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 <meta charset="UTF-8">
 <meta name="description" content="Anime Template">
 <meta name="keywords" content="Anime, unica, creative, html">
@@ -61,7 +61,9 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listGen}">
-													<li><a th:href="@{/moviegenres/{genId}(genId=${item.genresId})}" th:text="${item.name}"></a></li>
+													<li><a
+														th:href="@{/moviegenres/{genId}(genId=${item.genresId})}"
+														th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Country'"><a href="./categories.html"
@@ -69,7 +71,9 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listCoun}">
-													<li><a th:href="@{/moviecon/{genId}(genId=${item.countryId})}" th:text="${item.name}"></a></li>
+													<li><a
+														th:href="@{/moviecon/{genId}(genId=${item.countryId})}"
+														th:text="${item.name}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="'Seasion'"><a href="./categories.html"
@@ -77,16 +81,19 @@
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSea}">
-													<li><a th:href="@{/moviesea/{genId}(genId=${item.seasonId})}"
+													<li><a
+														th:href="@{/moviesea/{genId}(genId=${item.seasonId})}"
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>
-										<li th:case="'Series'"><a href=""
-											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										<li th:case="'Series'"><a href="" th:text="${item.name}">
+												<span class="arrow_carrot-down"></span>
 										</a>
 											<ul class="dropdown">
 												<ul:block th:each="item,state : ${listSer}">
-													<li><a th:href="@{/movieser/{serId}(serId=${item.seriesId})}" th:text="${item.title}"></a></li>
+													<li><a
+														th:href="@{/movieser/{serId}(serId=${item.seriesId})}"
+														th:text="${item.title}"></a></li>
 												</ul:block>
 											</ul></li>
 										<li th:case="*"><a th:href="@{'/'+${item.url}}"
@@ -133,7 +140,9 @@
 					<div class="anime__video__player">
 						<video id="player" playsinline controls
 							th:data-poster="@{'/'+${movie.movieEpisodes[0].episode.poster}}">
-							<source th:src="@{'/'+${movie.movieEpisodes[0].episode.pathVideo}}" type="video/mp4" />
+							<source
+								th:src="@{'/'+${movie.movieEpisodes[0].episode.pathVideo}}"
+								type="video/mp4" />
 							<!-- Captions are optional -->
 							<track kind="captions" label="English captions" src="#"
 								srclang="en" default />
@@ -143,7 +152,20 @@
 						<div class="section-title">
 							<h5>List Name</h5>
 						</div>
-						<a th:href="@{/add/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}" th:each="eps,state : ${eps}" th:text="${eps.episode.episodeNumber}"  th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
+						<ul:block th:each="eps,state : ${eps}" th:if="${state.size>1}">
+							<a
+								th:href="@{/add/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}"
+								th:each="eps,state : ${eps}"
+								th:text="${eps.episode.episodeNumber}"
+								th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
+						</ul:block>
+						<ul:block th:each="eps,state : ${eps}" th:if="${state.size<=1}">
+							<a
+								th:href="@{/add/{movieId}&{eps}(movieId=${movie.movieId},eps=${eps.episode.episodeNumber})}"
+								th:each="eps,state : ${eps}" th:text="VietSub"
+								th:style="${numeps==eps.episode.episodeNumber}?'background-color:rgb(229,54,55)'"></a>
+						</ul:block>
+
 					</div>
 				</div>
 			</div>
@@ -233,7 +255,8 @@
 				<i class="icon_close"></i>
 			</div>
 			<form class="search-model-form" method="get" th:action="@{/search/}">
-				<input type="text" id="search-input" placeholder="Search here....." name="name">
+				<input type="text" id="search-input" placeholder="Search here....."
+					name="name">
 			</form>
 		</div>
 	</div>

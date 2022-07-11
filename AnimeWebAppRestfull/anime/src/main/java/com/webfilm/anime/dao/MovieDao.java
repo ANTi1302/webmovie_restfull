@@ -22,18 +22,18 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 	public List<Movie> listMovieRecently();
 	@Query(value = "select top 6 * from [dbo].[movie] where live=1",nativeQuery = true)
 	public List<Movie> listMovieLive();
-	@Query(value = "select top(5) movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id) FROM     movie INNER JOIN\r\n"
+	@Query(value = "select top(5) movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id),movie.role_age FROM     movie INNER JOIN\r\n"
 			+ "                  movie_episode ON movie.movie_id = movie_episode.movie_id INNER JOIN\r\n"
 			+ "                  episode ON movie_episode.episode = episode.episode_id\r\n"
-			+ "group by movie.movie_id,movie.name,movie.poster_path,movie.views\r\n"
+			+ "group by movie.movie_id,movie.name,movie.poster_path,movie.views,movie.role_age\r\n"
 			+ " order by views desc",nativeQuery = true)
 	public List<Object[]> listMovieOrderByView();
 	@Query(value = "SELECT top 5 movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
-			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,COUNT(review_id) as sum\r\n"
+			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,movie.role_age,COUNT(review_id) as sum\r\n"
 			+ "FROM     review INNER JOIN\r\n"
 			+ "                  movie ON review.movie_id = movie.movie_id\r\n "
 			+ "GROUP BY movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
-			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending\r\n"
+			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,movie.role_age\r\n"
 			+ "				  order by MAX(review.created_at) ",nativeQuery = true)
 	public List<Movie> listMovieOrderByReview();
 	@Query(value = "SELECT movie.*\r\n"
