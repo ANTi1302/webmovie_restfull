@@ -166,14 +166,16 @@ public class DemoController extends BaseController {
 //		id=movieId;
 		//////Cookie
 		Cookie arr[] = req.getCookies();
-		for (Cookie o : arr) {
-            if (o.getName().equals(movieId)) {
-            	theModel.addAttribute("eps", o.getValue());
-            }else {
-            	int eps=1;
-            	theModel.addAttribute("eps",eps);
-			}
-        }
+		if (arr!=null) {
+			for (Cookie o : arr) {
+	            if (o.getName().equals(movieId)) {
+	            	theModel.addAttribute("eps", o.getValue());
+	            }else {
+	            	int eps=1;
+	            	theModel.addAttribute("eps",eps);
+				}
+	        }
+		}
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
 	}

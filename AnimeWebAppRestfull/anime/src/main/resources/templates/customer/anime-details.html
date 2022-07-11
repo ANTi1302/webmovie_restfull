@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <!-- Css Styles -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
@@ -23,6 +24,57 @@
 	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+	<style type="text/css">
+	.star-widget input{
+  display: none;
+}
+.star-widget label{
+  font-size: 25px;
+  color: #444;
+  padding: 5px;
+  float: right;
+  transition: all 0.2s ease;
+}
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label{
+  color: #fd4;
+}
+input:checked ~ label{
+  color: #fd4;
+}
+input#rate-5:checked ~ label{
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+#rate-1:checked ~ form header:before{
+  content: "I just hate it ";
+}
+#rate-2:checked ~ form header:before{
+  content: "I don't like it ";
+}
+#rate-3:checked ~ form header:before{
+  content: "It is awesome ";
+}
+#rate-4:checked ~ form header:before{
+  content: "I just like it ";
+}
+#rate-5:checked ~ form header:before{
+  content: "I just love it ";
+}
+input:checked ~ form{
+  display: block;
+}
+form header{
+  width: 100%;
+  font-size: 10px;
+  color: #fe7;
+  font-weight: 500;
+  margin: 5px 0 0 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+	</style>
+	
 </head>
 
 <body>
@@ -137,12 +189,21 @@
                                 <span th:text="${movie.name}"></span>
                             </div>
                             <div class="anime__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
+                               <div class="star-widget">
+							        <input type="radio" name="rate" id="rate-5">
+							        <label for="rate-5" class="fas fa-star"></label>
+							        <input type="radio" name="rate" id="rate-4">
+							        <label for="rate-4" class="fas fa-star"></label>
+							        <input type="radio" name="rate" id="rate-3">
+							        <label for="rate-3" class="fas fa-star"></label>
+							        <input type="radio" name="rate" id="rate-2">
+							        <label for="rate-2" class="fas fa-star"></label>
+							        <input type="radio" name="rate" id="rate-1">
+							        <label for="rate-1" class="fas fa-star"></label>
+							        <form action="#">
+         								 <header:block></header:block>
+         								 
+     								   </form>
                                 </div>
                                 <span>1.029 Votes</span>
                             </div>
@@ -276,7 +337,21 @@
         <script th:src="@{/js/jquery.slicknav.js}"></script>
         <script th:src="@{/js/owl.carousel.min.js}"></script>
         <script th:src="@{/js/main.js}"></script>
-
+		<script>
+   			   const btn = document.querySelector("button");
+   			   const post = document.querySelector(".post");
+   			   const widget = document.querySelector(".star-widget");
+  			    const editBtn = document.querySelector(".edit");
+   				   btn.onclick = ()=>{
+   			     widget.style.display = "none";
+    			    post.style.display = "block";
+    			    editBtn.onclick = ()=>{
+    		      widget.style.display = "block";
+     			     post.style.display = "none";
+        }
+        return false;
+      }
+   		 </script>
     </body>
 
     </html>

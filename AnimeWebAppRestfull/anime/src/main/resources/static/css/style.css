@@ -30,7 +30,7 @@
 
 /* Template default CSS
 /*----------------------------------------*/
-
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 html,
 body {
 	height: 100%;
@@ -2339,4 +2339,5 @@ ol {
 	.anime__review__item__text {
 		padding: 18px 20px 20px;
 	}
+
 }
