@@ -166,15 +166,18 @@ public class DemoController extends BaseController {
 //		id=movieId;
 		//////Cookie
 		Cookie arr[] = req.getCookies();
+		int eps=1;
 		if (arr!=null) {
 			for (Cookie o : arr) {
 	            if (o.getName().equals(movieId)) {
 	            	theModel.addAttribute("eps", o.getValue());
 	            }else {
-	            	int eps=1;
+	            	
 	            	theModel.addAttribute("eps",eps);
 				}
 	        }
+		}else {
+        	theModel.addAttribute("eps",eps);
 		}
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
@@ -325,9 +328,16 @@ public class DemoController extends BaseController {
 	public ModelAndView addCookie(Model model,HttpServletResponse resp, HttpServletRequest req,
 			@PathVariable("movieId") String movieId, @PathVariable("eps") int eps) {
 		/// Cookie
+		
 		Cookie page[] = req.getCookies();
 		String num_page = "";
 		String ep_co = String.valueOf(eps);
+		if (page==null) {
+			Cookie p = new Cookie(movieId,ep_co);
+			p.setMaxAge(60 * 60 * 24);
+			p.setPath("/");
+			resp.addCookie(p);
+		}else {
 		for (Cookie o : page) {
 			if (o.getName().equals(movieId)) {
 				num_page = num_page + o.getValue();
@@ -344,6 +354,7 @@ public class DemoController extends BaseController {
 		p.setMaxAge(60 * 60 * 24);
 		p.setPath("/");
 		resp.addCookie(p);
+		}
 		/////
 		
 		///////////
