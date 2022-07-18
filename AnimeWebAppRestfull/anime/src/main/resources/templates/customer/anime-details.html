@@ -100,7 +100,7 @@ form header {
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="/home">
+                        <a href="/">
                             <img th:src="@{/img/logo.png}" alt="">
                         </a>
                     </div>
@@ -109,7 +109,7 @@ form header {
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
 							<ul>
-								<li class="active"><a href="./index.html">Homepage</a></li>
+								<li class="active"><a href="/">Homepage</a></li>
 								<ul:block th:each="item,state : ${list}">
 									<ul:block th:switch="${item.name}">
 										<li th:case="'Genres'"><a href="./categories.html"

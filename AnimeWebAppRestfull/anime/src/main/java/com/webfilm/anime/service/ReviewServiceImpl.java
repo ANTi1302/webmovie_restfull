@@ -26,9 +26,15 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<Review> listComment() {
+	public List<Review> listComment(String blogId) {
 		// TODO Auto-generated method stub
-		return reviewDao.listComment();
+		return reviewDao.listComment(blogId);
+	}
+
+	@Override
+	public int countReviewByMovie(String movieId) {
+		// TODO Auto-generated method stub
+		return reviewDao.countReviewByMovie(movieId);
 	}
 	
 }

@@ -240,9 +240,9 @@ public class HomeRestController {
 	public List<Review> listReviewAndReplies(@PathVariable(value = "replyId") String replyId) {
 		return reviewService.listReviewAndReplies(replyId);
 	}
-	@GetMapping("/rev")
-	public List<Review> comment() {
-		return reviewService.listComment();
+	@GetMapping("/revc/{blogId}")
+	public List<Review> comment(@PathVariable String blogId) {
+		return reviewService.listComment(blogId);
 	}
 	@GetMapping("/moviegen/{genId}")
 	public Page<Movie> moviege(@PathVariable(value = "genId") String genId,Pageable pageable) {

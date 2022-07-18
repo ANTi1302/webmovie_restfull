@@ -11,5 +11,6 @@ public interface ReviewService {
 
 	public List<Review> listByMovieId(String movieId);
 	public List<Review> listReviewAndReplies(String replyId);
-	public List<Review> listComment();
+	public List<Review> listComment(String blogId);
+	public int countReviewByMovie(String movieId);
 }

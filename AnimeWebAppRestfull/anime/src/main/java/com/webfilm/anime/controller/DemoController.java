@@ -74,7 +74,7 @@ public class DemoController extends BaseController {
 	@Autowired
 	private BlogService blogService;
 
-	@GetMapping({ "/home", "/trang-chu" })
+	@GetMapping({ "/" })
 	public ModelAndView home(Model model, HttpServletRequest req, HttpServletResponse resp) {
 		model.addAttribute("listSlide", slideService.listSlide());
 		model.addAttribute("listTrend", movieService.moviesTrend());
@@ -83,8 +83,6 @@ public class DemoController extends BaseController {
 		model.addAttribute("listLive", movieService.moviesLive());
 		model.addAttribute("listView", movieService.moviesOrderByView());
 		model.addAttribute("listReview", movieService.listMovieOrderByReview());
-		
-		
 		///////
 		
 		modelAndView.setViewName("customer/index");
@@ -291,11 +289,14 @@ public class DemoController extends BaseController {
 	public ModelAndView blogdetail(Model model, @PathVariable("blogId") String blogId) {
 		Blogs blogs = blogService.blogById(blogId);
 		model.addAttribute("blog", blogs);
-		List<Review> comment = reviewService.listComment();
+		List<Review> comment = reviewService.listComment(blogId);
 		List<Review> reply = null;
+		int count = 0;
 		for (Review review : comment) {
 			reply = (reviewService.listReviewAndReplies(review.getReviewId()));
+			count=(reviewService.countReviewByMovie(review.getReviewId()));
 		}
+		model.addAttribute("count", count);
 		model.addAttribute("rep", reply);
 		blogs.setReviews(comment);
 		modelAndView.setViewName("customer/blog-details");

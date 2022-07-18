@@ -20,6 +20,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
@@ -53,7 +55,6 @@ public class Review implements Serializable{
 	@JoinColumn(name="review_id")
 	@Column(name = "review_reply")
 	private List<Review> reviewReply;
-	
 //	public List<Review> getReviewReply() {
 //		return reviewReply;
 //	}
@@ -61,13 +62,15 @@ public class Review implements Serializable{
 //	public void setReviewReply(List<Review> reviewReply) {
 //		this.reviewReply = reviewReply;
 //	}
-
-	public Integer getCountLike() {
-		return countLike;
+	@Transient
+	private int count;
+	
+	public int getCount() {
+		return count;
 	}
 
-	public void setCountLike(Integer countLike) {
-		this.countLike = countLike;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public Review(String reviewId, String comment, Date createdAt, int status, Users user) {

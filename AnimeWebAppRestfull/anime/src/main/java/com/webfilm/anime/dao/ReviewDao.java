@@ -28,6 +28,9 @@ public interface ReviewDao extends JpaRepositoryImplementation<Review, String>{
 			+ ")\r\n"
 			+ "SELECT x.[review_id],x.[user_id] , x.[comment],x.[created_at],x.[status],x.[movie_id],x.[blog_id],x.[count_like],x.[review_reply] FROM x",nativeQuery = true)
 	public List<Review> listReviewAndReplies(@Param("replyId")String replyId);
-	@Query(value = "select *from review where review_reply is null",nativeQuery = true)
-	public List<Review> listComment();
+	@Query(value = "select *from review where review_reply is null and blog_id=:blogId",nativeQuery = true)
+	public List<Review> listComment(@Param(value = "blogId")String blogId);
+	@Query(value = "select count(*) from  review where review_reply =:replyId\r\n"
+			+ "",nativeQuery = true)
+	public int countReviewByMovie(@Param("replyId") String movieId);
 }

@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html">
+                        <a href="/">
                             <img src="img/logo.png" alt="">
                         </a>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
 							<ul>
-								<li class="active"><a href="/home">Homepage</a></li>
+								<li class="active"><a href="/">Homepage</a></li>
 								<ul:block th:each="item,state : ${list}">
 									<ul:block th:switch="${item.name}">
 										<li th:case="'Genres'"><a href="./categories.html"
@@ -156,7 +156,7 @@
                             <div th:case="'0'" class="blog__item small__item set-bg" th:data-setbg="@{'/'+${item.imgPath}}">
                                 <div class="blog__item__text"  th:each="cen,state : ${item.blogDetails}" >
                                      <p th:text="${cen.createdAt}"><span class="icon_calendar" ></span></p>
-                                    <h4><a th:href="@{/blogdetails/{blogId}(movieId=${item.blogId})}" th:text="${item.title}"></a></h4>
+                                    <h4><a th:href="@{/blogdetails/{blogId}(blogId=${item.blogId})}" th:text="${item.title}"></a></h4>
                                 </div>
                             </div>
                             </ul:block>
