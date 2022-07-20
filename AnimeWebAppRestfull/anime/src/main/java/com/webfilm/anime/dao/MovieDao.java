@@ -24,7 +24,7 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, UUID>{
 	public List<Movie> listMovieRecently();
 	@Query(value = "select * from movie where live= 1 limit 6",nativeQuery = true)
 	public List<Movie> listMovieLive();
-	@Query(value = "select movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id) as count_eps,movie.role_age FROM     movie INNER JOIN\r\n"
+	@Query(value = "select movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id) as count_eps,movie.role_age FROM movie INNER JOIN\r\n"
 			+ "                  movie_episode ON movie.movie_id = movie_episode.movie_id INNER JOIN\r\n"
 			+ "                  episode ON movie_episode.episode = episode.episode_id\r\n"
 			+ "group by movie.movie_id,movie.name,movie.poster_path,movie.views,movie.role_age\r\n"
