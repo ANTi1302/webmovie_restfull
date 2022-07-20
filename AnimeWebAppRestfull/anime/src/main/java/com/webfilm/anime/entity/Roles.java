@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +17,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "roles")
 public class Roles implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "role_id")
-	private String roleId;
+	private UUID roleId;
 	@Column(columnDefinition = "nvarchar(50)")
 	private String title;
 	private int active;

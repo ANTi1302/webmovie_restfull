@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +20,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "users")
 public class Users implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "user_id")
-	private String userId;
+	private UUID userId;
 	@Column(name = "first_name",columnDefinition = "nvarchar(500)")
 	private String firstName;
 	@Column(name = "last_name",columnDefinition = "nvarchar(500)")
@@ -54,10 +58,10 @@ public class Users implements Serializable{
 //	public void setReviews(List<Review> reviews) {
 //		this.reviews = reviews;
 //	}
-	public String getUserId() {
+	public UUID getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(UUID userId) {
 		this.userId = userId;
 	}
 	public String getFirstName() {
@@ -96,7 +100,7 @@ public class Users implements Serializable{
 	public void setAccessTokenID(String accessTokenID) {
 		this.accessTokenID = accessTokenID;
 	}
-	public Users(String userId, String firstName, String lastName, String email, String phone, String password,
+	public Users(UUID userId, String firstName, String lastName, String email, String phone, String password,
 			String accessTokenID) {
 		super();
 		this.userId = userId;

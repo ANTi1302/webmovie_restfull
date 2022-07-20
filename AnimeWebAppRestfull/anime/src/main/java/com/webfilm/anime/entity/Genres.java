@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,16 +15,19 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "genres")
 public class Genres implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
-	@Column(name = "genres_id", columnDefinition = "uniqueidentifier")
-	private String genresId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+	@Column(name = "genres_id")
+	private UUID genresId;
 	@Column(columnDefinition = "nvarchar(1000)")
 	private String name;
-	public String getGenresId() {
+	public UUID getGenresId() {
 		return genresId;
 	}
-	public void setGenresId(String genresId) {
+	public void setGenresId(UUID genresId) {
 		this.genresId = genresId;
 	}
 	public String getName() {
@@ -32,7 +36,7 @@ public class Genres implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Genres(String genresId, String name) {
+	public Genres(UUID genresId, String name) {
 		super();
 		this.genresId = genresId;
 		this.name = name;

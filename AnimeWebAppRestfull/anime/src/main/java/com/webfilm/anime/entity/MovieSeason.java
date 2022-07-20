@@ -18,15 +18,11 @@ public class MovieSeason implements Serializable {
 
 	@Id
 	@ManyToOne
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
 	@JoinColumn(name = "season_id")
 	private Season season;
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "movie_id")
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
 	private Movie movie;
 	
 	@Override

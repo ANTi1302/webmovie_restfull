@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "favorite")
 public class Favorite implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "favorite_id")
-	private String favoriteId;
+	private UUID favoriteId;
 	@Column(name = "created_at")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date createdAt;
@@ -32,16 +36,16 @@ public class Favorite implements Serializable{
 	public Favorite() {
 		super();
 	}
-	public Favorite(String favoriteId, Date createdAt, Users user) {
+	public Favorite(UUID favoriteId, Date createdAt, Users user) {
 		super();
 		this.favoriteId = favoriteId;
 		this.createdAt = createdAt;
 		this.user = user;
 	}
-	public String getFavoriteId() {
+	public UUID getFavoriteId() {
 		return favoriteId;
 	}
-	public void setFavoriteId(String favoriteId) {
+	public void setFavoriteId(UUID favoriteId) {
 		this.favoriteId = favoriteId;
 	}
 	public Date getCreatedAt() {

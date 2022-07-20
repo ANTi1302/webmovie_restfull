@@ -47,16 +47,8 @@ import com.webfilm.anime.service.SlideService;
 
 @Controller
 public class DemoController extends BaseController {
-	@Autowired
-	private MenuService menuService;
-	@Autowired
-	private GenresService genresService;
-	@Autowired
-	private SeasonService seasonService;
-	@Autowired
-	private SeriesService seriesService;
-	@Autowired
-	private CountryService countryService;
+
+
 	@Autowired
 	private SlideService slideService;
 	@Autowired

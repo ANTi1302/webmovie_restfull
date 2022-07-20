@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +15,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "episode")
 public class Episode implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "episode_id")
-	private String episodeId;
+	private UUID episodeId;
 	@Column(name = "number_season")
 	private int episodeNumber;
 	@Column(name = "path_video",columnDefinition = "nvarchar(1000)")
@@ -31,10 +35,10 @@ public class Episode implements Serializable{
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	public String getEpisodeId() {
+	public UUID getEpisodeId() {
 		return episodeId;
 	}
-	public void setEpisodeId(String episodeId) {
+	public void setEpisodeId(UUID episodeId) {
 		this.episodeId = episodeId;
 	}
 	public int getEpisodeNumber() {
@@ -49,7 +53,7 @@ public class Episode implements Serializable{
 	public void setPathVideo(String pathVideo) {
 		this.pathVideo = pathVideo;
 	}
-	public Episode(String episodeId, int episodeNumber, String pathVideo) {
+	public Episode(UUID episodeId, int episodeNumber, String pathVideo) {
 		super();
 		this.episodeId = episodeId;
 		this.episodeNumber = episodeNumber;

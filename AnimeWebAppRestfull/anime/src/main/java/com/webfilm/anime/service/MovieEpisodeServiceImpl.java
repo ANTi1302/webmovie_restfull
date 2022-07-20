@@ -1,6 +1,7 @@
 package com.webfilm.anime.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class MovieEpisodeServiceImpl implements MovieEpisodeService{
 	private MovieEpisodeDao movieEpisodeDao;
 
 	@Override
-	public List<MovieEpisode> movieByEps(String movieId,int eps) {
+	public List<MovieEpisode> movieByEps(UUID movieId,int eps) {
 		// TODO Auto-generated method stub
 		return movieEpisodeDao.listMovieByEps(movieId, eps);
 	}

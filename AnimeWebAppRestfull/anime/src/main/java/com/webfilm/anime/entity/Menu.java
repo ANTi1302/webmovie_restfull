@@ -1,5 +1,7 @@
 package com.webfilm.anime.entity;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,18 +14,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "menus")
 public class Menu {
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
-	@Column(name = "menus_id", columnDefinition = "uniqueidentifier")
-	private String menusId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+	@Column(name = "menus_id")
+	private UUID menusId;
 	@Column(columnDefinition = "varchar(500)")
 	private String name;
 	@Column(columnDefinition = "varchar(1000)")
 	private String url;
-	public String getMenusId() {
+	public UUID getMenusId() {
 		return menusId;
 	}
-	public void setMenusId(String menusId) {
+	public void setMenusId(UUID menusId) {
 		this.menusId = menusId;
 	}
 	public String getName() {
@@ -38,7 +43,7 @@ public class Menu {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Menu(String menusId, String name, String url) {
+	public Menu(UUID menusId, String name, String url) {
 		super();
 		this.menusId = menusId;
 		this.name = name;

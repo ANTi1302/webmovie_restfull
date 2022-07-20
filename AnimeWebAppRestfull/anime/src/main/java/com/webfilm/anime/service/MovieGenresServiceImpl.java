@@ -1,6 +1,7 @@
 package com.webfilm.anime.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,7 @@ public class MovieGenresServiceImpl implements MovieGenresService{
 	@Autowired
 	private MovieGenresDao movieGenresDao;
 	@Override
-	public List<MovieGenres> listGenresByMovieId(String movieId) {
+	public List<MovieGenres> listGenresByMovieId(UUID movieId) {
 		// TODO Auto-generated method stub
 		return movieGenresDao.listGenresByMovie(movieId);
 	}

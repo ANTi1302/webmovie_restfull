@@ -1,7 +1,9 @@
 package com.webfilm.anime.dao;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.hibernate.annotations.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -12,29 +14,29 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.webfilm.anime.dto.MovieDto;
 import com.webfilm.anime.entity.Movie;
-public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
+public interface MovieDao extends JpaRepositoryImplementation<Movie, UUID>{
 
-	@Query(value = "select top 6* from [dbo].[movie] where trending=1",nativeQuery = true)
+	@Query(value = "select * from movie where trending= 1 limit 6",nativeQuery = true)
 	public List<Movie> listMovieTrend();
-	@Query(value = "select top 6* from [dbo].[movie] where popular=1",nativeQuery = true)
+	@Query(value = "select * from movie where popular= 1 limit 6",nativeQuery = true)
 	public List<Movie> listMoviePopular();
-	@Query(value = "select top 6 * from [dbo].[movie] where recently=1",nativeQuery = true)
+	@Query(value = "select * from movie where recently= 1 limit 6",nativeQuery = true)
 	public List<Movie> listMovieRecently();
-	@Query(value = "select top 6 * from [dbo].[movie] where live=1",nativeQuery = true)
+	@Query(value = "select * from movie where live= 1 limit 6",nativeQuery = true)
 	public List<Movie> listMovieLive();
-	@Query(value = "select top(5) movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id),movie.role_age FROM     movie INNER JOIN\r\n"
+	@Query(value = "select movie.movie_id,movie.name,movie.poster_path,movie.views,count( episode.episode_id),movie.role_age FROM     movie INNER JOIN\r\n"
 			+ "                  movie_episode ON movie.movie_id = movie_episode.movie_id INNER JOIN\r\n"
 			+ "                  episode ON movie_episode.episode = episode.episode_id\r\n"
 			+ "group by movie.movie_id,movie.name,movie.poster_path,movie.views,movie.role_age\r\n"
-			+ " order by views desc",nativeQuery = true)
+			+ " order by views desc limit 5",nativeQuery = true)
 	public List<Object[]> listMovieOrderByView();
-	@Query(value = "SELECT top 5 movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
+	@Query(value = "SELECT movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,movie.role_age,COUNT(review_id) as sum\r\n"
 			+ "FROM     review INNER JOIN\r\n"
 			+ "                  movie ON review.movie_id = movie.movie_id\r\n "
 			+ "GROUP BY movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "                  movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,movie.role_age\r\n"
-			+ "				  order by MAX(review.created_at) ",nativeQuery = true)
+			+ "				  order by MAX(review.created_at) limit 5",nativeQuery = true)
 	public List<Movie> listMovieOrderByReview();
 	@Query(value = "SELECT movie.*\r\n"
 			+ "FROM     movie INNER JOIN\r\n"
@@ -44,7 +46,7 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, String>{
 	@Query(value = "SELECT movie.*\r\n"
 			+ "FROM     movie INNER JOIN\r\n"
 			+ "                  movie_series ON movie.movie_id = movie_series.movie_id\r\n"
-			+ "				   where [dbo].[movie_series].series_id=:serId",nativeQuery = true)
+			+ "				   where [movie_series].series_id=:serId",nativeQuery = true)
 	public Page<Movie> listMoveBySerId(@Param(value = "serId")String serId,Pageable pageable);
 	@Query(value = "SELECT movie.*\r\n"
 			+ "FROM     movie INNER JOIN\r\n"

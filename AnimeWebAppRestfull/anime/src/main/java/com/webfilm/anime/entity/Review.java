@@ -3,6 +3,7 @@ package com.webfilm.anime.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,11 +33,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "review")
 public class Review implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "review_id")
-	private String reviewId;
-	@Column(columnDefinition = "nvarchar(1000)")
+	private UUID reviewId;
 	private String comment;
 	@Column(name = "created_at")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
@@ -51,7 +54,6 @@ public class Review implements Serializable{
 	@Column(name = "count_like")
 	private Integer countLike;
 	@OneToMany
-	
 	@JoinColumn(name="review_id")
 	@Column(name = "review_reply")
 	private List<Review> reviewReply;
@@ -73,7 +75,7 @@ public class Review implements Serializable{
 		this.count = count;
 	}
 
-	public Review(String reviewId, String comment, Date createdAt, int status, Users user) {
+	public Review(UUID reviewId, String comment, Date createdAt, int status, Users user) {
 		super();
 		this.reviewId = reviewId;
 		this.comment = comment;
@@ -101,10 +103,10 @@ public class Review implements Serializable{
 	public Review() {
 		super();
 	}
-	public String getReviewId() {
+	public UUID getReviewId() {
 		return reviewId;
 	}
-	public void setReviewId(String reviewId) {
+	public void setReviewId(UUID reviewId) {
 		this.reviewId = reviewId;
 	}
 	public String getComment() {

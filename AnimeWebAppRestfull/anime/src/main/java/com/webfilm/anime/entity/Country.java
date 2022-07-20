@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +15,16 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "country")
 public class Country implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "country_id")
-	private String countryId;
+	private UUID countryId;
 	@Column(columnDefinition = "nvarchar(500)")
 	private String name;
-	public Country(String countryId, String name) {
+	public Country(UUID countryId, String name) {
 		super();
 		this.countryId = countryId;
 		this.name = name;
@@ -28,10 +32,10 @@ public class Country implements Serializable{
 	public Country() {
 		super();
 	}
-	public String getCountryId() {
+	public UUID getCountryId() {
 		return countryId;
 	}
-	public void setCountryId(String countryId) {
+	public void setCountryId(UUID countryId) {
 		this.countryId = countryId;
 	}
 	public String getName() {

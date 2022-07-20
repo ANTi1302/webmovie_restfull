@@ -1,6 +1,7 @@
 package com.webfilm.anime.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,25 +15,25 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDao reviewDao;
 
 	@Override
-	public List<Review> listByMovieId(String movieId) {
+	public List<Review> listByMovieId(UUID movieId) {
 		// TODO Auto-generated method stub
 		return reviewDao.listReviewByMovie(movieId);
 	}
 
 	@Override
-	public List<Review> listReviewAndReplies(String replyId) {
+	public List<Review> listReviewAndReplies(UUID replyId) {
 		// TODO Auto-generated method stub
 		return reviewDao.listReviewAndReplies(replyId);
 	}
 
 	@Override
-	public List<Review> listComment(String blogId) {
+	public List<Review> listComment(UUID blogId) {
 		// TODO Auto-generated method stub
 		return reviewDao.listComment(blogId);
 	}
 
 	@Override
-	public int countReviewByMovie(String movieId) {
+	public int countReviewByMovie(UUID movieId) {
 		// TODO Auto-generated method stub
 		return reviewDao.countReviewByMovie(movieId);
 	}

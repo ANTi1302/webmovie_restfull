@@ -2,83 +2,83 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 @Entity
 @Table(name = "movie")
 public class Movie implements Serializable {
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+	@Type(type="uuid-char")
 	@Column(name = "movie_id")
-	private String movieId;
-	@Column(columnDefinition = "nvarchar(500)")
+	private UUID movieId;
 	private String title;
-	@Column(columnDefinition = "nvarchar(500)")
 	private String name;
-	@Column(columnDefinition = "nvarchar(1000)")
 	private String overview;
-	@Column(columnDefinition = "nvarchar(500)")
-	private int runtime;
-	@Column(columnDefinition = "nvarchar(500)")
+	private Integer runtime;
 	private String tagline;
-	@Column(columnDefinition = "nvarchar(500)")
 	private String status;
 	@Column(name = "votes_avg")
 	private float votesAvg;
 	@Column(name = "votes_count")
-	private int votesCount;
-	@Column(columnDefinition = "nvarchar(500)")
+	private Integer votesCount;
 	private String type;
 	@Column(name = "date_aired")
-	private int dateAired;
-	@Column(columnDefinition = "nvarchar(500)")
+	private Integer dateAired;
 	private String quality;
-	@Column(columnDefinition = "nvarchar(500)")
 	private double views;
 	@Column(name = "scores_avg")
 	private float scoresAvg;
 	@Column(name = "scores_count")
-	private int scoresCount;
-	@Column(name = "poster_path", columnDefinition = "nvarchar(1000)")
+	private Integer scoresCount;
+	@Column(name = "poster_path")
 	private String posterPath;
-	@Column(columnDefinition = "nvarchar(500)")
-	private int recently;
-	@Column(columnDefinition = "nvarchar(500)")
-	private int live;
-	@Column(columnDefinition = "nvarchar(500)")
-	private int popular;
-	@Column(columnDefinition = "nvarchar(500)")
-	private int trending;
+	private Integer recently;
+	private Integer live;
+	private Integer popular;
+	private Integer trending;
 	@Column(name = "role_age")
 	private Integer roleAge;
 //	@ManyToOne
 //	@JoinColumn(name = "user_id")
 //	private Users users;
 	@OneToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "movie_id")
 	private List<MovieEpisode> movieEpisodes;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "movie_id")
 	private List<MovieGenres> movieGenres;
 	@OneToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@Transient
 	@JoinColumn(name = "movie_id")
+	@GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	private List<Review> reviews;
 	@OneToMany
 	@JoinColumn(name = "movie_id")
@@ -104,9 +104,9 @@ public class Movie implements Serializable {
 		this.movieCompanies = movieCompanies;
 	}
 
-	public Movie(String movieId, String title, String name, String overview, int runtime, String tagline, String status,
-			float votesAvg, int votesCount, String type, int dateAired, String quality, double views, float scoresAvg,
-			int scoresCount, String posterPath, int recently, int live, int popular, int trending,
+	public Movie(UUID movieId, String title, String name, String overview, Integer runtime, String tagline, String status,
+			float votesAvg, Integer votesCount, String type, Integer dateAired, String quality, double views, float scoresAvg,
+			Integer scoresCount, String posterPath, Integer recently, Integer live, Integer popular, Integer trending,
 			List<MovieCompany> movieCompanies) {
 		super();
 		this.movieId = movieId;
@@ -156,9 +156,9 @@ public class Movie implements Serializable {
 		this.movieGenres = movieGenres;
 	}
 
-	public Movie(String movieId, String title, String name, String overview, int runtime, String tagline, String status,
-			float votesAvg, int votesCount, String type, int dateAired, String quality, double views, float scoresAvg,
-			int scoresCount, String posterPath, int recently, int live, int popular, int trending) {
+	public Movie(UUID movieId, String title, String name, String overview, Integer runtime, String tagline, String status,
+			float votesAvg, Integer votesCount, String type, Integer dateAired, String quality, double views, float scoresAvg,
+			Integer scoresCount, String posterPath, Integer recently, Integer live, Integer popular, Integer trending) {
 		super();
 		this.movieId = movieId;
 		this.title = title;
@@ -189,11 +189,11 @@ public class Movie implements Serializable {
 //		this.movieSeries = movieSeries;
 //	}
 
-	public String getMovieId() {
+	public UUID getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(String movieId) {
+	public void setMovieId(UUID movieId) {
 		this.movieId = movieId;
 	}
 
@@ -221,11 +221,11 @@ public class Movie implements Serializable {
 		this.overview = overview;
 	}
 
-	public int getRuntime() {
+	public Integer getRuntime() {
 		return runtime;
 	}
 
-	public void setRuntime(int runtime) {
+	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
 	}
 
@@ -257,7 +257,7 @@ public class Movie implements Serializable {
 		return votesCount;
 	}
 
-	public void setVotesCount(int votesCount) {
+	public void setVotesCount(Integer votesCount) {
 		this.votesCount = votesCount;
 	}
 
@@ -269,11 +269,11 @@ public class Movie implements Serializable {
 		this.type = type;
 	}
 
-	public int getDateAired() {
+	public Integer getDateAired() {
 		return dateAired;
 	}
 
-	public void setDateAired(int dateAired) {
+	public void setDateAired(Integer dateAired) {
 		this.dateAired = dateAired;
 	}
 
@@ -301,11 +301,11 @@ public class Movie implements Serializable {
 		this.scoresAvg = scoresAvg;
 	}
 
-	public int getScoresCount() {
+	public Integer getScoresCount() {
 		return scoresCount;
 	}
 
-	public void setScoresCount(int scoresCount) {
+	public void setScoresCount(Integer scoresCount) {
 		this.scoresCount = scoresCount;
 	}
 
@@ -317,35 +317,35 @@ public class Movie implements Serializable {
 		this.posterPath = posterPath;
 	}
 
-	public int getRecently() {
+	public Integer getRecently() {
 		return recently;
 	}
 
-	public void setRecently(int recently) {
+	public void setRecently(Integer recently) {
 		this.recently = recently;
 	}
 
-	public int getLive() {
+	public Integer getLive() {
 		return live;
 	}
 
-	public void setLive(int live) {
+	public void setLive(Integer live) {
 		this.live = live;
 	}
 
-	public int getPopular() {
+	public Integer getPopular() {
 		return popular;
 	}
 
-	public void setPopular(int popular) {
+	public void setPopular(Integer popular) {
 		this.popular = popular;
 	}
 
-	public int getTrending() {
+	public Integer getTrending() {
 		return trending;
 	}
 
-	public void setTrending(int trending) {
+	public void setTrending(Integer trending) {
 		this.trending = trending;
 	}
 

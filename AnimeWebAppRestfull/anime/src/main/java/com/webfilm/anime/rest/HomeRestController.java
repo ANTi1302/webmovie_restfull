@@ -1,6 +1,7 @@
 package com.webfilm.anime.rest;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -182,7 +183,7 @@ public class HomeRestController {
 		return movieTrendService.listMVLive(pageable);
 	}
 	@GetMapping("/movie/{movieId}")
-	public List<Object[]> findMovie(@PathVariable String movieId) {
+	public List<Object[]> findMovie(@PathVariable UUID movieId) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
 		List<Review> reviews= reviewService.listByMovieId(movieId);
@@ -205,7 +206,7 @@ public class HomeRestController {
 		return gen;
 	}
 	@GetMapping("/company/{movieId}")
-	public List<MovieCompany> findMovieByCompany(@PathVariable String movieId) {
+	public List<MovieCompany> findMovieByCompany(@PathVariable UUID movieId) {
 		return movieCompanyService.companyById(movieId);
 	}
 	@GetMapping("/moviebygen/{name}&{movie}")
@@ -214,7 +215,7 @@ public class HomeRestController {
 		return movieGenres;
 	}
 	@GetMapping("/moviebyeps/{movieId}&{eps}")
-	public Movie findMovieByEps(@PathVariable(value = "movieId") String movieId,@PathVariable(value = "eps") int eps) {
+	public Movie findMovieByEps(@PathVariable(value = "movieId") UUID movieId,@PathVariable(value = "eps") int eps) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieEpisode> episode=movieEpisodeService.movieByEps(movieId, eps);
 		movie.setMovieEpisodes(episode);
@@ -225,7 +226,7 @@ public class HomeRestController {
 		return movieEpisodeService.movieEps(movieId);
 	}
 	@GetMapping("/genbymovie/{movieId}")
-	public List<MovieGenres> genbymovie(@PathVariable(value = "movieId") String movieId) {
+	public List<MovieGenres> genbymovie(@PathVariable(value = "movieId") UUID movieId) {
 		return movieGenresService.listGenresByMovieId(movieId);
 	}
 	@GetMapping("/bloglist")
@@ -233,15 +234,15 @@ public class HomeRestController {
 		return blogService.listBlog(pageable);
 	}
 	@GetMapping("/bloglist/{blogId}")
-	public Blogs blog(@PathVariable String blogId) {
+	public Blogs blog(@PathVariable UUID blogId) {
 		return blogService.blogById(blogId);
 	}
 	@GetMapping("/rev/{replyId}")
-	public List<Review> listReviewAndReplies(@PathVariable(value = "replyId") String replyId) {
+	public List<Review> listReviewAndReplies(@PathVariable(value = "replyId") UUID replyId) {
 		return reviewService.listReviewAndReplies(replyId);
 	}
 	@GetMapping("/revc/{blogId}")
-	public List<Review> comment(@PathVariable String blogId) {
+	public List<Review> comment(@PathVariable UUID blogId) {
 		return reviewService.listComment(blogId);
 	}
 	@GetMapping("/moviegen/{genId}")

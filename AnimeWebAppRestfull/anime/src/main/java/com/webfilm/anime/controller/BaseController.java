@@ -25,6 +25,8 @@ public class BaseController {
 	@Autowired
 	private CountryService countryService;
 	ModelAndView modelAndView= new ModelAndView();
+	
+
 	@PostConstruct
 	public ModelAndView init() {
 		modelAndView.addObject("list", menuService.listMenus());

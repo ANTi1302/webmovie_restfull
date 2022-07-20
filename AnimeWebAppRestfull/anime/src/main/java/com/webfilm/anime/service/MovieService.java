@@ -1,6 +1,7 @@
 package com.webfilm.anime.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public interface MovieService {
 	public List<Object[]> moviesOrderByView();
 	public List<Movie> listMovie();
 	public List<Movie> listMovieOrderByReview();
-	public Movie movieById(String id);
+	public Movie movieById(UUID id);
 //	public Movie listMovieByEps(String movieId,int eps);
 	public Page<Movie> listMoveByGenId(String genId, Pageable pageable);
 	public Page<Movie> listMoveBySerId(String serId,Pageable pageable);

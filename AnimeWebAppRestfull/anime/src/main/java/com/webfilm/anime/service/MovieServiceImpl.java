@@ -2,6 +2,7 @@ package com.webfilm.anime.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +55,7 @@ public class MovieServiceImpl implements MovieService{
 		return movieDao.listMovieOrderByReview();
 	}
 	@Override
-	public Movie movieById(String id) {
+	public Movie movieById(UUID id) {
 		// TODO Auto-generated method stub
 		Optional<Movie> result=movieDao.findById(id);
 		Movie movie=null;

@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +20,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "blogs")
 public class Blogs implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "blog_id")
-	private String blogId;
+	private UUID blogId;
 	@Column(columnDefinition = "nvarchar(500)")
 	private String title;
 	@Column(columnDefinition = "nvarchar(500)")
@@ -75,16 +79,16 @@ public class Blogs implements Serializable{
 	public Blogs() {
 		super();
 	}
-	public Blogs(String blogId, String title, String imgPath) {
+	public Blogs(UUID blogId, String title, String imgPath) {
 		super();
 		this.blogId = blogId;
 		this.title = title;
 		this.imgPath = imgPath;
 	}
-	public String getBlogId() {
+	public UUID getBlogId() {
 		return blogId;
 	}
-	public void setBlogId(String blogId) {
+	public void setBlogId(UUID blogId) {
 		this.blogId = blogId;
 	}
 	public String getTitle() {

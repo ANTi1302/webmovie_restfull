@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,18 +16,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "season")
 public class Season implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "season_id")
-	private String seasonId;
+	private UUID seasonId;
 	@Column(name = "start_year")
 	private int startYear;
 	@Column(name = "end_year")
 	private int endYear;
-	public String getSeasonId() {
+	public UUID getSeasonId() {
 		return seasonId;
 	}
-	public void setSeasonId(String seasonId) {
+	public void setSeasonId(UUID seasonId) {
 		this.seasonId = seasonId;
 	}
 	public int getStartYear() {
@@ -41,7 +45,7 @@ public class Season implements Serializable{
 	public void setEndYear(int endYear) {
 		this.endYear = endYear;
 	}
-	public Season(String seasonId, int startYear, int endYear) {
+	public Season(UUID seasonId, int startYear, int endYear) {
 		super();
 		this.seasonId = seasonId;
 		this.startYear = startYear;

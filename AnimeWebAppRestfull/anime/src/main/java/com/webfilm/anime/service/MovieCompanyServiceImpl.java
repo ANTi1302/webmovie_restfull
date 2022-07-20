@@ -2,6 +2,7 @@ package com.webfilm.anime.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class MovieCompanyServiceImpl implements MovieCompanyService{
 	@Autowired
 	private MovieCompanyDao movieCompanyDao;
 	@Override
-	public List<MovieCompany> companyById(String id) {
+	public List<MovieCompany> companyById(UUID id) {
 		return movieCompanyDao.movieCompaniesByIdMovie(id);
 	}
 

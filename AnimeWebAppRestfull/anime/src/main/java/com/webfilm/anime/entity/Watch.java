@@ -2,6 +2,7 @@ package com.webfilm.anime.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "watch")
 public class Watch implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
 	@Column(name = "watch_id", columnDefinition = "uniqueidentifier")
-	private String watchId;
+	private UUID watchId;
 	@Column(name = "created_at")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date createdAt;
@@ -32,16 +36,16 @@ public class Watch implements Serializable{
 	public Watch() {
 		super();
 	}
-	public Watch(String watchId, Date createdAt, Users user) {
+	public Watch(UUID watchId, Date createdAt, Users user) {
 		super();
 		this.watchId = watchId;
 		this.createdAt = createdAt;
 		this.user = user;
 	}
-	public String getWatchId() {
+	public UUID getWatchId() {
 		return watchId;
 	}
-	public void setWatchId(String watchId) {
+	public void setWatchId(UUID watchId) {
 		this.watchId = watchId;
 	}
 	public Date getCreatedAt() {

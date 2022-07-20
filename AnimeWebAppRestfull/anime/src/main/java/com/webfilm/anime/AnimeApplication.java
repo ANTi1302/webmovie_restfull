@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 
 import com.webfilm.config.DemoSecurityConfig;
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class AnimeApplication {
 	@Bean
 	public ModelMapper modelMapper() {

@@ -1,6 +1,7 @@
 package com.webfilm.anime.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,25 +17,28 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "image_blogs")
 public class ImageBlog implements Serializable{
 	@Id
-	@GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-	@GeneratedValue(generator = "generator")
-	@Column(name = "image_id", columnDefinition = "uniqueidentifier")
-	private String imageId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+	@Column(name = "image_id")
+	private UUID imageId;
 	@Column(columnDefinition = "nvarchar(1000)")
 	private String url;
 	@ManyToOne
 	@JoinColumn(name = "blog_id")
 	private Blogs blogs;
-	public ImageBlog(String imageId, String url, Blogs blogs) {
+	public ImageBlog(UUID imageId, String url, Blogs blogs) {
 		super();
 		this.imageId = imageId;
 		this.url = url;
 		this.blogs = blogs;
 	}
-	public String getImageId() {
+	public UUID getImageId() {
 		return imageId;
 	}
-	public void setImageId(String imageId) {
+	public void setImageId(UUID imageId) {
 		this.imageId = imageId;
 	}
 	public String getUrl() {
