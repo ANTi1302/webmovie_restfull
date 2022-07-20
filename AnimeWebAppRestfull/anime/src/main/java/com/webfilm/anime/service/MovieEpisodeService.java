@@ -9,5 +9,5 @@ import com.webfilm.anime.entity.MovieEpisode;
 public interface MovieEpisodeService {
 
 	public List<MovieEpisode> movieByEps(UUID movieId,int eps);
-	public List<MovieEpisode> movieEps(String movieId);
+	public List<MovieEpisode> movieEps(UUID movieId);
 }

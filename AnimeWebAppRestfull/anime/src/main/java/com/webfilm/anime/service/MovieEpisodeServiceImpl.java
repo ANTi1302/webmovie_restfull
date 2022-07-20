@@ -23,7 +23,7 @@ public class MovieEpisodeServiceImpl implements MovieEpisodeService{
 	}
 
 	@Override
-	public List<MovieEpisode> movieEps(String movieId) {
+	public List<MovieEpisode> movieEps(UUID movieId) {
 		// TODO Auto-generated method stub
 		return movieEpisodeDao.listEps(movieId);
 	}

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,6 @@ public class Movie implements Serializable {
         name = "UUID",
         strategy = "org.hibernate.id.UUIDGenerator"
     )
-	@Type(type="uuid-char")
 	@Column(name = "movie_id")
 	private UUID movieId;
 	private String title;
@@ -72,13 +72,7 @@ public class Movie implements Serializable {
 	@JoinColumn(name = "movie_id")
 	private List<MovieGenres> movieGenres;
 	@OneToMany
-	@Transient
 	@JoinColumn(name = "movie_id")
-	@GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
 	private List<Review> reviews;
 	@OneToMany
 	@JoinColumn(name = "movie_id")

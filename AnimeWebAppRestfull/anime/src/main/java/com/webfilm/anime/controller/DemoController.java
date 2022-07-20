@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -141,7 +142,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping("/moviebyid/{movieId}")
-	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") String movieId,HttpServletRequest req) {
+	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") UUID movieId,HttpServletRequest req) {
 		Movie movie = movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies = movieCompanyService.companyById(movieId);
 		List<MovieGenres> movieGenres = movieGenresService.listGenresByMovieId(movieId);
@@ -251,7 +252,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping({ "/watch/{movieId}&{eps}" })
-	public ModelAndView watch(Model model, @PathVariable("movieId") String movieId, @PathVariable("eps") int eps,
+	public ModelAndView watch(Model model, @PathVariable("movieId") UUID movieId, @PathVariable("eps") int eps,
 			HttpServletRequest req, HttpServletResponse resp) {
 		Movie movie = movieService.movieById(movieId);
 		List<MovieEpisode> episode = movieEpisodeService.movieByEps(movieId, eps);
@@ -278,7 +279,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping({ "/blogdetails/{blogId}" })
-	public ModelAndView blogdetail(Model model, @PathVariable("blogId") String blogId) {
+	public ModelAndView blogdetail(Model model, @PathVariable("blogId") UUID blogId) {
 		Blogs blogs = blogService.blogById(blogId);
 		model.addAttribute("blog", blogs);
 		List<Review> comment = reviewService.listComment(blogId);

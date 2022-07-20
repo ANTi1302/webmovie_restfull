@@ -42,9 +42,8 @@ public class Review implements Serializable{
 	private UUID reviewId;
 	private String comment;
 	@Column(name = "created_at")
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date createdAt;
-	private int status;
+	private Boolean status;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private Users user;
@@ -57,7 +56,16 @@ public class Review implements Serializable{
 	@JoinColumn(name="review_id")
 	@Column(name = "review_reply")
 	private List<Review> reviewReply;
-//	public List<Review> getReviewReply() {
+	
+
+	public Integer getCountLike() {
+		return countLike;
+	}
+
+	public void setCountLike(Integer countLike) {
+		this.countLike = countLike;
+	}
+	//	public List<Review> getReviewReply() {
 //		return reviewReply;
 //	}
 //
@@ -65,17 +73,17 @@ public class Review implements Serializable{
 //		this.reviewReply = reviewReply;
 //	}
 	@Transient
-	private int count;
+	private Integer count;
 	
-	public int getCount() {
+	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(Integer count) {
 		this.count = count;
 	}
 
-	public Review(UUID reviewId, String comment, Date createdAt, int status, Users user) {
+	public Review(UUID reviewId, String comment, Date createdAt, Boolean status, Users user) {
 		super();
 		this.reviewId = reviewId;
 		this.comment = comment;
@@ -121,10 +129,10 @@ public class Review implements Serializable{
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public int getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 //	public Users getUser() {

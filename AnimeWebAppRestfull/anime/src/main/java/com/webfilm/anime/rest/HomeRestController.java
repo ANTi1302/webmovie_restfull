@@ -222,7 +222,7 @@ public class HomeRestController {
 		return movie;
 	}
 	@GetMapping("/eps/{movieId}")
-	public List<MovieEpisode> findEps(@PathVariable(value = "movieId") String movieId) {
+	public List<MovieEpisode> findEps(@PathVariable(value = "movieId") UUID movieId) {
 		return movieEpisodeService.movieEps(movieId);
 	}
 	@GetMapping("/genbymovie/{movieId}")

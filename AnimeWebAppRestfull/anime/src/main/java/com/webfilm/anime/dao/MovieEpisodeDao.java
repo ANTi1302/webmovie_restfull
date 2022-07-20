@@ -13,11 +13,11 @@ import com.webfilm.anime.entity.MovieEpisode;
 import com.webfilm.anime.entity.MovieEpisodePK;
 
 public interface MovieEpisodeDao extends JpaRepositoryImplementation<MovieEpisode, MovieEpisodePK>{
-	@Query(value = "select*from movie_episode INNER JOIN\r\n"
+	@Query(value = "select * from movie_episode INNER JOIN\r\n"
 			+ " episode ON movie_episode.episode = episode.episode_id where movie_episode.movie_id=:movieId and episode.number_season=:eps",nativeQuery = true)
 public List<MovieEpisode> listMovieByEps(@Param(value ="movieId") UUID movieId, @Param(value = "eps")int eps);
-	@Query(value = "select*from movie_episode INNER JOIN\r\n"
+	@Query(value = "select * from movie_episode INNER JOIN\r\n"
 			+ " episode ON movie_episode.episode = episode.episode_id where movie_episode.movie_id=:movieId",nativeQuery = true)
-public List<MovieEpisode> listEps(@Param(value ="movieId") String movieId);
+public List<MovieEpisode> listEps(@Param(value ="movieId") UUID movieId);
 	
 }
