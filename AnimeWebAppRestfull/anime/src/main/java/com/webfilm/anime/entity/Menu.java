@@ -16,9 +16,9 @@ public class Menu {
 	@GeneratedValue(generator = "generator")
 	@Column(name = "menus_id", columnDefinition = "uniqueidentifier")
 	private String menusId;
-	@Column(columnDefinition = "nvarchar(500)")
+	@Column(columnDefinition = "varchar(500)")
 	private String name;
-	@Column(columnDefinition = "nvarchar(1000)")
+	@Column(columnDefinition = "varchar(1000)")
 	private String url;
 	public String getMenusId() {
 		return menusId;
