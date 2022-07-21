@@ -26,7 +26,7 @@
 
 - API: 	https://codejava-app-anime.herokuapp.com/listMvLive
 	
-- API: 	https://codejava-app-anime.herokuapp.com/listMvOrderByView (BUG)
+- API: 	https://codejava-app-anime.herokuapp.com/listMvOrderByView
 	
 
 - API: 	https://codejava-app-anime.herokuapp.com/listMovie
@@ -45,7 +45,7 @@
 
 - API: 	https://codejava-app-anime.herokuapp.com/company/{movieId}
 
-- API: 	https://codejava-app-anime.herokuapp.com/moviebygen/{name}&{movie} (BUG)
+- API: 	https://codejava-app-anime.herokuapp.com/moviebygen/{name}&{movie}
 	
 - API: 	https://codejava-app-anime.herokuapp.com/moviebyeps/{movieId}&{eps}
 
