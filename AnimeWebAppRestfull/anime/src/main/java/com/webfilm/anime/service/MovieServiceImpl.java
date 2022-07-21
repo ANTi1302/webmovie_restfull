@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService{
 		return movieDao.listMovieLive();
 	}
 	@Override
-	public List<Object[]> moviesOrderByView() {
+	public List<Movie> moviesOrderByView() {
 		// TODO Auto-generated method stub
 		return movieDao.listMovieOrderByView();
 	}
@@ -72,22 +72,22 @@ public class MovieServiceImpl implements MovieService{
 //		return movieDao.listMovieByEps(movieId, eps);
 //	}
 	@Override
-	public Page<Movie> listMoveByGenId(String genId,Pageable pageable) {
+	public Page<Movie> listMoveByGenId(UUID genId,Pageable pageable) {
 		// TODO Auto-generated method stub
 		return movieDao.listMoveByGenId(genId,pageable);
 	}
 	@Override
-	public Page<Movie> listMoveBySerId(String serId, Pageable pageable) {
+	public Page<Movie> listMoveBySerId(UUID serId, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return movieDao.listMoveBySerId(serId, pageable);
 	}
 	@Override
-	public Page<Movie> listMoveByConId(String conId, Pageable pageable) {
+	public Page<Movie> listMoveByConId(UUID conId, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return movieDao.listMoveByConId(conId, pageable);
 	}
 	@Override
-	public Page<Movie> listMoveBySeaId(String seaId, Pageable pageable) {
+	public Page<Movie> listMoveBySeaId(UUID seaId, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return movieDao.listMoveBySeaId(seaId, pageable);
 	}
@@ -95,6 +95,11 @@ public class MovieServiceImpl implements MovieService{
 	public Page<Movie> listByName(String name,Pageable pageable) {
 		// TODO Auto-generated method stub
 		return movieDao.listByName(name,pageable);
+	}
+	@Override
+	public List<Movie> listMovieByNameGen(String name,String nameMovie) {
+		// TODO Auto-generated method stub
+		return movieDao.listMovieByNameGen(name,nameMovie);
 	}
 
 }

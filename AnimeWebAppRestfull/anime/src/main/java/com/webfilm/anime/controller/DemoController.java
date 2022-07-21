@@ -82,7 +82,7 @@ public class DemoController extends BaseController {
 		return modelAndView;
 	}
 
-	@GetMapping({ "/trend", "/popular", "recently", "live", "movie" })
+	@GetMapping({ "/trend", "/popular", "/recently", "/live", "/movie" })
 	public ModelAndView category(Model model,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size,
@@ -126,9 +126,8 @@ public class DemoController extends BaseController {
 				model.addAttribute("pageNumbers", pageNumbers);
 			}
 		} else if (request.getRequestURI().equals("/movie")) {
-			Page<Movie> bookPage = movieTrendService.listMV(pageable);
-			model.addAttribute("listTrend", bookPage);
-			int totalPages = bookPage.getTotalPages();
+			model.addAttribute("listTrend", movieTrendService.listMV(pageable));
+			int totalPages = movieTrendService.listMV(pageable).getTotalPages();
 			if (totalPages > 0) {
 				List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 				model.addAttribute("pageNumbers", pageNumbers);
@@ -140,6 +139,35 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
+//	@GetMapping({ "movie" })
+//	public ModelAndView movie(Model model,
+//			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+//			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size,
+//			HttpServletRequest request,
+//			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+//		Sort sortable = null;
+//		if (sort.equals("ASC")) {
+//			sortable = Sort.by("name").ascending();
+//		}
+//		if (sort.equals("DESC")) {
+//			sortable = Sort.by("name").descending();
+//		}
+//		Pageable pageable = PageRequest.of(page - 1, size, sortable);
+//
+//		  if (request.getRequestURI().equals("/movie")) {
+//			model.addAttribute("listTrend", movieTrendService.listMV(pageable));
+//			int totalPages = movieTrendService.listMV(pageable).getTotalPages();
+//			if (totalPages > 0) {
+//				List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+//				model.addAttribute("pageNumbers", pageNumbers);
+//			}}
+//		
+//		model.addAttribute("request", request.getRequestURI());
+//		model.addAttribute("listView", movieService.moviesOrderByView());
+//		model.addAttribute("listReview", movieService.listMovieOrderByReview());
+//		modelAndView.setViewName("customer/categories");
+//		return modelAndView;
+//	}
 
 	@GetMapping("/moviebyid/{movieId}")
 	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") UUID movieId,HttpServletRequest req) {
@@ -152,7 +180,7 @@ public class DemoController extends BaseController {
 		movie.setReviews(reviews);
 		theModel.addAttribute("movie", movie);
 		for (MovieGenres review : movieGenres) {
-			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(review.getGenres().getName(),movie.getName()));
+			theModel.addAttribute("moviemighr", movieService.listMovieByNameGen(review.getGenres().getName(),movie.getName()));
 		}
 //		id=movieId;
 		//////Cookie
@@ -175,7 +203,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping("/moviegenres/{genId}")
-	public ModelAndView moviegen(Model theModel, @PathVariable("genId") String genId, HttpServletRequest request,
+	public ModelAndView moviegen(Model theModel, @PathVariable("genId") UUID genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
@@ -194,7 +222,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping("/movieser/{serId}")
-	public ModelAndView movieser(Model theModel, @PathVariable("serId") String genId, HttpServletRequest request,
+	public ModelAndView movieser(Model theModel, @PathVariable("serId") UUID genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
@@ -214,7 +242,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping("/moviecon/{conId}")
-	public ModelAndView moviecon(Model theModel, @PathVariable("conId") String genId, HttpServletRequest request,
+	public ModelAndView moviecon(Model theModel, @PathVariable("conId") UUID genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
@@ -233,7 +261,7 @@ public class DemoController extends BaseController {
 	}
 
 	@GetMapping("/moviesea/{seaId}")
-	public ModelAndView moviesea(Model theModel, @PathVariable("seaId") String genId, HttpServletRequest request,
+	public ModelAndView moviesea(Model theModel, @PathVariable("seaId") UUID genId, HttpServletRequest request,
 			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
 		Pageable pageable = PageRequest.of(page - 1, size);

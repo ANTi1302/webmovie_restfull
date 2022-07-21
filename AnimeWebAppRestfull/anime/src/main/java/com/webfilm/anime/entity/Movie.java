@@ -24,6 +24,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table(name = "movie")
 public class Movie implements Serializable {
@@ -76,6 +78,7 @@ public class Movie implements Serializable {
 	private List<Review> reviews;
 	@OneToMany
 	@JoinColumn(name = "movie_id")
+	@Column(name = "studios")
 	private List<MovieCompany> movieCompanies;
 	
 	public Integer getRoleAge() {

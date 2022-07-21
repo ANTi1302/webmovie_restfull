@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.webfilm.anime.entity.Movie;
 
+import net.bytebuddy.implementation.bytecode.ByteCodeAppender.Size;
+
 public interface MovieTrendService {
 
 	public  Page<Movie> listMVTrend( Pageable pageable);

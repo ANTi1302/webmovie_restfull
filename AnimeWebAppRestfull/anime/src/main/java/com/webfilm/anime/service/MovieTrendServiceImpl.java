@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.webfilm.anime.dao.MovieTrendDao;
 import com.webfilm.anime.entity.Movie;
+
+import net.bytebuddy.implementation.bytecode.ByteCodeAppender.Size;
 @Service
 public class MovieTrendServiceImpl implements MovieTrendService {
 

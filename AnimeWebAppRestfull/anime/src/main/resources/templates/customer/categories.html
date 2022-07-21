@@ -275,19 +275,19 @@
 							</ul>
 							<div class="filter__gallery" th:each="item,state : ${listView}">
 								<div class="product__sidebar__view__item set-bg mix day years"
-									th:data-setbg="@{'/'+${item[2]}}">
-										<ul:block th:if="${item[4]>1}">
-									<div  class="ep" th:text="${item[4]}+'/18'"></div>
+									th:data-setbg="@{'/'+${item.posterPath}}">
+									<ul:block th:if="${item.movieEpisodes.size>1}">
+									<div class="ep" th:text="${item.movieEpisodes.size}+'/18'"></div>
 									</ul:block>
-									<ul:block th:if="${item[4]==1}">
-									<div class="ep" th:text="${item[5]}+'+'"></div>
+									<ul:block th:if="${item.movieEpisodes.size==1}">
+									<div class="ep" th:text="${item.roleAge}+'+'"></div>
 									</ul:block>
 									<div class="view">
 										<i class="fa fa-eye"
-											th:text="${#numbers.formatInteger(item[3],3)}"></i>
+												th:text="${#numbers.formatInteger(item.views,3)}"></i>
 									</div>
 									<h5>
-									<a th:href="@{/moviebyid/{movieId}(movieId=${item[0]})}" th:text="${item[1]}"></a>
+										<a th:href="@{/moviebyid/{movieId}(movieId=${item.movieId})}" th:text="${item.name}"></a>
 									</h5>
 								</div>
 							</div>

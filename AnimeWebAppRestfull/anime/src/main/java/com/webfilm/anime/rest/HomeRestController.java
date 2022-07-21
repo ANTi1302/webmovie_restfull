@@ -128,7 +128,7 @@ public class HomeRestController {
 	}
 
 	@GetMapping("/listMvOrderByView")
-	public List<Object[]> findMovieOrderByView() {
+	public List<Movie> findMovieOrderByView() {
 		return movieService.moviesOrderByView();
 	}
 
@@ -158,6 +158,14 @@ public class HomeRestController {
 
 		return movieTrendService.listMVTrend(pageable);
 	}
+	@GetMapping("/listMVPage")
+	public Page<Movie> listMoviePag(@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
+
+		Pageable pageable = PageRequest.of(page, size);
+
+		return movieTrendService.listMV(pageable);
+	}
 	@GetMapping("/listPopular")
 	public Page<Movie> listPopular(@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size) {
@@ -183,7 +191,7 @@ public class HomeRestController {
 		return movieTrendService.listMVLive(pageable);
 	}
 	@GetMapping("/movie/{movieId}")
-	public List<Object[]> findMovie(@PathVariable UUID movieId) {
+	public List<Movie> findMovie(@PathVariable UUID movieId) {
 		Movie movie=movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies= movieCompanyService.companyById(movieId);
 		List<Review> reviews= reviewService.listByMovieId(movieId);
@@ -196,9 +204,9 @@ public class HomeRestController {
 //		for (int i = 0; i < movieGenres.size(); i++) {
 //			theModel.addAttribute("moviemighr", movieGenresService.listMovieByNameGen(movieGenres.get(i).toString()));
 //		}
-		List<Object[]> gen=null;
+		List<Movie> gen=null;
 		for (MovieGenres review : movieGenres) {
-			gen= movieGenresService.listMovieByNameGen(review.getGenres().getName(),movie.getName());
+			gen= movieService.listMovieByNameGen(review.getGenres().getName(),movie.getName());
 		}
 		if (movie==null) {
 			throw new RuntimeException("Product id not found - "+movieId);
@@ -210,8 +218,8 @@ public class HomeRestController {
 		return movieCompanyService.companyById(movieId);
 	}
 	@GetMapping("/moviebygen/{name}&{movie}")
-	public List<Object[]> findMovieByNameGen(@PathVariable(value = "name") String name,@PathVariable(value = "movie") String movie) {
-		List<Object[]> movieGenres= movieGenresService.listMovieByNameGen(name,movie);
+	public List<Movie> findMovieByNameGen(@PathVariable(value = "name") String name,@PathVariable(value = "movie") String movie) {
+		List<Movie> movieGenres= movieService.listMovieByNameGen(name,movie);
 		return movieGenres;
 	}
 	@GetMapping("/moviebyeps/{movieId}&{eps}")
@@ -246,7 +254,7 @@ public class HomeRestController {
 		return reviewService.listComment(blogId);
 	}
 	@GetMapping("/moviegen/{genId}")
-	public Page<Movie> moviege(@PathVariable(value = "genId") String genId,Pageable pageable) {
+	public Page<Movie> moviege(@PathVariable(value = "genId") UUID genId,Pageable pageable) {
 		return movieService.listMoveByGenId(genId,pageable);
 	}
 	@GetMapping("/moviebyname/{name}")

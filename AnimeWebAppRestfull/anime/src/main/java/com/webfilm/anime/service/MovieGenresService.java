@@ -11,6 +11,6 @@ import com.webfilm.anime.entity.MovieGenres;
 public interface MovieGenresService {
 
 	public List<MovieGenres> listGenresByMovieId(UUID movieId);
-	public List<Object[]> listMovieByNameGen(String name,@Param("namemovie")String nameMovie);
+	
 
 }
