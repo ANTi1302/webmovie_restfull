@@ -15,5 +15,5 @@ public interface MovieTrendService {
 	public  Page<Movie> listMVPopular( Pageable pageable);
 	public  Page<Movie> listMVRecently( Pageable pageable);
 	public  Page<Movie> listMVLive(Pageable pageable);
-	public  Page<Movie> listMV( Pageable pageable);
+	public  Page<Movie> listMovie( Pageable pageable);
 }

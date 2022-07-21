@@ -164,7 +164,7 @@ public class HomeRestController {
 
 		Pageable pageable = PageRequest.of(page, size);
 
-		return movieTrendService.listMV(pageable);
+		return movieTrendService.listMovie(pageable);
 	}
 	@GetMapping("/listPopular")
 	public Page<Movie> listPopular(@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,

@@ -22,6 +22,4 @@ public interface MovieTrendDao extends PagingAndSortingRepository<Movie, UUID>{
 	public  Page<Movie> listMovieRecently(Pageable pageable);
 	@Query(value = "select * from movie where live=1",nativeQuery = true)
 	public  Page<Movie> listMovieLive(Pageable pageable);
-	@Query(value = "select * from movie",nativeQuery = true)
-	public  Page<Movie> listMovie(Pageable pageable);
 }

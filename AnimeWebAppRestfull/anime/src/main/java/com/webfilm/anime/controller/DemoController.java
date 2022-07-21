@@ -126,8 +126,8 @@ public class DemoController extends BaseController {
 				model.addAttribute("pageNumbers", pageNumbers);
 			}
 		} else if (request.getRequestURI().equals("/movie")) {
-			model.addAttribute("listTrend", movieTrendService.listMV(pageable));
-			int totalPages = movieTrendService.listMV(pageable).getTotalPages();
+			model.addAttribute("listTrend", movieTrendService.listMovie(pageable));
+			int totalPages = movieTrendService.listMovie(pageable).getTotalPages();
 			if (totalPages > 0) {
 				List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 				model.addAttribute("pageNumbers", pageNumbers);

@@ -43,9 +43,9 @@ public class MovieTrendServiceImpl implements MovieTrendService {
 	}
 
 	@Override
-	public Page<Movie> listMV(Pageable pageable) {
+	public Page<Movie> listMovie(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return movieTrendDao.listMovie(pageable);
+		return movieTrendDao.findAll(pageable);
 	}
 
 }
