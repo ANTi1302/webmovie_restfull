@@ -171,6 +171,7 @@ public class DemoController extends BaseController {
 
 	@GetMapping("/moviebyid/{movieId}")
 	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") UUID movieId,HttpServletRequest req) {
+		String movieId2 = String.valueOf(movieId);
 		Movie movie = movieService.movieById(movieId);
 		List<MovieCompany> movieCompanies = movieCompanyService.companyById(movieId);
 		List<MovieGenres> movieGenres = movieGenresService.listGenresByMovieId(movieId);
@@ -185,18 +186,17 @@ public class DemoController extends BaseController {
 //		id=movieId;
 		//////Cookie
 		Cookie arr[] = req.getCookies();
-		int eps=1;
-		if (arr!=null) {
+		
+		if (arr != null ) {
 			for (Cookie o : arr) {
-	            if (o.getName().equals(movieId)) {
-	            	theModel.addAttribute("eps", o.getValue());
+	            if (o.getName().equals(movieId2)) {
+	            	theModel.addAttribute("eps",o.getValue());
 	            }else {
-	            	
-	            	theModel.addAttribute("eps",eps);
+	            	theModel.addAttribute("eps",1);
 				}
 	        }
 		}else {
-        	theModel.addAttribute("eps",eps);
+        	theModel.addAttribute("eps",1);
 		}
 		modelAndView.setViewName("customer/anime-details");
 		return modelAndView;
@@ -312,7 +312,7 @@ public class DemoController extends BaseController {
 		model.addAttribute("blog", blogs);
 		List<Review> comment = reviewService.listComment(blogId);
 		List<Review> reply = null;
-		int count = 0;
+		List<Integer> count = null;
 		for (Review review : comment) {
 			reply = (reviewService.listReviewAndReplies(review.getReviewId()));
 			count=(reviewService.countReviewByMovie(review.getReviewId()));

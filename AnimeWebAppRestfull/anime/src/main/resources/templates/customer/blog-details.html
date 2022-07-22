@@ -28,6 +28,19 @@
 <link rel="stylesheet" th:href="@{/css/slicknav.min.css}"
 	type="text/css">
 <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+<style type="text/css">
+.show-replies {
+  cursor: pointer;
+}
+.blog__details__comment__item--reply {
+  display: none;
+  position: relative;
+}
+
+.blog__details__comment__item--reply.opened {
+  display: block;
+}
+</style>
 </head>
 
 <body>
@@ -190,7 +203,7 @@
                             </div>
                             <div class="blog__details__comment">
                                 <h4>3 Comments</h4>
-                                <div class="blog__details__comment__item" th:each="rev,state : ${blog.reviews}">
+                                <div class="blog__details__comment__item opened" id="first-comment" th:each="rev,state : ${blog.reviews}">
                                     <div class="blog__details__comment__item__pic">
                                         <img th:src="@{'/'+${rev.user.pathImg}}" alt="">
                                     </div>
@@ -200,11 +213,12 @@
                                         <p th:text="${rev.comment}"></p>
                                         <a href="#">Like</a>
                                         <a href="#">Reply</a>
-                                        <a href="#"  th:text="'Reply '+ ${count}"></a>
                                     </div>
-                                   
                                 </div>
-                                <div class="blog__details__comment__item blog__details__comment__item--reply" th:each="rep,state : ${rep}">
+                                 <div class="show-replies" th:each="repcount,state : ${count}" th:text="'Reply '+ ${repcount}"></div>
+                                 
+                                <div class="blog__details__comment__item blog__details__comment__item--reply"  dataset="first-comment"
+           							 th:each="rep,state : ${rep}">
                                     <div class="blog__details__comment__item__pic">
                                        <img th:src="@{'/'+${rep.user.pathImg}}" alt="">
                                     </div>
@@ -294,7 +308,22 @@
         <script th:src="@{/js/jquery.slicknav.js}"></script>
         <script th:src="@{/js/owl.carousel.min.js}"></script>
         <script th:src="@{/js/main.js}"></script>
+		<script type="text/javascript">
+		const showContainers = document.querySelectorAll(".show-replies");
 
+		showContainers.forEach((btn) =>
+		  btn.addEventListener("click", (e) => {
+		    let parentContainer = e.target.closest(".blog__details__comment__item--reply");
+		    let _id = parentContainer.id;
+		    if (_id) {
+		      let childrenContainer = parentContainer.querySelectorAll(
+		        `[dataset=${_id}]`
+		      );
+		      childrenContainer.forEach((child) => child.classList.toggle("opened"));
+		    }
+		  })
+		);
+		</script>
     </body>
 
     </html>

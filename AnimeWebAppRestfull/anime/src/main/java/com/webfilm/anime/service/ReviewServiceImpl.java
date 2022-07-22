@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int countReviewByMovie(UUID movieId) {
+	public List<Integer> countReviewByMovie(UUID movieId) {
 		// TODO Auto-generated method stub
 		return reviewDao.countReviewByMovie(movieId);
 	}

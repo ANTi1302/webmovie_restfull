@@ -13,5 +13,5 @@ public interface ReviewService {
 	public List<Review> listByMovieId(UUID movieId);
 	public List<Review> listReviewAndReplies(UUID uuid);
 	public List<Review> listComment(UUID blogId);
-	public int countReviewByMovie(UUID uuid);
+	public List<Integer> countReviewByMovie(UUID uuid);
 }
