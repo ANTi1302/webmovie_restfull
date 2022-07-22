@@ -66,4 +66,8 @@ public interface MovieDao extends JpaRepositoryImplementation<Movie, UUID>{
 			+ "					  where movie.name NOT IN (SELECT movie.name FROM movie where movie.name like :namemovie)and genres.name like %:namegen% group by movie.movie_id, movie.title, movie.name, movie.overview, movie.runtime, movie.tagline, movie.status, movie.votes_avg, movie.votes_count, movie.type, movie.studios, movie.date_aired, movie.quality, movie.views, movie.scores_avg, \r\n"
 			+ "			                movie.scores_count, movie.poster_path, movie.recently, movie.live, movie.popular, movie.trending,movie.role_age",nativeQuery = true)
 	public List<Movie> listMovieByNameGen(@Param("namegen")String name,@Param("namemovie")String nameMovie);
+	
+//	INSERT INTO review (review_id,user_id,comment,created_at,status,movie_id,blog_id,count_like,review_reply)
+//	VALUES (uuid_generate_v4(),'38ec11b0-8661-4e1d-a5f4-b91c347f85f6','do ec' ,'7-22-2022',true
+//			,'220808ea-fcd6-44c9-802c-e10319fea445','18c5db31-cc7d-4797-b236-2342627319ff',2,'f087b4e8-68d1-4533-abab-f94ec29cd250');
 }

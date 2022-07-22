@@ -32,12 +32,12 @@
 .show-replies {
   cursor: pointer;
 }
-.blog__details__comment__item--reply {
+.comment__container {
   display: none;
   position: relative;
 }
 
-.blog__details__comment__item--reply.opened {
+.comment__container.opened {
   display: block;
 }
 </style>
@@ -203,7 +203,9 @@
                             </div>
                             <div class="blog__details__comment">
                                 <h4>3 Comments</h4>
-                                <div class="blog__details__comment__item opened" id="first-comment" th:each="rev,state : ${blog.reviews}">
+                                <div class="comment__container opened" id="first-comment">
+                                 <div class="comment__card">
+                                <div class="blog__details__comment__item" th:each="rev,state : ${blog.reviews}">
                                     <div class="blog__details__comment__item__pic">
                                         <img th:src="@{'/'+${rev.user.pathImg}}" alt="">
                                     </div>
@@ -216,8 +218,9 @@
                                     </div>
                                 </div>
                                  <div class="show-replies" th:each="repcount,state : ${count}" th:text="'Reply '+ ${repcount}"></div>
-                                 
-                                <div class="blog__details__comment__item blog__details__comment__item--reply"  dataset="first-comment"
+                                  </div>
+                                  <div class="comment__container"  dataset="first-comment" id="first-reply" >
+                                <div class="blog__details__comment__item blog__details__comment__item--reply"
            							 th:each="rep,state : ${rep}">
                                     <div class="blog__details__comment__item__pic">
                                        <img th:src="@{'/'+${rep.user.pathImg}}" alt="">
@@ -230,6 +233,8 @@
                                         <a href="#">Reply</a>
                                     </div>
                                 </div>
+                                 </div>
+                                 </div>
                             </div>
                             <div class="blog__details__form">
                                 <h4>Leave A Commnet</h4>
@@ -313,7 +318,7 @@
 
 		showContainers.forEach((btn) =>
 		  btn.addEventListener("click", (e) => {
-		    let parentContainer = e.target.closest(".blog__details__comment__item--reply");
+		    let parentContainer = e.target.closest(".comment__container");
 		    let _id = parentContainer.id;
 		    if (_id) {
 		      let childrenContainer = parentContainer.querySelectorAll(
