@@ -29,6 +29,7 @@ import com.webfilm.anime.entity.Review;
 import com.webfilm.anime.entity.Season;
 import com.webfilm.anime.entity.Series;
 import com.webfilm.anime.entity.Slides;
+import com.webfilm.anime.entity.Users;
 import com.webfilm.anime.service.BlogService;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
@@ -42,6 +43,7 @@ import com.webfilm.anime.service.ReviewService;
 import com.webfilm.anime.service.SeasonService;
 import com.webfilm.anime.service.SeriesService;
 import com.webfilm.anime.service.SlideService;
+import com.webfilm.anime.service.UserService;
 
 @RestController
 public class HomeRestController {
@@ -74,7 +76,9 @@ public class HomeRestController {
 	private MovieEpisodeService movieEpisodeService;
 	@Autowired
 	private BlogService blogService;
-
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping("/list")
 	public List<Menu> findAllMenu() {
 		return menuService.listMenus();
@@ -260,5 +264,9 @@ public class HomeRestController {
 	@GetMapping("/moviebyname/{name}")
 	public Page<Movie> moviebyname(@PathVariable String name,Pageable pageable) {
 		return movieService.listByName(name,pageable);
+	}
+	@GetMapping("/users/{email}")
+	public List<Users> moviebyname(@PathVariable String email) {
+		return userService.getUsersByGmail(email);
 	}
 }

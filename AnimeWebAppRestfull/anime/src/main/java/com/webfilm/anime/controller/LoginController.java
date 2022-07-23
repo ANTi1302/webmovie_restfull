@@ -16,7 +16,7 @@ import com.webfilm.anime.service.SeriesService;
 @Controller
 public class LoginController extends BaseController{
 
-	@RequestMapping({"/login","/admin/login"})
+	@RequestMapping({"/login","/admin"})
 	public ModelAndView showformlogin(HttpServletResponse response, HttpServletRequest request) {
 
 		modelAndView.setViewName("customer/login");

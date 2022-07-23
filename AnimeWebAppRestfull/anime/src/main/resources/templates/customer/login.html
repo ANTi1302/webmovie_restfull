@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Anime Template">
@@ -15,14 +16,14 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/plyr.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 
 <body>
@@ -45,22 +46,49 @@
                 <div class="col-lg-8">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li><a href="/">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-details.html">Anime Details</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./signup.html">Sign Up</a></li>
-                                        <li><a href="./login.html">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
+							<ul>
+								<li class="active"><a href="/">Homepage</a></li>
+								<ul:block th:each="item,state : ${list}">
+									<ul:block th:switch="${item.name}">
+										<li th:case="'Genres'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listGen}">
+													<li><a th:href="@{/moviegenres/{genId}(genId=${item.genresId})}" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Country'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listCoun}">
+													<li><a th:href="@{/moviecon/{genId}(genId=${item.countryId})}" th:text="${item.name}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Seasion'"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSea}">
+													<li><a th:href="@{/moviesea/{genId}(genId=${item.seasonId})}"
+														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="'Series'"><a href=""
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a>
+											<ul class="dropdown">
+												<ul:block th:each="item,state : ${listSer}">
+													<li><a th:href="@{/movieser/{serId}(serId=${item.seriesId})}" th:text="${item.title}"></a></li>
+												</ul:block>
+											</ul></li>
+										<li th:case="*"><a href="./categories.html"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+									</ul:block>
+							</ul>
+						</nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -97,13 +125,14 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Login</h3>
-                        <form th:action="login" method="post">
+                        <div th:if="${param.error}" class="alert alert-danger">Invalid email and password. </div>
+                        <form th:action="@{/login}" method="post">
                             <div class="input__item">
-                                <input type="text" placeholder="Email address">
+                                <input type="email" id="email" placeholder="Email address" name="email">
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password">
+                                <input type="password" id="pass" placeholder="Password" name="pass">
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>
@@ -183,14 +212,14 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/player.js}"></script>
+        <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/mixitup.min.js}"></script>
+        <script th:src="@{/js/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
 
 
 </body>

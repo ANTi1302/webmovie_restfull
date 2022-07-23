@@ -41,11 +41,16 @@ public class Users implements Serializable{
 	private String accessTokenID;
 	@Column(name = "path_img",columnDefinition = "nvarchar(1000)")
 	private String pathImg;
-//	@OneToMany
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@JoinColumn(name = "user_id")
-//	private List<Review> reviews;
+	@OneToMany
+	@JoinColumn(name = "user_id")
+	private List<RoleUserPK> roleUsers;
 	
+	public List<RoleUserPK> getRoleUsers() {
+		return roleUsers;
+	}
+	public void setRoleUsers(List<RoleUserPK> roleUsers) {
+		this.roleUsers = roleUsers;
+	}
 	public String getPathImg() {
 		return pathImg;
 	}
