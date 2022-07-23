@@ -76,6 +76,15 @@
 														th:text="'Phim lẻ '+ ${item.startYear}"></a></li>
 												</ul:block>
 											</ul></li>
+											<li  th:if="${acc == null}" th:case="'Login'"><a th:href="@{'/'+${item.url}}"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+											<li th:if="${acc != null}" th:case="'Logout'"><a th:href="@{'/'+${item.url}}"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
+											<li th:if="${acc == null}" th:case="'Sign Up'"><a th:href="@{'/'+${item.url}}"
+											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
+										</a></li>
 										<li th:case="'Series'"><a href=""
 											th:text="${item.name}"> <span class="arrow_carrot-down"></span>
 										</a>
@@ -96,6 +105,7 @@
 					<div class="header__right">
 						<a href="#" class="search-switch"><span class="icon_search"></span></a>
 						<a href="./login.html"><span class="icon_profile"></span></a>
+						<h1 th:if="${acc !=null}" th:text="${acc.firstName}"></h1>
 					</div>
 				</div>
 			</div>

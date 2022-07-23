@@ -25,11 +25,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		Users u= this.userService.getUsersByGmail(authentication.getName()).get(0);
 		request.getSession().setAttribute("acc", u);
-		Cookie arr[] = request.getCookies();
-		for (Cookie o : arr) {
-				o.setMaxAge(0);
-				response.addCookie(o);
-		}
+//		Cookie arr[] = request.getCookies();
+//		for (Cookie o : arr) {
+//				o.setMaxAge(0);
+//				response.addCookie(o);
+//		}
 		response.sendRedirect("/");
 	
 	}

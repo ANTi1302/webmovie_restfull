@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,7 @@ import com.webfilm.anime.entity.MovieCompany;
 import com.webfilm.anime.entity.MovieEpisode;
 import com.webfilm.anime.entity.MovieGenres;
 import com.webfilm.anime.entity.Review;
+import com.webfilm.anime.entity.Users;
 import com.webfilm.anime.service.BlogService;
 import com.webfilm.anime.service.CountryService;
 import com.webfilm.anime.service.GenresService;
@@ -69,6 +71,8 @@ public class DemoController extends BaseController {
 
 	@GetMapping({ "/" })
 	public ModelAndView home(Model model, HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		Users username = (Users) session.getAttribute("acc");
 		model.addAttribute("listSlide", slideService.listSlide());
 		model.addAttribute("listTrend", movieService.moviesTrend());
 		model.addAttribute("listPopular", movieService.moviesPopular());
@@ -77,7 +81,7 @@ public class DemoController extends BaseController {
 		model.addAttribute("listView", movieService.moviesOrderByView());
 		model.addAttribute("listReview", movieService.listMovieOrderByReview());
 		///////
-		
+		req.setAttribute("acc",username);
 		modelAndView.setViewName("customer/index");
 		return modelAndView;
 	}

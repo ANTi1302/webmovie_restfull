@@ -46,9 +46,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("pass");
 		http.formLogin().defaultSuccessUrl("/").failureUrl("/login?error");
-//		http.formLogin().successHandler(this.logSuccessHandler);
-//		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/customer/**")
-//				.access("hasRole('ROLE_ADMIN')");
+		http.formLogin().successHandler(this.logSuccessHandler);
+		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/customer/**")
+				.access("hasRole('ROLE_ADMIN')");
 		http.csrf().disable();
 	}
 
