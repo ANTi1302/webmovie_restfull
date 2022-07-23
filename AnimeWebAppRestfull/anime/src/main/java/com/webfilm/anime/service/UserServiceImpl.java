@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDao userDao;
-//	@Autowired
-//    private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 	@Override
 	public List<Users> getUsersByGmail(String email) {
 		// TODO Auto-generated method stub
@@ -36,6 +36,13 @@ public class UserServiceImpl implements UserService{
 		Set<GrantedAuthority> authorities= new HashSet<>();
 		authorities.add(new SimpleGrantedAuthority("ADMIN"));
 		return new org.springframework.security.core.userdetails.User(customer.getEmail(),customer.getPassword(),authorities);
+	}
+	@Override
+	public void addNewUser(Users users) {
+		// TODO Auto-generated method stub
+		String pass=users.getPassword();
+		users.setPassword(passwordEncoder.encode(pass));
+		userDao.save(users);
 	}
 
 }

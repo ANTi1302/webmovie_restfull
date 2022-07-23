@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Anime Template">
@@ -97,17 +97,26 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Sign Up</h3>
-                        <form action="#">
+                        <form th:action="@{/register}" method="post" th:object="${user}">
+									<i th:if="${errMsg !=null }" class="alert alert-success" th:text="${errMsg }"></i>
                             <div class="input__item">
-                                <input type="text" placeholder="Email address">
+                                <input type="text" placeholder="Email address" th:field="*{email}">
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" placeholder="First Name" th:field="*{firstName}">
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password">
+                                <input type="text" placeholder="Last Name" th:field="*{lastName}">
+                                <span class="icon_profile"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Password" th:field="*{password}">
+                                <span class="icon_lock"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Confirm Password" name="confimlpassword">
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>

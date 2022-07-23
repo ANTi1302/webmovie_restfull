@@ -8,6 +8,6 @@ import com.webfilm.anime.entity.Users;
 
 public interface UserService extends UserDetailsService{
 
-	List<Users> getUsersByGmail(String email);
-
+	public List<Users> getUsersByGmail(String email);
+	public void addNewUser(Users users);
 }

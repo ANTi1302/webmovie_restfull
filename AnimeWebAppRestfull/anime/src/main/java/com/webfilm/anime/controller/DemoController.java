@@ -143,35 +143,6 @@ public class DemoController extends BaseController {
 		modelAndView.setViewName("customer/categories");
 		return modelAndView;
 	}
-//	@GetMapping({ "movie" })
-//	public ModelAndView movie(Model model,
-//			@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
-//			@RequestParam(name = "size", required = false, defaultValue = "18") Integer size,
-//			HttpServletRequest request,
-//			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-//		Sort sortable = null;
-//		if (sort.equals("ASC")) {
-//			sortable = Sort.by("name").ascending();
-//		}
-//		if (sort.equals("DESC")) {
-//			sortable = Sort.by("name").descending();
-//		}
-//		Pageable pageable = PageRequest.of(page - 1, size, sortable);
-//
-//		  if (request.getRequestURI().equals("/movie")) {
-//			model.addAttribute("listTrend", movieTrendService.listMV(pageable));
-//			int totalPages = movieTrendService.listMV(pageable).getTotalPages();
-//			if (totalPages > 0) {
-//				List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-//				model.addAttribute("pageNumbers", pageNumbers);
-//			}}
-//		
-//		model.addAttribute("request", request.getRequestURI());
-//		model.addAttribute("listView", movieService.moviesOrderByView());
-//		model.addAttribute("listReview", movieService.listMovieOrderByReview());
-//		modelAndView.setViewName("customer/categories");
-//		return modelAndView;
-//	}
 
 	@GetMapping("/moviebyid/{movieId}")
 	public ModelAndView showSPbyID(Model theModel, @PathVariable("movieId") UUID movieId,HttpServletRequest req) {

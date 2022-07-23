@@ -12,6 +12,5 @@ import com.webfilm.anime.entity.Users;
 public interface UserDao extends JpaRepository<Users, UUID>{
 
 	@Query(value = "select *from users where email=:email",nativeQuery = true)
-	List<Users> getUsersByGmail(@Param(value = "email")String email);
-
+	public List<Users> getUsersByGmail(@Param(value = "email")String email);
 }

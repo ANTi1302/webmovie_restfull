@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +26,7 @@ public class Users implements Serializable{
         name = "UUID",
         strategy = "org.hibernate.id.UUIDGenerator"
     )
+	@Type(type="pg-uuid")
 	@Column(name = "user_id")
 	private UUID userId;
 	@Column(name = "first_name",columnDefinition = "nvarchar(500)")
